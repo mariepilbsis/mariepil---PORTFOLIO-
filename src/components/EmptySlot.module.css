@@ -1,3 +1,9 @@
+/**
+ * The slot paints its own quiet surface over the parent frame's --photo
+ * backing. --photo is the correct colour behind real artwork, but as a large
+ * empty cream slab on a near-black page it shouts louder than the content it
+ * is standing in for. A dashed, low-contrast well reads as "pending" instead.
+ */
 .slot {
   display: flex;
   flex-direction: column;
@@ -8,7 +14,13 @@
   height: 100%;
   padding: 18px;
   box-sizing: border-box;
-  color: var(--slot);
+  /* Opaque base so the parent frame's cream --photo backing is fully covered,
+     with a faint lift on top of it. */
+  background:
+    linear-gradient(rgba(var(--linec), 0.035), rgba(var(--linec), 0.035)),
+    var(--bg);
+  border: 1px dashed rgba(var(--linec), 0.14);
+  color: rgba(var(--txc), 0.38);
   text-align: center;
 }
 
@@ -17,7 +29,7 @@
   font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.4;
-  color: var(--slot);
+  color: rgba(var(--txc), 0.5);
 }
 
 .note {
@@ -25,5 +37,5 @@
   font-size: 9.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.7;
+  opacity: 0.72;
 }

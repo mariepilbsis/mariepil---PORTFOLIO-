@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 import { EmptySlot } from '../../components/EmptySlot';
 import type { Project } from '../../data/projects';
@@ -22,7 +23,8 @@ export function CaseModal({ project, onClose }: CaseModalProps) {
 
   if (!project) return null;
 
-  return (
+  // Portalled to <body> — see the note in Lightbox.tsx.
+  return createPortal(
     <div className={styles.overlay}>
       <button type="button" className={styles.backdrop} onClick={onClose} aria-label="Close" />
 
@@ -87,6 +89,7 @@ export function CaseModal({ project, onClose }: CaseModalProps) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
