@@ -75,7 +75,9 @@ export const PROCESS_FLOW: readonly FlowNode[] = [
     top: '88%',
     reverse: true,
     active: true,
-    color: '#FF8B9C',
+    // Themed rather than the prototype's hardcoded #FF8B9C, which washed out
+    // to near-invisible against the light theme's near-white background.
+    color: 'var(--acc2)',
   },
 ];
 

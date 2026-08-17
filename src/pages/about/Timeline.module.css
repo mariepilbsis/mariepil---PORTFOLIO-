@@ -120,11 +120,13 @@
   color: var(--hd);
 }
 
+/* Themed rather than the prototype's hardcoded #FF8B9C, which had too little
+   contrast against the crimson tint in the light theme. */
 .now {
   padding: 3px 10px;
   border-radius: 999px;
   background: rgba(var(--accc), 0.18);
-  color: #ff8b9c;
+  color: var(--acc2);
   font-family: var(--font-mono);
   font-size: 10px;
 }
