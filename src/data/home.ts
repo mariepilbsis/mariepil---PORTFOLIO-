@@ -19,7 +19,7 @@ export interface StatEntry {
 // "Leading" lived here too, but the identity card's role row now says it.
 export const STAT_LEDGER: readonly StatEntry[] = [
   { label: 'Currently', value: 'Multimedia & Publications Head · IS³' },
-  { label: 'Shipped', value: '3 systems · 1 built and deployed' },
+  { label: 'Shipped', value: 'SmartStock · built and deployed' },
 ];
 
 export const TICKER_ITEMS: readonly string[] = [
@@ -55,7 +55,7 @@ export const ENTRY_CARDS: readonly EntryCard[] = [
   {
     num: '02',
     title: 'Systems & Projects',
-    body: 'Three systems designed end to end — one of them built and deployed.',
+    body: 'SmartStock, designed end to end — then built and deployed for real.',
     cta: 'Open the reel',
     to: '/work#systems',
   },

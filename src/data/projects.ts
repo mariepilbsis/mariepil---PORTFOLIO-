@@ -48,20 +48,4 @@ export const PROJECTS: readonly Project[] = [
     ],
     toolList: ['Django', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'PythonAnywhere'],
   },
-  {
-    num: '03',
-    name: 'Harvest Market',
-    meta: 'E-Commerce · UI/UX · 2024',
-    tools: 'Product catalog, checkout, user dashboard, responsive web and mobile layouts',
-    blurb: 'An e-commerce platform connecting local growers to buyers.',
-    problem:
-      'Farm sellers needed a storefront that worked on a phone first, with a checkout simple enough for first-time online buyers.',
-    process: [
-      'Designed the product catalog and category browsing',
-      'Simplified checkout to the fewest possible steps',
-      'Designed the buyer dashboard and order history',
-      'Built responsive layouts for web and mobile',
-    ],
-    toolList: ['Figma', 'Prototyping', 'Responsive design', 'HTML', 'CSS'],
-  },
 ];

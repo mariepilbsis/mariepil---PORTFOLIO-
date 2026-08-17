@@ -5,7 +5,7 @@ export interface Site {
   phone: string;
   base: string;
   linkedin: string;
-  /** Outstanding from the client — the Résumé button stays inert until this is a real URL. */
+  /** Served from public/ — an empty string leaves the Résumé button inert. */
   resume: string;
   footerLine: string;
 }
@@ -17,6 +17,6 @@ export const SITE: Site = {
   phone: '(+63) 928 741 7364',
   base: 'Bulacan, PH',
   linkedin: 'https://www.linkedin.com/in/gay-marie-pil-a932a02ab/',
-  resume: '',
+  resume: '/MariePil-Resume.pdf',
   footerLine: '© 2026 · Gay Marie R. Pil · designed and built in Bulacan',
 };

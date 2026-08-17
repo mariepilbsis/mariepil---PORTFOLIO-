@@ -57,7 +57,7 @@ export function Contact() {
           >
             LinkedIn
           </a>
-          {/* Outstanding from the client: the résumé PDF. Disabled until SITE.resume is set. */}
+          {/* Falls back to an inert pill if SITE.resume is ever cleared. */}
           {SITE.resume ? (
             <a
               className={`${ui.btn} ${ui.dashed} ${ui.xxl}`}
