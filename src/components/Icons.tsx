@@ -52,6 +52,23 @@ export function ArrowUpIcon({ size = 17 }: IconProps) {
   );
 }
 
+export function PlayIcon({ size = 15 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5.6a1 1 0 011.5-.87l9 6.4a1 1 0 010 1.74l-9 6.4A1 1 0 018 18.4V5.6z" />
+    </svg>
+  );
+}
+
+export function PauseIcon({ size = 15 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="7" y="5" width="3.6" height="14" rx="1.2" />
+      <rect x="13.4" y="5" width="3.6" height="14" rx="1.2" />
+    </svg>
+  );
+}
+
 export function LinkedInIcon({ size = 17 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

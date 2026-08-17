@@ -1,4 +1,5 @@
 import { useEffect, useRef, type UIEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { EmptySlot } from '../../components/EmptySlot';
 import { PROJECTS, type Project } from '../../data/projects';
@@ -8,7 +9,6 @@ import styles from './WorkReel.module.css';
 
 interface WorkReelProps {
   onOpenCase: (index: number) => void;
-  onJumpToPubmats: () => void;
 }
 
 function ProjectCard({
@@ -56,23 +56,26 @@ function ProjectCard({
   );
 }
 
-function EndPanel({ onJumpToPubmats }: { onJumpToPubmats: () => void }) {
+/** The reel closes the page now that the gallery runs above it. */
+function EndPanel() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className={styles.endLabel}>End of reel</div>
-      <p className={styles.endCopy}>The pubmats live in the gallery next door.</p>
+      <p className={styles.endCopy}>Pubmats up top, systems here — that is the full shelf.</p>
       <button
         type="button"
         className={`${ui.btn} ${ui.primary} ${ui.lg} ${styles.endBtn}`}
-        onClick={onJumpToPubmats}
+        onClick={() => navigate('/contact')}
       >
-        Down to the pubmats ↓
+        Start a project ↗
       </button>
     </>
   );
 }
 
-export function WorkReel({ onOpenCase, onJumpToPubmats }: WorkReelProps) {
+export function WorkReel({ onOpenCase }: WorkReelProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const isNarrow = useMediaQuery('(max-width: 900px)');
@@ -102,7 +105,7 @@ export function WorkReel({ onOpenCase, onJumpToPubmats }: WorkReelProps) {
 
   const header = (
     <div className={styles.header}>
-      <div className="eyebrow">01 — Systems &amp; Projects</div>
+      <div className="eyebrow">02 — Systems &amp; Projects</div>
       <h2 className={styles.title}>
         My <span className={styles.titleAccent}>Work</span>
       </h2>
@@ -112,7 +115,7 @@ export function WorkReel({ onOpenCase, onJumpToPubmats }: WorkReelProps) {
   // Under 900px the sticky horizontal stage becomes a plain vertical stack.
   if (isNarrow) {
     return (
-      <section className={styles.stack}>
+      <section id="systems" className={styles.stack}>
         {header}
         <div className={styles.stackList}>
           {PROJECTS.map((project, index) => (
@@ -121,7 +124,7 @@ export function WorkReel({ onOpenCase, onJumpToPubmats }: WorkReelProps) {
             </article>
           ))}
           <article className={`${styles.stackCard} ${styles.stackEnd}`}>
-            <EndPanel onJumpToPubmats={onJumpToPubmats} />
+            <EndPanel />
           </article>
         </div>
       </section>
@@ -129,7 +132,7 @@ export function WorkReel({ onOpenCase, onJumpToPubmats }: WorkReelProps) {
   }
 
   return (
-    <div className={`hide-sb ${styles.scroller}`} onScroll={onScroll}>
+    <div id="systems" className={`hide-sb ${styles.scroller}`} onScroll={onScroll}>
       <div className={styles.runway}>
         <div className={styles.sticky}>
           {header}
@@ -146,7 +149,7 @@ export function WorkReel({ onOpenCase, onJumpToPubmats }: WorkReelProps) {
               ))}
 
               <div className={styles.endPanel}>
-                <EndPanel onJumpToPubmats={onJumpToPubmats} />
+                <EndPanel />
               </div>
             </div>
 

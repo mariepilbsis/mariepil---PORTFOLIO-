@@ -1,32 +1,32 @@
 import { useMemo, useState } from 'react';
 
 import { EmptySlot } from '../../components/EmptySlot';
-import { PUBMAT_YEARS, PUBMATS, type PubmatYear } from '../../data/pubmats';
+import { PUBMAT_KINDS, PUBMATS, type PubmatKind } from '../../data/pubmats';
 import ui from '../../styles/ui.module.css';
 import styles from './PubmatGallery.module.css';
 
 export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
-  const [year, setYear] = useState<PubmatYear>('All');
+  const [kind, setKind] = useState<PubmatKind>('All');
 
   const counts = useMemo(() => {
-    const map = new Map<PubmatYear, number>([['All', PUBMATS.length]]);
+    const map = new Map<PubmatKind, number>([['All', PUBMATS.length]]);
     for (const pubmat of PUBMATS) {
-      map.set(pubmat.year, (map.get(pubmat.year) ?? 0) + 1);
+      map.set(pubmat.kind, (map.get(pubmat.kind) ?? 0) + 1);
     }
     return map;
   }, []);
 
   // Keep the original index so the lightbox opens the right entry.
   const shown = PUBMATS.map((pubmat, index) => ({ pubmat, index })).filter(
-    ({ pubmat }) => year === 'All' || pubmat.year === year,
+    ({ pubmat }) => kind === 'All' || pubmat.kind === kind,
   );
 
   return (
     <section id="pubmats" className={`container ${styles.section}`}>
-      <div className="eyebrow">02 — Pubmats · {PUBMATS.length} pieces</div>
+      <div className="eyebrow">01 — Pubmats · {PUBMATS.length} pieces</div>
 
       <h2 className={styles.title}>
-        Layout work, <span className={styles.titleAccent}>by year</span>
+        Layout work, <span className={styles.titleAccent}>by type</span>
       </h2>
 
       <p className={styles.intro}>
@@ -34,16 +34,16 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
         for the Information Systems Synergy Society.
       </p>
 
-      <div className={styles.filters} role="group" aria-label="Filter pubmats by year">
-        {PUBMAT_YEARS.map((value) => {
-          const active = value === year;
+      <div className={styles.filters} role="group" aria-label="Filter pubmats by type">
+        {PUBMAT_KINDS.map((value) => {
+          const active = value === kind;
           return (
             <button
               key={value}
               type="button"
               className={`${ui.filterChip} ${ui.filterChipLg} ${active ? ui.filterChipActive : ''}`}
               aria-pressed={active}
-              onClick={() => setYear(value)}
+              onClick={() => setKind(value)}
             >
               <span className={ui.filterChipFill} aria-hidden="true" />
               <span className={ui.filterChipLabel}>
@@ -53,6 +53,10 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
           );
         })}
       </div>
+
+      {shown.length === 0 && (
+        <p className={styles.empty}>No {kind.toLowerCase()} filed here yet — coming soon.</p>
+      )}
 
       <div className={styles.grid}>
         {shown.map(({ pubmat, index }) => (

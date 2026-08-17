@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { PROJECTS } from '../../data/projects';
@@ -11,26 +11,21 @@ import { WorkReel } from './WorkReel';
 export function Work() {
   const [openCase, setOpenCase] = useState(-1);
   const [lightbox, setLightbox] = useState(-1);
-  const galleryRef = useRef<HTMLDivElement>(null);
   const { hash } = useLocation();
 
-  const jumpToPubmats = useCallback(() => {
-    galleryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, []);
-
-  /** Arriving at /work#pubmats lands directly on the gallery. */
+  /** Arriving at /work#pubmats or /work#systems lands on that section. */
   useEffect(() => {
-    if (hash !== '#pubmats') return;
-    galleryRef.current?.scrollIntoView({ block: 'start' });
+    if (!hash) return;
+    document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'start' });
   }, [hash]);
 
   return (
     <div className="pg">
-      <WorkReel onOpenCase={setOpenCase} onJumpToPubmats={jumpToPubmats} />
+      {/* Pubmats lead — it is the deepest body of work — with the systems
+          reel following as the second act. */}
+      <PubmatGallery onOpen={setLightbox} />
 
-      <div ref={galleryRef}>
-        <PubmatGallery onOpen={setLightbox} />
-      </div>
+      <WorkReel onOpenCase={setOpenCase} />
 
       <CaseModal
         project={openCase >= 0 ? PROJECTS[openCase] : null}

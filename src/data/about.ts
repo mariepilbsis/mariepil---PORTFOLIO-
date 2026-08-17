@@ -17,12 +17,25 @@ export const IDENTITY_ROWS: readonly IdentityRow[] = [
   { key: 'status', value: '● open to opportunities', accent: true },
 ];
 
+/**
+ * The identity card's media slot. The portrait is always there; when this is a
+ * real file the card grows a play control and the video runs over the photo.
+ *
+ * To switch it on: drop the file in src/assets/, `import reel from
+ * '../assets/<file>.mp4'` above, and set `video: reel`. Nothing else changes.
+ */
+export const PROFILE_MEDIA: { video: string } = {
+  video: '',
+};
+
 export const BIO = {
   headingLine1: 'Good layout is a system,',
   headingLine2: 'not a lucky draft.',
   pullQuoteLead: "Two years running an org's publications desk taught me the thing school didn't: ",
   pullQuoteTail: 'a design only counts once it ships, on time, with the team intact.',
-  body: "I'm a creative, detail-oriented Information Systems student working across UI/UX design, front-end development, digital content creation, and business operations support. I design user-centered systems, build interactive prototypes, lead creative teams, and keep inventory software honest.",
+  // Trimmed once the home hero and identity card started carrying the
+  // student / school / role details this used to restate.
+  body: 'I work across UI/UX design, front-end development and content — user-centered systems, interactive prototypes, creative teams, and inventory software kept honest.',
 } as const;
 
 export interface Principle {

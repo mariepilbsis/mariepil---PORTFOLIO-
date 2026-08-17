@@ -5,6 +5,8 @@
   min-height: 620px;
   overflow-y: auto;
   overflow-x: hidden;
+  /* Clears the fixed nav when /work#systems jumps here. */
+  scroll-margin-top: calc(var(--nav-h) + 8px);
 }
 
 /* The tall runway is what turns vertical scroll into horizontal travel. */
@@ -231,6 +233,7 @@
 .stack {
   position: relative;
   z-index: 1;
+  scroll-margin-top: calc(var(--nav-h) + 8px);
 }
 
 .stackList {

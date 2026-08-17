@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 
+import { IdentityCard } from '../../components/IdentityCard';
+import { BIO, PRINCIPLES } from '../../data/about';
 import { ENTRY_CARDS, HERO, STAT_LEDGER } from '../../data/home';
-import { ProcessDiagram } from './ProcessDiagram';
 import { Ticker } from './Ticker';
 import ui from '../../styles/ui.module.css';
 import styles from './Home.module.css';
@@ -32,7 +33,11 @@ export function Home() {
               {HERO.lead}
               <strong className={styles.leadStrong}>{HERO.leadStrong}</strong>
             </p>
-            <p className={styles.sub}>{HERO.sub}</p>
+
+            <p className={styles.quote}>
+              {BIO.pullQuoteLead}
+              <span className={styles.quoteTail}>{BIO.pullQuoteTail}</span>
+            </p>
 
             <div className={styles.heroButtons}>
               <button
@@ -61,8 +66,31 @@ export function Home() {
             </dl>
           </div>
 
-          <ProcessDiagram />
+          <div className={styles.heroCard}>
+            <IdentityCard />
+          </div>
         </div>
+
+        <section className={styles.creed}>
+          <div className={styles.creedHead}>
+            <h2 className={styles.creedTitle}>
+              {BIO.headingLine1}
+              <br />
+              {BIO.headingLine2}
+            </h2>
+            <p className={styles.creedBody}>{BIO.body}</p>
+          </div>
+
+          <div className={styles.principles}>
+            {PRINCIPLES.map((principle) => (
+              <div key={principle.num} className={styles.principle}>
+                <div className={styles.principleNum}>{principle.num}</div>
+                <div className={styles.principleTitle}>{principle.title}</div>
+                <p className={styles.principleBody}>{principle.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
 
       <Ticker />

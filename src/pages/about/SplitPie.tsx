@@ -28,6 +28,18 @@ export function SplitPie() {
           role="img"
           aria-label="Designer 60 percent, coder 40 percent"
         >
+          {/* A CSS drop-shadow() on a slice gets clipped to the default filter
+              region (its bbox + 10%), which showed up as a hard-edged square of
+              glow. These declare a region wide enough to hold the blur. */}
+          <defs>
+            <filter id="pie-glow-designer" x="-35%" y="-35%" width="170%" height="170%">
+              <feDropShadow dx="0" dy="0" stdDeviation="10" className={styles.glowStrong} />
+            </filter>
+            <filter id="pie-glow-coder" x="-35%" y="-35%" width="170%" height="170%">
+              <feDropShadow dx="0" dy="0" stdDeviation="8" className={styles.glowSoft} />
+            </filter>
+          </defs>
+
           <path
             d="M120 120 L120 8 A112 112 0 1 0 185.8 210.6 Z"
             transform="translate(-6,3)"

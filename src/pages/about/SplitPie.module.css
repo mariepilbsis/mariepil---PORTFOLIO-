@@ -66,17 +66,27 @@
   padding: 0 8px;
 }
 
+/* Themed here rather than as flood-color attributes so the glow follows the
+   light/dark accent. */
+.glowStrong {
+  flood-color: rgb(var(--accc));
+  flood-opacity: 0.65;
+}
+
+.glowSoft {
+  flood-color: rgb(var(--accc));
+  flood-opacity: 0.45;
+}
+
 .sliceDesigner {
   fill: var(--acc);
   cursor: pointer;
-  transition:
-    fill 0.28s,
-    filter 0.28s;
+  transition: fill 0.28s;
 }
 
 .sliceDesigner:hover {
   fill: var(--acc2);
-  filter: drop-shadow(0 0 22px rgba(var(--accc), 0.65));
+  filter: url(#pie-glow-designer);
 }
 
 .sliceCoder {
@@ -85,14 +95,13 @@
   cursor: pointer;
   transition:
     fill 0.28s,
-    stroke 0.28s,
-    filter 0.28s;
+    stroke 0.28s;
 }
 
 .sliceCoder:hover {
   fill: var(--slice2);
   stroke: var(--acc);
-  filter: drop-shadow(0 0 18px rgba(var(--accc), 0.45));
+  filter: url(#pie-glow-coder);
 }
 
 /* Set through CSS rather than the fill attribute so the labels follow the theme. */

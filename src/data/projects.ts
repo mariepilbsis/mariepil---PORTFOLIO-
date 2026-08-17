@@ -50,38 +50,6 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     num: '03',
-    name: 'ISkolaris',
-    meta: 'Research Platform · UI/UX · 2025',
-    tools: 'Research database interface, navigation and accessibility of academic content',
-    blurb: 'A research database interface for students and professors.',
-    problem:
-      'Academic papers were scattered and hard to search, so students gave up before they found anything relevant.',
-    process: [
-      'Interviewed students and professors about how they search',
-      'Restructured navigation around subject and year',
-      'Designed browse, search and paper-detail screens',
-      'Raised contrast and text sizing for accessibility',
-    ],
-    toolList: ['Figma', 'Wireframing', 'User flows', 'Usability design'],
-  },
-  {
-    num: '04',
-    name: 'EcoCollect',
-    meta: 'Waste Management · UI/UX · 2024',
-    tools: 'Collection scheduling, reporting, dashboards, notification interfaces',
-    blurb: 'A digital platform for waste collection scheduling and community reporting.',
-    problem:
-      'Residents had no way to know when collection would happen or to report a missed pickup, so complaints went nowhere.',
-    process: [
-      'Mapped the resident and collector journeys',
-      'Designed the scheduling calendar and report form',
-      'Built dashboard and notification interfaces',
-      'Designed the reporting views for barangay staff',
-    ],
-    toolList: ['Figma', 'Wireframing', 'Prototyping', 'Usability design'],
-  },
-  {
-    num: '05',
     name: 'Harvest Market',
     meta: 'E-Commerce · UI/UX · 2024',
     tools: 'Product catalog, checkout, user dashboard, responsive web and mobile layouts',
