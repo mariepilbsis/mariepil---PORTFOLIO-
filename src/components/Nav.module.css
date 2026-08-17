@@ -141,6 +141,10 @@
 }
 
 @media (max-width: 620px) {
+  .pill {
+    gap: 10px;
+  }
+
   .brandName {
     display: none;
   }
@@ -150,5 +154,16 @@
     order: 3;
     width: 100%;
     justify-content: center;
+    gap: 2px;
+  }
+
+  .link {
+    padding: 8px 10px;
+    font-size: 12.5px;
+  }
+
+  .underline {
+    left: 10px;
+    right: 10px;
   }
 }
