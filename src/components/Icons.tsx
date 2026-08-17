@@ -52,6 +52,30 @@ export function ArrowUpIcon({ size = 17 }: IconProps) {
   );
 }
 
+export function CloseIcon({ size = 20 }: IconProps) {
+  return (
+    <svg width={size} height={size} {...base} strokeWidth={1.6}>
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
+
+export function ChevronLeftIcon({ size = 22 }: IconProps) {
+  return (
+    <svg width={size} height={size} {...base} strokeWidth={1.6}>
+      <path d="M14.5 5l-7 7 7 7" />
+    </svg>
+  );
+}
+
+export function ChevronRightIcon({ size = 22 }: IconProps) {
+  return (
+    <svg width={size} height={size} {...base} strokeWidth={1.6}>
+      <path d="M9.5 5l7 7-7 7" />
+    </svg>
+  );
+}
+
 export function PlayIcon({ size = 15 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

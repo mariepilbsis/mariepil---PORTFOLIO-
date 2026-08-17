@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { PROJECTS } from '../../data/projects';
-import { PUBMATS } from '../../data/pubmats';
+import { PUBMAT_EVENTS } from '../../data/pubmats';
 import { CaseModal } from './CaseModal';
 import { Lightbox } from './Lightbox';
 import { PubmatGallery } from './PubmatGallery';
@@ -32,7 +32,7 @@ export function Work() {
         onClose={() => setOpenCase(-1)}
       />
       <Lightbox
-        pubmat={lightbox >= 0 ? PUBMATS[lightbox] : null}
+        event={lightbox >= 0 ? PUBMAT_EVENTS[lightbox] : null}
         onClose={() => setLightbox(-1)}
       />
     </div>

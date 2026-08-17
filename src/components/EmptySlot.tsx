@@ -1,8 +1,8 @@
 import styles from './EmptySlot.module.css';
 
 /**
- * Graceful empty state for artwork the client has not supplied yet — the
- * case-study screenshots and the nine pubmats still marked `img: null`.
+ * Graceful empty state for artwork not supplied yet — the case-study
+ * screenshots, and pubmat events whose pieces are all still `img: null`.
  * Replaces the prototype's drag-and-drop `image-slot` element.
  */
 export function EmptySlot({ label }: { label: string }) {

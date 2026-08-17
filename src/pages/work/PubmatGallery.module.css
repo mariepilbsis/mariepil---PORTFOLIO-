@@ -70,11 +70,46 @@
   transform: translateY(-3px);
 }
 
+/* A multi-piece event reads as a folder: a sheet peeking out behind the card,
+   drawn as offset box-shadows. Shadows paint outside the border-box, so this
+   survives the card's overflow clip and needs no z-index games. The filled
+   layer masks the outlined one, leaving just its edge. */
+.cardStacked {
+  box-shadow:
+    5px -5px 0 -1px var(--bg),
+    5px -5px 0 0 rgba(var(--linec), 0.16);
+  transition:
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.cardStacked:hover {
+  box-shadow:
+    8px -8px 0 -1px var(--bg),
+    8px -8px 0 0 var(--acc);
+}
+
 .frame {
   position: relative;
   height: 330px;
   background: var(--photo);
   overflow: hidden;
+}
+
+.count {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(6, 4, 4, 0.72);
+  backdrop-filter: blur(4px);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: rgba(247, 243, 241, 0.92);
+  pointer-events: none;
 }
 
 .zoom {
