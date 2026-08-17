@@ -1,0 +1,104 @@
+.card {
+  max-width: 400px;
+  border: 1px solid rgba(var(--linec), 0.14);
+  border-radius: 26px;
+  overflow: hidden;
+  background: rgba(var(--linec), 0.03);
+  box-shadow:
+    0 30px 70px rgba(var(--accc), 0.18),
+    0 0 0 1px rgba(var(--accc), 0.08);
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1),
+    box-shadow 0.35s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 42px 90px rgba(var(--accc), 0.3),
+    0 0 0 1px rgba(var(--accc), 0.18);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  border-bottom: 1px solid rgba(var(--linec), 0.08);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--txc), 0.45);
+}
+
+.verified {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--acc2);
+}
+
+.verifiedDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--acc);
+}
+
+/* ---------------------------------------------------------------- portrait */
+
+.portraitFrame {
+  position: relative;
+  height: 352px;
+  background: var(--photo);
+  overflow: hidden;
+}
+
+/* Scaled and nudged off-centre to frame the face, matching the prototype crop. */
+.portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50.4% 61.9%;
+  transform: scale(1.35);
+  display: block;
+}
+
+/* ------------------------------------------------------------- data rows */
+
+.rows {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(var(--linec), 0.07);
+  transition:
+    background 0.2s,
+    padding-left 0.2s;
+}
+
+.row:hover {
+  background: rgba(var(--accc), 0.12);
+  padding-left: 22px;
+}
+
+.rowKey {
+  color: rgba(var(--txc), 0.35);
+}
+
+.rowValue {
+  margin: 0;
+  text-align: right;
+  color: var(--tx);
+}
+
+.rowAccent {
+  color: var(--acc2);
+}

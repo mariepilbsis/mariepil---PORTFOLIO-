@@ -1,0 +1,128 @@
+.split {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 64px;
+  align-items: center;
+  justify-items: stretch;
+}
+
+.side {
+  min-width: 0;
+}
+
+.heading {
+  margin: 0 0 22px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--hd);
+}
+
+.headingRight {
+  text-align: right;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.listRight {
+  align-items: flex-end;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: rgba(var(--txc), 0.78);
+}
+
+.listRight .item {
+  text-align: right;
+}
+
+.diamond {
+  width: 5px;
+  height: 5px;
+  flex: none;
+  background: var(--acc);
+  transform: rotate(45deg);
+}
+
+/* -------------------------------------------------------------------- pie */
+
+.pieWrap {
+  display: flex;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.sliceDesigner {
+  fill: var(--acc);
+  cursor: pointer;
+  transition:
+    fill 0.28s,
+    filter 0.28s;
+}
+
+.sliceDesigner:hover {
+  fill: var(--acc2);
+  filter: drop-shadow(0 0 22px rgba(var(--accc), 0.65));
+}
+
+.sliceCoder {
+  fill: var(--slice);
+  stroke: rgba(var(--linec), 0.16);
+  cursor: pointer;
+  transition:
+    fill 0.28s,
+    stroke 0.28s,
+    filter 0.28s;
+}
+
+.sliceCoder:hover {
+  fill: var(--slice2);
+  stroke: var(--acc);
+  filter: drop-shadow(0 0 18px rgba(var(--accc), 0.45));
+}
+
+/* Set through CSS rather than the fill attribute so the labels follow the theme. */
+.labelDesigner {
+  fill: var(--surf);
+  pointer-events: none;
+}
+
+.labelCoder {
+  fill: var(--tx);
+  pointer-events: none;
+}
+
+@media (max-width: 860px) {
+  .split {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    justify-items: center;
+  }
+
+  .heading,
+  .headingRight {
+    text-align: center;
+  }
+
+  .listRight {
+    align-items: center;
+  }
+
+  .list {
+    align-items: center;
+  }
+}

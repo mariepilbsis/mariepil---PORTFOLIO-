@@ -1,0 +1,22 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vite
+
+# Design reference only — never shipped, and prototype/uploads holds 117 MB of
+# 5000x5000 print-resolution originals. The web-sized versions the app actually
+# uses live in src/assets/pubmats/. Keep the handoff zip as the backup for these.
+prototype/
+
+# editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

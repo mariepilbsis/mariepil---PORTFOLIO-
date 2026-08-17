@@ -1,0 +1,11 @@
+.shell {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--tx);
+  overflow-x: hidden;
+}
+
+.navSpacer {
+  height: var(--nav-h);
+}

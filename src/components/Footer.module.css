@@ -1,0 +1,44 @@
+.footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(var(--linec), 0.09);
+  background: var(--surf);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 22px 24px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--acc);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--onacc);
+}
+
+.line {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: rgba(var(--txc), 0.45);
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

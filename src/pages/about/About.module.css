@@ -1,0 +1,126 @@
+.intro {
+  z-index: 1;
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 56px;
+  align-items: stretch;
+  margin-top: 24px;
+}
+
+.h2 {
+  margin: 0;
+  padding-top: 4px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(34px, 3.9vw, 50px);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  color: var(--hd);
+}
+
+.pullQuote {
+  margin: 26px 0 0;
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--tx);
+  text-wrap: pretty;
+}
+
+.pullQuoteTail {
+  color: rgba(var(--txc), 0.5);
+}
+
+.body {
+  margin: 22px 0 0;
+  max-width: 620px;
+  font-size: 15px;
+  line-height: 1.72;
+  color: rgba(var(--txc), 0.66);
+  text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------- principles */
+
+.principles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+  margin-top: 44px;
+  border-top: 1px solid rgba(var(--linec), 0.14);
+}
+
+.principle {
+  padding: 26px 16px 22px 0;
+  margin-top: -1px;
+  border-top: 1px solid transparent;
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    padding-left 0.25s;
+}
+
+.principle:hover {
+  border-top-color: var(--acc);
+  background: rgba(var(--linec), 0.035);
+  padding-left: 14px;
+}
+
+.principleNum {
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--acc2);
+}
+
+.principleTitle {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--hd);
+}
+
+.principleBody {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(var(--txc), 0.55);
+}
+
+/* ------------------------------------------------------------- sections */
+
+.halves {
+  z-index: 1;
+  padding-top: 84px;
+  padding-bottom: 40px;
+}
+
+.halvesEyebrow {
+  margin-bottom: 44px;
+}
+
+.experience {
+  z-index: 1;
+  padding-top: 12px;
+  padding-bottom: 40px;
+}
+
+.sectionTitle {
+  margin: 20px 0 46px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 56px);
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+  color: var(--hd);
+}
+
+.italicAccent {
+  font-style: italic;
+  color: var(--acc);
+}

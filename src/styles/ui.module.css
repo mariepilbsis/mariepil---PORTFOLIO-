@@ -1,0 +1,234 @@
+/* Shared pill controls: buttons, chips and icon buttons.
+   Every interactive target keeps a 44px minimum height. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  transition:
+    background 0.22s,
+    border-color 0.22s,
+    color 0.22s;
+}
+
+/* ---- variants ---- */
+
+.primary {
+  background: var(--acc);
+  color: var(--onacc);
+  border: 0;
+  font-weight: 700;
+}
+
+.primary:hover {
+  background: var(--acc2);
+  color: var(--onacc);
+}
+
+.glow {
+  box-shadow: 0 10px 30px rgba(var(--accc), 0.36);
+}
+
+.ghost {
+  background: rgba(var(--linec), 0.06);
+  border: 1px solid rgba(var(--linec), 0.15);
+  color: var(--tx);
+  font-weight: 600;
+}
+
+.ghost:hover {
+  border-color: var(--acc);
+  color: var(--acc2);
+}
+
+.outline {
+  background: transparent;
+  border: 1px solid rgba(var(--linec), 0.2);
+  color: var(--tx);
+  font-weight: 600;
+}
+
+.outline:hover {
+  border-color: var(--acc);
+  color: var(--acc2);
+}
+
+.dashed {
+  background: transparent;
+  border: 1px dashed rgba(var(--linec), 0.25);
+  color: rgba(var(--txc), 0.7);
+  font-weight: 600;
+}
+
+.dashed:hover {
+  border-color: var(--acc);
+  color: var(--acc2);
+}
+
+.mono {
+  background: rgba(var(--linec), 0.04);
+  border: 1px solid rgba(var(--linec), 0.12);
+  color: rgba(var(--txc), 0.8);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.mono:hover {
+  border-color: var(--acc);
+  color: var(--acc2);
+}
+
+/* ---- sizes ---- */
+
+.sm {
+  padding: 11px 18px;
+  font-size: 12.5px;
+}
+
+.md {
+  padding: 12px 20px;
+  font-size: 13px;
+}
+
+.lg {
+  padding: 14px 24px;
+  font-size: 13.5px;
+}
+
+.xl {
+  padding: 16px 26px;
+  font-size: 14px;
+}
+
+.xxl {
+  padding: 16px 28px;
+  font-size: 14px;
+}
+
+/* ---- static tag chip (timeline, case modal) ---- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border: 1px solid rgba(var(--linec), 0.14);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: rgba(var(--txc), 0.75);
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+
+.chip:hover {
+  border-color: var(--acc);
+  color: var(--acc3);
+  background: rgba(var(--accc), 0.12);
+}
+
+.chipLg {
+  padding: 8px 14px;
+}
+
+.chipDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--acc);
+  flex: none;
+}
+
+/* ---- square filter chip (constellation categories, pubmat years) ---- */
+
+.filterChip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 15px;
+  border: 1px solid rgba(var(--linec), 0.18);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tx);
+  opacity: 0.55;
+  transition:
+    opacity 0.25s,
+    border-color 0.22s;
+}
+
+.filterChip:hover {
+  border-color: var(--acc);
+  opacity: 1;
+}
+
+.filterChipActive {
+  opacity: 1;
+}
+
+/* Crimson fill lives in an overlay so its opacity can animate. */
+.filterChipFill {
+  position: absolute;
+  inset: 0;
+  background: var(--acc);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.filterChipActive .filterChipFill {
+  opacity: 1;
+}
+
+.filterChipLabel {
+  position: relative;
+  color: var(--tx);
+}
+
+.filterChipActive .filterChipLabel {
+  color: var(--surf);
+}
+
+.filterChipLg {
+  min-height: 44px;
+  padding: 11px 18px;
+  font-size: 11px;
+}
+
+/* ---- 44px round icon button ---- */
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--linec), 0.14);
+  background: transparent;
+  color: var(--tx);
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+
+.iconBtn:hover {
+  border-color: var(--acc);
+  color: var(--acc2);
+  background: rgba(var(--accc), 0.1);
+}

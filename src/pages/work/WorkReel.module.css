@@ -1,0 +1,258 @@
+/* -------------------------------------------------- sticky horizontal reel */
+
+.scroller {
+  height: calc(100vh - 76px);
+  min-height: 620px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* The tall runway is what turns vertical scroll into horizontal travel. */
+.runway {
+  position: relative;
+  height: 280vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 76px);
+  min-height: 620px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  max-width: var(--maxw);
+  width: 100%;
+  margin: 0 auto;
+  padding: 44px 24px 26px;
+}
+
+.title {
+  margin: 16px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(38px, 5.4vw, 60px);
+  letter-spacing: -0.015em;
+  line-height: 1;
+  color: var(--hd);
+}
+
+.titleAccent {
+  font-style: italic;
+  color: var(--acc);
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  border-top: 1px solid rgba(var(--linec), 0.09);
+  overflow: hidden;
+}
+
+.track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  will-change: transform;
+  transition: transform 0.12s linear;
+}
+
+.panel {
+  position: relative;
+  flex: none;
+  width: 430px;
+  padding: 44px 40px 0;
+  border-right: 1px solid rgba(var(--linec), 0.09);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 26px;
+  transition: background 0.3s;
+}
+
+.panel:hover {
+  background: rgba(var(--accc), 0.06);
+}
+
+/* Alternating panels put the screenshot above the copy. */
+.panelReverse {
+  flex-direction: column-reverse;
+}
+
+/* --------------------------------------------------------------- card body */
+
+.cardHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.index {
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--hd);
+}
+
+.identity {
+  text-align: right;
+}
+
+.name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--hd);
+}
+
+.meta {
+  margin-top: 5px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(var(--txc), 0.45);
+}
+
+.tools {
+  margin-top: 24px;
+}
+
+.toolsTitle {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--hd);
+}
+
+.toolsBody {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(var(--txc), 0.55);
+}
+
+.caseBtn {
+  margin-top: 20px;
+}
+
+.shot {
+  position: relative;
+  height: 230px;
+  flex: none;
+  background: var(--photo);
+  border: 1px solid rgba(var(--linec), 0.08);
+  overflow: hidden;
+}
+
+.shotImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------------------------------------------------------- final panel */
+
+.endPanel {
+  position: relative;
+  flex: none;
+  width: 380px;
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.endLabel {
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acc2);
+}
+
+.endCopy {
+  margin: 0 0 26px;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--hd);
+  text-wrap: pretty;
+}
+
+.endBtn {
+  align-self: flex-start;
+}
+
+/* ------------------------------------------------------------- progress */
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(var(--linec), 0.08);
+}
+
+.progressBar {
+  height: 3px;
+  width: 0%;
+  background: var(--acc);
+  box-shadow: 0 0 12px rgba(var(--accc), 0.8);
+}
+
+.scrollHint {
+  position: absolute;
+  bottom: 18px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(var(--txc), 0.35);
+}
+
+.scrollArrow {
+  color: var(--acc);
+}
+
+/* ------------------------------------------- narrow-screen vertical stack */
+
+.stack {
+  position: relative;
+  z-index: 1;
+}
+
+.stackList {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.stackCard {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: 26px 24px;
+  border: 1px solid rgba(var(--linec), 0.11);
+  border-radius: 16px;
+  background: rgba(var(--linec), 0.03);
+}
+
+.stackEnd {
+  justify-content: center;
+  gap: 0;
+}

@@ -1,0 +1,92 @@
+import { useEffect, useRef } from 'react';
+
+import { EmptySlot } from '../../components/EmptySlot';
+import type { Project } from '../../data/projects';
+import { useDismissable } from '../../hooks/useDismissable';
+import ui from '../../styles/ui.module.css';
+import styles from './CaseModal.module.css';
+
+interface CaseModalProps {
+  project: Project | null;
+  onClose: () => void;
+}
+
+export function CaseModal({ project, onClose }: CaseModalProps) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useDismissable(project !== null, onClose);
+
+  useEffect(() => {
+    if (project) closeRef.current?.focus();
+  }, [project]);
+
+  if (!project) return null;
+
+  return (
+    <div className={styles.overlay}>
+      <button type="button" className={styles.backdrop} onClick={onClose} aria-label="Close" />
+
+      <div
+        className={styles.sheet}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="case-modal-title"
+      >
+        <div className={styles.header}>
+          <span className={styles.meta}>{project.meta}</span>
+          <button
+            ref={closeRef}
+            type="button"
+            className={styles.close}
+            onClick={onClose}
+            aria-label="Close case study"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className={styles.body}>
+          <div id="case-modal-title" className={styles.name}>
+            {project.name}
+          </div>
+          <p className={styles.blurb}>{project.blurb}</p>
+
+          <div className={styles.shot}>
+            {project.cover ? (
+              <img
+                className={styles.shotImg}
+                src={project.cover}
+                alt={`${project.name} screenshots`}
+              />
+            ) : (
+              <EmptySlot label={`${project.name} screenshots`} />
+            )}
+          </div>
+
+          <div className={styles.label}>Problem</div>
+          <p className={styles.problem}>{project.problem}</p>
+
+          <div className={styles.label}>Process</div>
+          <ol className={styles.process}>
+            {project.process.map((step, index) => (
+              <li key={step} className={styles.step}>
+                <span className={styles.stepNum}>{String(index + 1).padStart(2, '0')}</span>
+                <span className={styles.stepLabel}>{step}</span>
+              </li>
+            ))}
+          </ol>
+
+          <div className={styles.label}>Tools used</div>
+          <div className={styles.tools}>
+            {project.toolList.map((tool) => (
+              <span key={tool} className={`${ui.chip} ${ui.chipLg}`}>
+                <span className={ui.chipDot} aria-hidden="true" />
+                {tool}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,241 @@
+/* ---------------------------------------------------------------------------
+   Design tokens.
+
+   Both themes are driven from one set of custom properties on <html>; the light
+   theme overrides them under html[data-theme="light"]. The channel-triplet
+   variables (--txc, --linec, …) exist so translucent values can be written as
+   rgba(var(--txc), .6).
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg: #0c0908;
+  --bgc: 12, 9, 8;
+  --surf: #12090a;
+  --surfc: 18, 9, 10;
+  --tx: #f7f3f1;
+  --txc: 247, 243, 241;
+  --linec: 255, 255, 255;
+  --hd: #ffffff;
+  --onacc: #12090a;
+  --acc2: #ff5c72;
+  --acc3: #ffd8de;
+  --slice: #241618;
+  --slice2: #33201f;
+  --slot: #3a2e30;
+  --photo: #efe9e7;
+  --gridA: 0.055;
+  --glowA: 0.2;
+  --glowB: 0.15;
+  color-scheme: dark;
+
+  /* Fixed accent — identical in both themes. */
+  --acc: #e23048;
+  --accc: 226, 48, 72;
+
+  /* Type families. */
+  --font-sans: 'Instrument Sans', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Archivo Black', sans-serif;
+
+  /* Layout. */
+  --maxw: 1240px;
+  --gutter: 24px;
+  --nav-h: 92px;
+}
+
+html[data-theme='light'] {
+  --bg: #f4efec;
+  --bgc: 244, 239, 236;
+  --surf: #ffffff;
+  --surfc: 255, 255, 255;
+  --tx: #1c1416;
+  --txc: 28, 20, 22;
+  --linec: 20, 12, 14;
+  --hd: #140c0e;
+  --onacc: #ffffff;
+  --acc2: #b81230;
+  --acc3: #7e0a1d;
+  --slice: #e6ddd9;
+  --slice2: #d9ccc7;
+  --slot: #b4a8a3;
+  --photo: #e8e0dc;
+  --gridA: 0.05;
+  --glowA: 0.11;
+  --glowB: 0.08;
+  color-scheme: light;
+}
+
+/* ------------------------------------------------------------------ base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--tx);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--acc2);
+  text-decoration: none;
+  transition: color 0.22s;
+}
+
+a:hover {
+  color: var(--acc3);
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--acc);
+  color: var(--onacc);
+}
+
+/* The prototype only styled hover; keyboard users get a visible ring here. */
+:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* -------------------------------------------------------------- keyframes */
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: rotate(45deg) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(45deg) scale(1.15);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --------------------------------------------------------------- utilities */
+
+/* Page enter animation. */
+.pg {
+  animation: fadeUp 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.container {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.hide-sb {
+  scrollbar-width: none;
+}
+
+.hide-sb::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Section eyebrow: crimson rule + mono uppercase label. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acc2);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 2px;
+  background: var(--acc);
+  flex: none;
+}
+
+.eyebrow-muted {
+  color: rgba(var(--txc), 0.35);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

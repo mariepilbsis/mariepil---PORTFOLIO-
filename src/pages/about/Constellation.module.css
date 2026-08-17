@@ -1,0 +1,172 @@
+.band {
+  position: relative;
+  z-index: 1;
+  margin-top: 64px;
+  padding-bottom: 56px;
+  border-top: 1px solid rgba(var(--linec), 0.09);
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 62%,
+    rgba(var(--accc), var(--glowB)),
+    transparent 62%
+  );
+}
+
+/* Blends the band into the experience section below it. */
+.fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(var(--bgc), 0), var(--bg) 82%);
+}
+
+.head {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 58px 24px 0;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acc2);
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  letter-spacing: 0.16em;
+  color: rgba(var(--txc), 0.4);
+}
+
+.hintDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--acc);
+}
+
+.title {
+  margin: 0 0 26px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 56px);
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+  color: var(--hd);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+/* ------------------------------------------------------------- node field */
+
+.field {
+  position: relative;
+  z-index: 1;
+  height: 520px;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.layer {
+  position: absolute;
+  inset: 44px 60px 40px;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.linkPath {
+  filter: drop-shadow(0 0 6px rgba(var(--accc), 0.8));
+}
+
+.node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  transition: opacity 0.35s;
+  cursor: default;
+}
+
+.nodeOff {
+  opacity: 0.16;
+}
+
+.nodeOff:hover {
+  opacity: 1;
+}
+
+.nodeDot {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--acc);
+  transition: box-shadow 0.35s;
+}
+
+.nodeDotLit {
+  box-shadow: 0 0 14px rgba(var(--accc), 0.95);
+}
+
+.nodeLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--tx);
+  white-space: nowrap;
+}
+
+.nodeOff .nodeLabel {
+  color: rgba(var(--txc), 0.6);
+}
+
+@media (max-width: 860px) {
+  .field {
+    height: 640px;
+  }
+
+  .layer {
+    inset: 30px 24px 24px;
+  }
+
+  .nodeLabel {
+    font-size: 10px;
+  }
+
+  .hint {
+    display: none;
+  }
+}
