@@ -108,6 +108,26 @@
   gap: 10px;
 }
 
+/*
+ * Below this the pill can no longer hold brand, links and CTA on one line.
+ * Left to flex-wrap alone the CTA dropped onto a row of its own and `margin-left:
+ * auto` shoved it to the far right, leaving up to 651px of dead space beside it
+ * and doubling the nav from 62px to 122px. Giving the links their own centred
+ * row instead keeps the brand and the CTA paired on the first one.
+ *
+ * 900px rather than the measured 860px break: the exact point depends on how
+ * wide the link text renders, so it moves with the font. A breakpoint that
+ * arrives slightly early is invisible; one that arrives late is that gap.
+ */
+@media (max-width: 900px) {
+  .links {
+    margin-left: 0;
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 620px) {
   .pill {
     gap: 10px;
@@ -118,10 +138,6 @@
   }
 
   .links {
-    margin-left: 0;
-    order: 3;
-    width: 100%;
-    justify-content: center;
     gap: 2px;
   }
 

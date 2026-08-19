@@ -49,7 +49,17 @@ function ProjectCard({
 
       <div className={styles.shot}>
         {project.cover ? (
-          <img className={styles.shotImg} src={project.cover} alt={`${project.name} screenshot`} />
+          // Thumbnail, lazily — the card is small and sits below the fold.
+          <picture>
+            <source srcSet={project.coverThumb} type="image/webp" />
+            <img
+              className={styles.shotImg}
+              src={project.coverThumbJpg ?? project.cover}
+              alt={`${project.name} screenshot`}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         ) : (
           <EmptySlot label={`${project.name} cover`} />
         )}

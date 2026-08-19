@@ -1,4 +1,6 @@
 import smartstockCover from '../assets/pubmats/smartstock-hero.jpg';
+import smartstockCoverThumb from '../assets/pubmats/thumbs/smartstock-hero.webp';
+import smartstockCoverThumbJpg from '../assets/pubmats/thumbs/smartstock-hero.jpg';
 
 export interface Project {
   num: string;
@@ -16,6 +18,16 @@ export interface Project {
    * fall back to an empty slot.
    */
   cover?: string;
+  /**
+   * The same cover at thumbnail size, for the reel card — which paints it about
+   * 430px wide. Pointing that card at the full-size `cover` made a 224 KB
+   * original the heaviest thing on /work, eagerly fetched below the fold, for a
+   * picture nobody was looking at full size. `cover` stays for the case modal
+   * and the video poster, which do fill the screen.
+   */
+  coverThumb?: string;
+  /** The thumbnail as JPEG, for browsers without WebP. */
+  coverThumbJpg?: string;
   /**
    * Walkthrough video, served straight from public/ rather than bundled — it is
    * far too big to run through the asset pipeline, and swapping the file should
@@ -43,6 +55,8 @@ export const PROJECTS: readonly Project[] = [
     // The campaign hero doubles as the case cover — it is the same product
     // shot, and it already lives in the pubmat gallery.
     cover: smartstockCover,
+    coverThumb: smartstockCoverThumb,
+    coverThumbJpg: smartstockCoverThumbJpg,
     video: '/SmartStock-AI-InventoryPrototype-Video.mp4',
   },
   {
