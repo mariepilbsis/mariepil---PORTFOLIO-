@@ -4,8 +4,12 @@ import merch03 from '../assets/pubmats/merch-pubmat-03.jpg';
 import merch04 from '../assets/pubmats/merch-pubmat-04.jpg';
 import membershipDrive from '../assets/pubmats/membership-drive.jpg';
 import bsisBrochure from '../assets/pubmats/bsis-brochure.jpg';
+import bsisBrochureOutside from '../assets/pubmats/bsis-brochure-outside.jpg';
+import bsisBrochureMockup from '../assets/pubmats/bsis-brochure-mockup.jpg';
 import aeroBrochure01 from '../assets/pubmats/aero-brochure-01.jpg';
 import aeroBrochure02 from '../assets/pubmats/aero-brochure-02.jpg';
+import aeroBrochureCaap from '../assets/pubmats/aero-brochure-caap.jpg';
+import bpmBdo from '../assets/pubmats/bpm-bdo.jpg';
 import salubongBooth from '../assets/pubmats/salubong-booth.jpg';
 import birthdayGreeting from '../assets/pubmats/birthday-greeting.jpg';
 import isnergyMrMs from '../assets/pubmats/isnergy-mr-ms.jpg';
@@ -82,7 +86,18 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     event: 'Program brochure',
     kind: 'Brochures',
     year: '2025',
-    pieces: [{ label: 'BSIS Brochure', img: bsisBrochure }],
+    pieces: [
+      { label: 'Outside spread', img: bsisBrochureOutside },
+      { label: 'Inside spread', img: bsisBrochure },
+      { label: 'Trifold mockup', img: bsisBrochureMockup },
+    ],
+  },
+  {
+    title: 'Business Process Management',
+    event: 'BDO Unibank · account registration and activation',
+    kind: 'Brochures',
+    year: '2025',
+    pieces: [{ label: 'BPM lifecycle e-brochure', img: bpmBdo }],
   },
   {
     title: 'Salubong Booth Poster',
@@ -210,6 +225,7 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     pieces: [
       { label: 'Spread 01', img: aeroBrochure01 },
       { label: 'Spread 02', img: aeroBrochure02 },
+      { label: 'CAAP mandates and functions · e-brochure', img: aeroBrochureCaap },
     ],
   },
 ];

@@ -23,10 +23,14 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
   }, []);
 
   // Keep the original index so the lightbox opens the right event. Folders lead
-  // and single pieces follow; sort is stable, so each group keeps data order.
+  // and single pieces follow; inside each group the cards run A–Z by title.
   const shown = PUBMAT_EVENTS.map((event, index) => ({ event, index }))
     .filter(({ event }) => kind === 'All' || event.kind === kind)
-    .sort((a, b) => Number(a.event.pieces.length === 1) - Number(b.event.pieces.length === 1));
+    .sort(
+      (a, b) =>
+        Number(a.event.pieces.length === 1) - Number(b.event.pieces.length === 1) ||
+        a.event.title.localeCompare(b.event.title),
+    );
 
   return (
     <section id="pubmats" className={`container ${styles.section}`}>
