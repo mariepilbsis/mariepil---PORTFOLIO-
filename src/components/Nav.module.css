@@ -108,38 +108,6 @@
   gap: 10px;
 }
 
-.themeToggle {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  flex: none;
-  border-radius: 50%;
-  border: 1px solid rgba(var(--linec), 0.16);
-  background: transparent;
-  color: var(--tx);
-  cursor: pointer;
-  transition:
-    border-color 0.22s,
-    color 0.22s,
-    background 0.22s;
-}
-
-.themeToggle:hover {
-  border-color: var(--acc);
-  color: var(--acc);
-  background: rgba(var(--accc), 0.08);
-}
-
-/* Both icons are stacked; the theme crossfades between them. */
-.themeIcon {
-  position: absolute;
-  display: flex;
-  transition: opacity 0.22s;
-}
-
 @media (max-width: 620px) {
   .pill {
     gap: 10px;

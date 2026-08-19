@@ -17,23 +17,6 @@ const base = {
   'aria-hidden': true,
 } as const;
 
-export function SunIcon({ size = 17 }: IconProps) {
-  return (
-    <svg width={size} height={size} {...base}>
-      <circle cx="12" cy="12" r="4.2" />
-      <path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" />
-    </svg>
-  );
-}
-
-export function MoonIcon({ size = 17 }: IconProps) {
-  return (
-    <svg width={size} height={size} {...base}>
-      <path d="M20.5 14.6A8.6 8.6 0 019.4 3.5a8.6 8.6 0 1011.1 11.1z" />
-    </svg>
-  );
-}
-
 export function MailIcon({ size = 17 }: IconProps) {
   return (
     <svg width={size} height={size} {...base}>

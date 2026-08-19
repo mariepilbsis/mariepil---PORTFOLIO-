@@ -1,10 +1,13 @@
 /* ---------------------------------------------------------------------------
    Design tokens.
 
-   Both themes are driven from one set of custom properties on <html>; the light
-   theme overrides them under html[data-theme="light"]. The channel-triplet
-   variables (--txc, --linec, …) exist so translucent values can be written as
-   rgba(var(--txc), .6).
+   The site is dark only. index.html hardcodes data-theme="dark" on <html>, so
+   the light block below never matches — it is kept, intact and contrast
+   checked, so light mode is a small change to switch back on rather than a
+   rewrite. See the note above it.
+
+   The channel-triplet variables (--txc, --linec, …) exist so translucent
+   values can be written as rgba(var(--txc), .6).
    --------------------------------------------------------------------------- */
 
 :root {
@@ -60,6 +63,19 @@
   --nav-h: 92px;
 }
 
+/* DORMANT — light mode is switched off.
+ *
+ * Nothing sets data-theme="light" any more, so none of this applies. To bring
+ * light mode back:
+ *   1. Give <html> in index.html a theme chosen at runtime again rather than
+ *      the fixed data-theme="dark", setting it before first paint so there is
+ *      no flash of the wrong theme.
+ *   2. Restore the theme context and provider, and the toggle button in Nav.
+ *      Both were removed in the same commit as this note — `git log -- src/theme`
+ *      has them.
+ *
+ * The values are AA-checked against the light ground and still good; the
+ * ratios in the comments are current. */
 html[data-theme='light'] {
   --bg: #f4efec;
   --bgc: 244, 239, 236;

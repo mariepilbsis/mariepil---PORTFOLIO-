@@ -3,8 +3,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { NAV_ITEMS } from '../data/navigation';
 import { SITE } from '../data/site';
-import { useTheme } from '../theme/theme-context';
-import { MoonIcon, SunIcon } from './Icons';
 import ui from '../styles/ui.module.css';
 import styles from './Nav.module.css';
 
@@ -13,7 +11,6 @@ const NAV_GAP = 14;
 
 export function Nav() {
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
   const wrapRef = useRef<HTMLElement>(null);
 
   /**
@@ -61,29 +58,6 @@ export function Nav() {
         </nav>
 
         <div className={styles.actions}>
-          <button
-            type="button"
-            className={styles.themeToggle}
-            onClick={toggleTheme}
-            aria-label="Toggle light and dark theme"
-            title={theme === 'light' ? 'Switch to dark' : 'Switch to light'}
-          >
-            <span
-              className={styles.themeIcon}
-              style={{ opacity: theme === 'light' ? 0 : 1 }}
-              aria-hidden="true"
-            >
-              <SunIcon />
-            </span>
-            <span
-              className={styles.themeIcon}
-              style={{ opacity: theme === 'light' ? 1 : 0 }}
-              aria-hidden="true"
-            >
-              <MoonIcon />
-            </span>
-          </button>
-
           <button
             type="button"
             className={`${ui.btn} ${ui.primary} ${ui.md}`}
