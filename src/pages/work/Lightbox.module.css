@@ -11,20 +11,22 @@
 
 /* ------------------------------------------------------------------ track */
 
-/* One slide per viewport width, snapped. Native horizontal drag on touch. */
+/* One slide per viewport height, snapped. A wheel or a touch flick pages the
+   folder, which is the gesture people reach for first. */
 .track {
   position: absolute;
   inset: 0;
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  overscroll-behavior-x: contain;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
 }
 
 /* Flex, not grid: a grid item's automatic minimum size is its intrinsic size,
    so a 1350px-tall poster ignored max-height and overflowed the viewport.
-   Side padding clears the arrows, bottom padding clears the caption rail. */
+   Right padding clears the arrow stack, bottom padding clears the caption. */
 .slide {
   flex: none;
   width: 100%;
@@ -32,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 26px 78px 74px;
+  padding: 26px 78px 74px 40px;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   cursor: zoom-out;
@@ -80,17 +82,18 @@
 
 /* ----------------------------------------------------------------- arrows */
 
-/* 48px square — over the 44px minimum, and clear of the slide's side padding. */
+/* 48px square — over the 44px minimum, and clear of the slide's side padding.
+   Stacked on the right edge now that the track runs vertically, so the pair
+   reads as up/down rather than back/forward. */
 .arrow {
   position: absolute;
-  top: 50%;
+  right: 18px;
   z-index: 2;
   width: 48px;
   height: 48px;
   display: grid;
   place-items: center;
   padding: 0;
-  transform: translateY(-50%);
   border: 1px solid rgba(247, 243, 241, 0.18);
   border-radius: 50%;
   background: rgba(6, 4, 4, 0.6);
@@ -110,11 +113,11 @@
 }
 
 .arrowPrev {
-  left: 18px;
+  top: calc(50% - 56px);
 }
 
 .arrowNext {
-  right: 18px;
+  top: calc(50% + 8px);
 }
 
 /* ------------------------------------------------------------------- foot */
@@ -229,24 +232,14 @@
 }
 
 @media (max-width: 640px) {
-  /* Arrows move off the sides on touch — swipe is the primary gesture there,
-     so the artwork gets the full width instead. */
+  /* Arrows go away entirely on touch — a vertical flick is the native gesture
+     there, so the artwork gets the full width instead. */
   .slide {
     padding: 18px 14px 92px;
   }
 
   .arrow {
-    top: auto;
-    bottom: 16px;
-    transform: none;
-  }
-
-  .arrowPrev {
-    left: 14px;
-  }
-
-  .arrowNext {
-    right: 14px;
+    display: none;
   }
 
   .foot {

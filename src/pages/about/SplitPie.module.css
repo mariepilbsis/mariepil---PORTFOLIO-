@@ -14,9 +14,12 @@
   margin: 0 0 22px;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: 34px;
-  line-height: 1;
+  /* The headings run to two lines at this length, so they shrink a little and
+     get room to breathe between them rather than sitting flush. */
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.12;
   letter-spacing: -0.01em;
+  text-wrap: balance;
   color: var(--hd);
 }
 

@@ -76,6 +76,22 @@ export function ChevronRightIcon({ size = 22 }: IconProps) {
   );
 }
 
+export function ChevronUpIcon({ size = 22 }: IconProps) {
+  return (
+    <svg width={size} height={size} {...base} strokeWidth={1.6}>
+      <path d="M5 14.5l7-7 7 7" />
+    </svg>
+  );
+}
+
+export function ChevronDownIcon({ size = 22 }: IconProps) {
+  return (
+    <svg width={size} height={size} {...base} strokeWidth={1.6}>
+      <path d="M5 9.5l7 7 7-7" />
+    </svg>
+  );
+}
+
 export function PlayIcon({ size = 15 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

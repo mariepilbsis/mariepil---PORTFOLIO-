@@ -9,7 +9,7 @@ export function SplitPie() {
   return (
     <div className={styles.split}>
       <div className={styles.side}>
-        <h3 className={`${styles.heading} ${styles.headingRight}`}>Part designer</h3>
+        <h3 className={`${styles.heading} ${styles.headingRight}`}>Design &amp; User Experience</h3>
         <ul className={`${styles.list} ${styles.listRight}`}>
           {HALF_DESIGN.map((item) => (
             <li key={item} className={styles.item}>
@@ -26,7 +26,7 @@ export function SplitPie() {
           width="264"
           height="264"
           role="img"
-          aria-label="Designer 60 percent, coder 40 percent"
+          aria-label="Designer 60 percent, developer 40 percent"
         >
           {/* A CSS drop-shadow() on a slice gets clipped to the default filter
               region (its bbox + 10%), which showed up as a hard-edged square of
@@ -63,21 +63,21 @@ export function SplitPie() {
             Designer
           </text>
           <text
-            x="188"
+            x="180"
             y="104"
             textAnchor="middle"
             fontFamily="'Instrument Sans', sans-serif"
-            fontSize="18"
+            fontSize="16"
             fontWeight="700"
             className={styles.labelCoder}
           >
-            Coder
+            Developer
           </text>
         </svg>
       </div>
 
       <div className={styles.side}>
-        <h3 className={styles.heading}>Part coder</h3>
+        <h3 className={styles.heading}>Engineering &amp; Implementation</h3>
         <ul className={styles.list}>
           {HALF_CODE.map((item) => (
             <li key={item} className={styles.item}>

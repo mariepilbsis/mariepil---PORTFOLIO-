@@ -7,8 +7,6 @@ import membershipDrive from '../assets/pubmats/membership-drive.jpg';
 import bsisBrochure from '../assets/pubmats/bsis-brochure.jpg';
 import bsisBrochureOutside from '../assets/pubmats/bsis-brochure-outside.jpg';
 import bsisBrochureMockup from '../assets/pubmats/bsis-brochure-mockup.jpg';
-import aeroBrochure01 from '../assets/pubmats/aero-brochure-01.jpg';
-import aeroBrochure02 from '../assets/pubmats/aero-brochure-02.jpg';
 import aeroBrochureCaap from '../assets/pubmats/aero-brochure-caap.jpg';
 import bpmBdo from '../assets/pubmats/bpm-bdo.jpg';
 import salubongBooth from '../assets/pubmats/salubong-booth.jpg';
@@ -220,16 +218,6 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
   },
   {
     // The one piece here that came in as paid outside work.
-    title: 'Aeronautical Communications',
-    event: 'Freelance commission · brochure',
-    kind: 'Brochures',
-    year: '2026',
-    pieces: [
-      { label: 'Spread 01', img: aeroBrochure01 },
-      { label: 'Spread 02', img: aeroBrochure02 },
-    ],
-  },
-  {
     title: 'CAAP E-Brochure',
     event: 'Civil Aviation Authority of the Philippines · mandates and functions',
     kind: 'Brochures',

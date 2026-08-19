@@ -64,17 +64,17 @@ export const PRINCIPLES: readonly Principle[] = [
 ];
 
 export const HALF_DESIGN: readonly string[] = [
-  'UI design',
-  'UX design',
-  'Wireframing & user flows',
-  'Layout & publication design',
-  'Making it pop',
+  'UI/UX Design & Prototyping',
+  'Wireframing & User Flows',
+  'Publication & Layout Design',
+  'Visual Systems & Branding',
+  'Accessibility & Usability Design',
 ];
 
 export const HALF_CODE: readonly string[] = [
-  'Front-end development',
-  'HTML / CSS',
-  'JavaScript',
-  'Django & MySQL',
-  'Deploying it properly',
+  'Front-End Development',
+  'HTML / CSS / JavaScript',
+  'Django & MySQL Integration',
+  'System Architecture & Databases',
+  'Production Deployment & Testing',
 ];
