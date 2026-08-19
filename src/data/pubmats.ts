@@ -7,6 +7,17 @@ import bsisBrochure from '../assets/pubmats/bsis-brochure.jpg';
 import freshiesSalubong from '../assets/pubmats/freshies-salubong.jpg';
 import salubongBooth from '../assets/pubmats/salubong-booth.jpg';
 import birthdayGreeting from '../assets/pubmats/birthday-greeting.jpg';
+import applicationFront from '../assets/pubmats/application-front.jpg';
+import applicationCreatives from '../assets/pubmats/application-creatives.jpg';
+import applicationExec from '../assets/pubmats/application-exec.jpg';
+import applicationLegal from '../assets/pubmats/application-legal.jpg';
+import applicationMpd from '../assets/pubmats/application-mpd.jpg';
+import smartstockPoster from '../assets/pubmats/smartstock-poster.jpg';
+import smartstockHero from '../assets/pubmats/smartstock-hero.jpg';
+import smartstockAiForecasts from '../assets/pubmats/smartstock-ai-forecasts.jpg';
+import smartstockBanner from '../assets/pubmats/smartstock-banner.jpg';
+import smartstockLogoMark from '../assets/pubmats/smartstock-logo-mark.jpg';
+import smartstockWordmark from '../assets/pubmats/smartstock-wordmark.jpg';
 
 /** Filter categories. The gallery is grouped by type of piece, not by year. */
 export const PUBMAT_KINDS = ['All', 'Logos', 'Pubmats', 'Brochures'] as const;
@@ -99,13 +110,18 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
   },
   {
     title: 'Freshies Salubong',
-    event: 'Salubong welcome · booth',
+    event: 'Salubong welcome',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [
-      { label: 'Salubong welcome', img: freshiesSalubong },
-      { label: 'Booth collateral', img: salubongBooth },
-    ],
+    pieces: [{ label: 'Salubong welcome', img: freshiesSalubong }],
+  },
+  {
+    // Stands on its own rather than sitting inside the Salubong folder.
+    title: 'Salubong Booth Poster',
+    event: 'Booth collateral',
+    kind: 'Pubmats',
+    year: '2026',
+    pieces: [{ label: 'Salubong Booth Poster', img: salubongBooth }],
   },
   {
     title: 'Birthday Greeting',
@@ -129,11 +145,17 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     ],
   },
   {
-    title: 'Open for Applications',
-    event: 'IS³ recruitment',
+    title: 'Application Poster',
+    event: 'IS³ recruitment · July 9–14',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Open for Applications', img: null }],
+    pieces: [
+      { label: 'Shape the Future of IS · front page', img: applicationFront },
+      { label: 'Executive Department', img: applicationExec },
+      { label: 'Creatives Department', img: applicationCreatives },
+      { label: 'Legal Department', img: applicationLegal },
+      { label: 'Membership & Publicity Department', img: applicationMpd },
+    ],
   },
   {
     title: 'Gold Gear Awards',
@@ -141,6 +163,29 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Pubmats',
     year: '2026',
     pieces: [{ label: 'Gold Gear Awards', img: null }],
+  },
+  {
+    // SmartStock — the Technopreneurship capstone brand for Gerlyn Variety Store.
+    title: 'Technopreneurship',
+    event: 'SmartStock · campaign collateral',
+    kind: 'Pubmats',
+    year: '2026',
+    pieces: [
+      { label: 'The Future of Retail Inventory · poster', img: smartstockPoster },
+      { label: 'Smarter inventory starts here', img: smartstockHero },
+      { label: 'AI Demand Forecasts', img: smartstockAiForecasts },
+      { label: 'The Future of Retail Inventory · banner', img: smartstockBanner },
+    ],
+  },
+  {
+    title: 'Branding',
+    event: 'SmartStock · visual identity',
+    kind: 'Logos',
+    year: '2026',
+    pieces: [
+      { label: 'SmartStock logo mark', img: smartstockLogoMark },
+      { label: 'Gerlyn Variety Store SmartStock wordmark', img: smartstockWordmark },
+    ],
   },
 ];
 
