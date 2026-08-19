@@ -39,13 +39,13 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
       </div>
 
       <h2 className={styles.title}>
-        Layout work, <span className={styles.titleAccent}>by type</span>
+        Selected Work <span className={styles.titleAccent}>&amp; Publications</span>
       </h2>
 
       <p className={styles.intro}>
-        Publication materials designed as Head Layout Artist and Multimedia &amp; Publications Head
-        for the Information Systems Synergy Society, plus freelance commissions. Each card is one
-        piece or one event — open a stacked card to page through everything produced for it.
+        Visual systems and digital media designed as Multimedia and Publications Head for the
+        Information Systems Synergy Society, alongside client projects. Click into any collection to
+        explore the full output.
       </p>
 
       <div className={styles.filters} role="group" aria-label="Filter pubmats by type">

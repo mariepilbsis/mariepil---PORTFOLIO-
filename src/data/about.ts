@@ -29,13 +29,14 @@ export const PROFILE_MEDIA: { video: string } = {
 };
 
 export const BIO = {
-  headingLine1: 'Good layout is a system,',
-  headingLine2: 'not a lucky draft.',
-  pullQuoteLead: "Two years running an org's publications desk taught me the thing school didn't: ",
-  pullQuoteTail: 'a design only counts once it ships, on time, with the team intact.',
+  headingLine1: 'Great design is structured,',
+  headingLine2: 'functional, and scalable.',
+  pullQuoteLead: 'Leading multimedia and publication teams taught me what matters most: ',
+  pullQuoteTail:
+    'a design only creates value when it ships accurately, hits every deadline, and elevates the user experience.',
   // Trimmed once the home hero and identity card started carrying the
   // student / school / role details this used to restate.
-  body: 'I work across UI/UX design, front-end development and content — user-centered systems, interactive prototypes, creative teams, and inventory software kept honest.',
+  body: 'I bridge the gap between UI/UX design, front-end development, and operations—crafting interactive prototypes, web interfaces, and production-ready systems grounded in clear user data.',
 } as const;
 
 export interface Principle {
@@ -48,17 +49,17 @@ export const PRINCIPLES: readonly Principle[] = [
   {
     num: '01',
     title: 'Design the system',
-    body: 'Flows and wireframes first, so the pretty part has somewhere to sit.',
+    body: 'User flows, wireframes, and interactive Figma prototypes first—ensuring every visual decision serves a functional purpose.',
   },
   {
     num: '02',
     title: 'Build it for real',
-    body: 'Django, MySQL, plain HTML/CSS/JS — I hand off code, not just mockups.',
+    body: 'HTML, CSS, JavaScript, and Django backend integration—I deliver functional, deployed code alongside high-fidelity mockups.',
   },
   {
     num: '03',
     title: 'Ship with a team',
-    body: 'Four designers, one calendar, zero missed posting deadlines.',
+    body: 'Directing multimedia initiatives across design, web, and layout—ensuring consistent branding and zero missed event deadlines.',
   },
 ];
 

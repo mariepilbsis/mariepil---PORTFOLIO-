@@ -1,3 +1,4 @@
+import merchTeaser from '../assets/pubmats/merch-teaser.jpg';
 import merch01 from '../assets/pubmats/merch-pubmat-01.jpg';
 import merch02 from '../assets/pubmats/merch-pubmat-02.jpg';
 import merch03 from '../assets/pubmats/merch-pubmat-03.jpg';
@@ -36,7 +37,7 @@ import isBrandingCover from '../assets/pubmats/is-branding-cover.jpg';
 import isBrandingPfp from '../assets/pubmats/is-branding-pfp.jpg';
 
 /** Filter categories. The gallery is grouped by type of piece, not by year. */
-export const PUBMAT_KINDS = ['All', 'Logos', 'Pubmats', 'Brochures'] as const;
+export const PUBMAT_KINDS = ['All', 'Pubmats', 'Brochures', 'Logos'] as const;
 
 export type PubmatKind = (typeof PUBMAT_KINDS)[number];
 
@@ -68,6 +69,7 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Pubmats',
     year: '2024',
     pieces: [
+      { label: 'Coming soon teaser', img: merchTeaser },
       { label: 'Merch Pubmat 01', img: merch01 },
       { label: 'Merch Pubmat 02', img: merch02 },
       { label: 'Merch Pubmat 03', img: merch03 },
@@ -197,8 +199,8 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     ],
   },
   {
-    title: 'Branding',
-    event: 'SmartStock · visual identity',
+    title: 'SmartStock Branding',
+    event: 'Visual identity · logo mark and wordmark',
     kind: 'Logos',
     year: '2026',
     pieces: [
@@ -225,8 +227,14 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     pieces: [
       { label: 'Spread 01', img: aeroBrochure01 },
       { label: 'Spread 02', img: aeroBrochure02 },
-      { label: 'CAAP mandates and functions · e-brochure', img: aeroBrochureCaap },
     ],
+  },
+  {
+    title: 'CAAP E-Brochure',
+    event: 'Civil Aviation Authority of the Philippines · mandates and functions',
+    kind: 'Brochures',
+    year: '2026',
+    pieces: [{ label: 'CAAP E-Brochure', img: aeroBrochureCaap }],
   },
 ];
 

@@ -5,8 +5,8 @@ export const HERO = {
   eyebrowMuted: '· Bulacan State University',
   headingLead: "Hi, I'm Marie ",
   headingAccent: 'Pil',
-  lead: 'I design interfaces and ',
-  leadStrong: 'lead the teams that ship them',
+  lead: 'I design user-centered systems and ',
+  leadStrong: 'lead the creative teams that ship them.',
   primaryCta: 'View my work →',
   secondaryCta: 'Get in touch',
 } as const;
