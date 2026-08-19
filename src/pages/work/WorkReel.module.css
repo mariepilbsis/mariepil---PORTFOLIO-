@@ -10,6 +10,8 @@
 }
 
 /* The tall runway is what turns vertical scroll into horizontal travel. */
+/* Starting height only — WorkReel measures the real horizontal travel and sets
+   this inline, so the runway is never longer than the distance it drives. */
 .runway {
   position: relative;
   height: 280vh;

@@ -109,6 +109,24 @@ export function PauseIcon({ size = 15 }: IconProps) {
   );
 }
 
+/** Corner brackets pushing out — enter the browser's own fullscreen. */
+export function ExpandIcon({ size = 17 }: IconProps) {
+  return (
+    <svg width={size} height={size} {...base}>
+      <path d="M9 3.6H3.6V9M15 3.6h5.4V9M9 20.4H3.6V15M15 20.4h5.4V15" />
+    </svg>
+  );
+}
+
+/** The same brackets pulling in — leave fullscreen. */
+export function CollapseIcon({ size = 17 }: IconProps) {
+  return (
+    <svg width={size} height={size} {...base}>
+      <path d="M3.6 9H9V3.6M20.4 9H15V3.6M3.6 15H9v5.4M20.4 15H15v5.4" />
+    </svg>
+  );
+}
+
 export function LinkedInIcon({ size = 17 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

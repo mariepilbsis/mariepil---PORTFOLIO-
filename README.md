@@ -281,13 +281,15 @@ All in `prototype/uploads/` (referenced by these exact paths in the prototype) p
 Icons are hand-written inline SVG (email, LinkedIn, arrow-up, sun, moon) — 24-unit viewBox,
 `stroke="currentColor"`, `stroke-width:1.7`, round caps/joins. No icon library.
 
-**Still outstanding from the client** (build these as graceful empty states, not blockers):
-- Case-study screenshots for the work reel cards and the case modal.
-- Artwork for 9 pubmat entries currently marked `img: null`
-  (Captivate Booth, Valentine's Campaign, ISystems Convergence, ExeCom Turnover, ISnergy,
-  Open for Applications, Gold Gear Awards, and two others).
-- Resume PDF for the Contact page's dashed "Resume" button (`href="#"` today).
-- Dean's Lister semester details on the recognition card.
+**Still outstanding from the client** — as originally handed off. Most of this has since
+landed; see *Maintaining the built site* at the end of this file for what is actually left.
+
+| Item | Status |
+|---|---|
+| Artwork for 9 pubmat entries marked `img: null` | **Done** — 18 events, 35 pieces, none `null` |
+| Resume PDF for the Contact page | **Done** — `public/MariePil-Resume.pdf` |
+| Case-study screenshots for the work reel and case modal | **Partly** — SmartStock has a walkthrough video; neither project has a `cover`, so the reel cards still fall back to `EmptySlot` |
+| Dean's Lister semester details | **Still open** — see the note in `data/credentials.ts` |
 
 ## Files
 ```
@@ -360,3 +362,16 @@ per-route title, description and canonical for browsers and search engines.
 - **An absolute production domain.** `public/sitemap.xml` uses relative `<loc>` values and
   `index.html` has no `og:url`, because the final domain was not settled. Both want the
   real origin once it is.
+- **Case-study covers.** Neither entry in `data/projects.ts` sets `cover`, so the work reel
+  cards and the case modal fall back to `EmptySlot`. SmartStock has a walkthrough video,
+  which takes the modal's shot slot when present; the reel card still shows the placeholder.
+- **Dean's Lister semester details** on the recognition card — see the note in
+  `data/credentials.ts`.
+
+### One thing to weigh
+
+`public/SmartStock-AI-InventoryPrototype-Video.mp4` is 48.7 MB and committed to the repo, so
+every clone carries it and git keeps it in history permanently. `preload="metadata"` means
+visitors pay nothing until they press play, so this is a repo-weight question rather than a
+page-weight one. A re-encode would likely cut it several times over; hosting it externally
+and pointing `video:` at a URL would take it out of git entirely.

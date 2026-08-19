@@ -7,6 +7,7 @@ import { PUBMAT_EVENTS } from '../../data/pubmats';
 import { CaseModal } from './CaseModal';
 import { Lightbox } from './Lightbox';
 import { PubmatGallery } from './PubmatGallery';
+import { VideoTheater } from './VideoTheater';
 import { WorkReel } from './WorkReel';
 
 export function Work() {
@@ -29,6 +30,14 @@ export function Work() {
   const closeCase = useCallback(() => setOpenCase(-1), []);
   const closeLightbox = useCallback(() => setLightbox(-1), []);
 
+  /**
+   * A project with a walkthrough opens straight into the theater: the clip
+   * fills the screen and plays on its own, with the case study in the column
+   * beside it. Stopping at the sheet first would have made someone click a
+   * poster to reach the same case study they had just asked for.
+   */
+  const project = openCase >= 0 ? PROJECTS[openCase] : null;
+
   /** Arriving at /work#pubmats or /work#systems lands on that section. */
   useEffect(() => {
     if (!hash) return;
@@ -43,7 +52,11 @@ export function Work() {
 
       <WorkReel onOpenCase={setOpenCase} />
 
-      <CaseModal project={openCase >= 0 ? PROJECTS[openCase] : null} onClose={closeCase} />
+      {project?.video ? (
+        <VideoTheater project={project} onClose={closeCase} />
+      ) : (
+        <CaseModal project={project} onClose={closeCase} />
+      )}
       {/* Keyed by folder so each one opens as a fresh mount — see Lightbox. */}
       <Lightbox
         key={lightbox}

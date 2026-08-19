@@ -14,7 +14,9 @@ export const IDENTITY_ROWS: readonly IdentityRow[] = [
   { key: 'program', value: 'bs information systems' },
   { key: 'base', value: 'bulacan, ph · gmt+8' },
   { key: 'exp', value: 'design lead · since 2023' },
-  { key: 'status', value: '● open to opportunities', accent: true },
+  // The status dot is drawn in CSS, not typed here — as text a screen reader
+  // announces it as "black circle" before the words that matter.
+  { key: 'status', value: 'open to opportunities', accent: true },
 ];
 
 /**

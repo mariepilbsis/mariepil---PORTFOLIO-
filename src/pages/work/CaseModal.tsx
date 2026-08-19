@@ -57,25 +57,11 @@ export function CaseModal({ project, onClose }: CaseModalProps) {
           </div>
           <p className={styles.blurb}>{project.blurb}</p>
 
-          <div className={`${styles.shot} ${project.video ? styles.shotVideo : ''}`}>
-            {project.video ? (
-              // preload="metadata" so opening the case study costs a few KB of
-              // headers, not the whole walkthrough.
-              //
-              // TODO(a11y): this clip has narration and no captions, which
-              // locks out deaf and hard-of-hearing visitors and anyone
-              // watching muted. Needs a WebVTT transcript added as
-              // <track kind="captions" srcLang="en" src="/captions.vtt" default />,
-              // after which jsx-a11y/media-has-caption goes back to error.
-              <video
-                className={styles.shotPlayer}
-                src={project.video}
-                poster={project.cover}
-                controls
-                playsInline
-                preload="metadata"
-              />
-            ) : project.cover ? (
+          {/* A project with a walkthrough never reaches this sheet — Work
+              sends it to the theater instead, where the clip plays full screen
+              with this same case study beside it. */}
+          <div className={styles.shot}>
+            {project.cover ? (
               <img
                 className={styles.shotImg}
                 src={project.cover}

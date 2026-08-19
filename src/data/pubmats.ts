@@ -51,7 +51,7 @@ function art(stem: string): Pick<PubmatPiece, 'img' | 'thumb' | 'thumbJpg'> {
 }
 
 /** Filter categories. The gallery is grouped by type of piece, not by year. */
-export const PUBMAT_KINDS = ['All', 'Pubmats', 'Brochures', 'Logos'] as const;
+export const PUBMAT_KINDS = ['All', 'Pubmats', 'Brochures', 'Others'] as const;
 
 export type PubmatKind = (typeof PUBMAT_KINDS)[number];
 
@@ -219,7 +219,7 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
   {
     title: 'SmartStock Branding',
     event: 'Visual identity · logo mark and wordmark',
-    kind: 'Logos',
+    kind: 'Others',
     year: '2026',
     pieces: [
       { label: 'SmartStock logo mark', ...art('smartstock-logo-mark') },
@@ -229,11 +229,24 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
   {
     title: 'IS³ Branding',
     event: 'Facebook cover · profile photo',
-    kind: 'Logos',
+    kind: 'Others',
     year: '2026',
     pieces: [
       { label: 'Facebook cover photo', ...art('is-branding-cover') },
       { label: 'Facebook profile photo', ...art('is-branding-pfp') },
+    ],
+  },
+  {
+    // The SmartStock certificates from the IS 311 awarding — the venture's own
+    // recognition rather than a piece of collateral, so it files under Others.
+    title: 'SmartStock Awards',
+    event: 'IS 311 Technopreneurship · awarding',
+    kind: 'Others',
+    year: '2026',
+    pieces: [
+      { label: 'High-Potential Venture Team', ...art('smartstock-award-venture-team') },
+      { label: 'Best Venture Marketing Campaign', ...art('smartstock-award-marketing') },
+      { label: 'Best Wadhwani Venture Journey', ...art('smartstock-award-wadhwani') },
     ],
   },
   {

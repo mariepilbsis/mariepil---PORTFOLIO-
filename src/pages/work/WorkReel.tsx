@@ -1,4 +1,4 @@
-import { useEffect, useRef, type UIEvent } from 'react';
+import { useEffect, useRef, useState, type UIEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { EmptySlot } from '../../components/EmptySlot';
@@ -36,12 +36,14 @@ function ProjectCard({
           <p className={styles.toolsBody}>{project.tools}</p>
         </div>
 
+        {/* Named for what the click actually does: a project with a
+            walkthrough opens into the player, not into a reading sheet. */}
         <button
           type="button"
           className={`${ui.btn} ${ui.outline} ${ui.sm} ${styles.caseBtn}`}
           onClick={() => onOpenCase(index)}
         >
-          Case study ↗
+          {project.video ? 'Play walkthrough ↗' : 'Case study ↗'}
         </button>
       </div>
 
@@ -78,7 +80,47 @@ function EndPanel() {
 export function WorkReel({ onOpenCase }: WorkReelProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const isNarrow = useMediaQuery('(max-width: 900px)');
+  const [hasTravel, setHasTravel] = useState(true);
+
+  /**
+   * The runway is what the reader scrolls through to drive the track sideways,
+   * so it has to be as tall as the sideways distance actually is — not a fixed
+   * 280vh. With two projects on a 1440px screen the panels (1240px) already fit
+   * the stage, so there is nothing to travel, and a hardcoded runway meant
+   * scrolling three screen-heights past a stage that never moved.
+   */
+  useEffect(() => {
+    if (isNarrow) return;
+
+    const track = trackRef.current;
+    const stage = stageRef.current;
+    const scroller = scrollerRef.current;
+    if (!track || !stage || !scroller) return;
+
+    const runway = scroller.firstElementChild as HTMLElement | null;
+    if (!runway) return;
+
+    const measure = () => {
+      const travel = Math.max(0, track.scrollWidth - stage.clientWidth);
+      runway.style.height = `${scroller.clientHeight + travel}px`;
+      setHasTravel(travel > 0);
+
+      if (travel === 0) {
+        track.style.transform = 'translate3d(0,0,0)';
+        if (barRef.current) barRef.current.style.width = '0%';
+      }
+    };
+
+    const observer = new ResizeObserver(measure);
+    observer.observe(track);
+    observer.observe(stage);
+    measure();
+
+    return () => observer.disconnect();
+  }, [isNarrow]);
 
   /**
    * Vertical scroll inside the container drives a horizontal translate on the
@@ -132,12 +174,17 @@ export function WorkReel({ onOpenCase }: WorkReelProps) {
   }
 
   return (
-    <div id="systems" className={`hide-sb ${styles.scroller}`} onScroll={onScroll}>
+    <div
+      id="systems"
+      ref={scrollerRef}
+      className={`hide-sb ${styles.scroller}`}
+      onScroll={onScroll}
+    >
       <div className={styles.runway}>
         <div className={styles.sticky}>
           {header}
 
-          <div className={styles.stage}>
+          <div ref={stageRef} className={styles.stage}>
             <div ref={trackRef} className={styles.track}>
               {PROJECTS.map((project, index) => (
                 <article
@@ -153,12 +200,18 @@ export function WorkReel({ onOpenCase }: WorkReelProps) {
               </div>
             </div>
 
-            <div className={styles.progress} aria-hidden="true">
-              <div ref={barRef} className={styles.progressBar} />
-            </div>
-            <div className={styles.scrollHint} aria-hidden="true">
-              Scroll<span className={styles.scrollArrow}>→</span>
-            </div>
+            {/* Both of these promise sideways motion, so neither belongs on a
+                stage that already fits. */}
+            {hasTravel && (
+              <>
+                <div className={styles.progress} aria-hidden="true">
+                  <div ref={barRef} className={styles.progressBar} />
+                </div>
+                <div className={styles.scrollHint} aria-hidden="true">
+                  Scroll<span className={styles.scrollArrow}>→</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

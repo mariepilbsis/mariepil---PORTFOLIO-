@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { BackgroundGrid } from './components/BackgroundGrid';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { Footer } from './components/Footer';
 import { Nav } from './components/Nav';
 import { About } from './pages/about/About';
@@ -23,6 +24,8 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+
   return (
     <div className={styles.shell}>
       {/* Four nav links, a theme toggle and a CTA repeat ahead of the content
@@ -38,13 +41,18 @@ export default function App() {
       <div className={styles.navSpacer} />
 
       <main id="main" tabIndex={-1}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        {/* Inside the shell, so a broken page still leaves the nav and footer
+            to escape through. Keyed on the path so moving to another page
+            clears the error. */}
+        <ErrorBoundary resetKey={pathname}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </ErrorBoundary>
       </main>
 
       <Footer />

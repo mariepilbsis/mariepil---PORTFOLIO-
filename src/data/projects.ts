@@ -1,3 +1,5 @@
+import smartstockCover from '../assets/pubmats/smartstock-hero.jpg';
+
 export interface Project {
   num: string;
   name: string;
@@ -9,8 +11,9 @@ export interface Project {
   process: readonly string[];
   toolList: readonly string[];
   /**
-   * Case-study screenshot. Still outstanding from the client for every project,
-   * so the card and the modal both fall back to an empty slot.
+   * Case-study still: the reel card's image, and the poster the walkthrough
+   * opens on. Outstanding for most projects, so the card and the modal both
+   * fall back to an empty slot.
    */
   cover?: string;
   /**
@@ -37,6 +40,9 @@ export const PROJECTS: readonly Project[] = [
       'Tested the forecast screens for plain-language clarity',
     ],
     toolList: ['Figma', 'Prototyping', 'User flows', 'Wireframing', 'Usability design'],
+    // The campaign hero doubles as the case cover — it is the same product
+    // shot, and it already lives in the pubmat gallery.
+    cover: smartstockCover,
     video: '/SmartStock-AI-InventoryPrototype-Video.mp4',
   },
   {

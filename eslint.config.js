@@ -30,9 +30,9 @@ export default tseslint.config(
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 
       /*
-       * OUTSTANDING, not suppressed. The SmartStock walkthrough in the case
-       * modal carries a narration track, so it genuinely needs a captions
-       * file — see the note on the <video> in CaseModal.tsx. Kept at warn so
+       * OUTSTANDING, not suppressed. The SmartStock walkthrough carries a
+       * narration track, so it genuinely needs a captions file — see the note
+       * on the <video> in VideoTheater.tsx. Kept at warn so
        * `npm run lint` stays green for everything else while this is still
        * open; raise it back to error once the .vtt lands.
        */

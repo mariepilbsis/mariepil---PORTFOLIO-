@@ -100,21 +100,6 @@
   display: block;
 }
 
-/* A widescreen walkthrough gets the shape of the footage rather than the
-   screenshot slot's fixed 260px, which would letterbox it to a slit. */
-.shotVideo {
-  height: auto;
-  aspect-ratio: 16 / 9;
-  background: #000;
-}
-
-.shotPlayer {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
-
 .label {
   margin-bottom: 12px;
   font-family: var(--font-mono);

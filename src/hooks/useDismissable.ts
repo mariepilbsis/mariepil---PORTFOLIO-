@@ -1,12 +1,21 @@
 import { useEffect, type RefObject } from 'react';
 
-/** Everything that can hold focus inside an overlay, in document order. */
+/**
+ * Everything that can hold focus inside an overlay, in document order.
+ *
+ * Media elements are in the list because a `controls` player is a real tab
+ * stop: leaving it out let the trap wrap straight past the video theater's
+ * clip, so a keyboard user could close the overlay but never pause, seek or
+ * change the volume of the thing they had opened.
+ */
 const FOCUSABLE = [
   'a[href]',
   'button:not([disabled])',
   'input:not([disabled])',
   'select:not([disabled])',
   'textarea:not([disabled])',
+  'video[controls]',
+  'audio[controls]',
   '[tabindex]:not([tabindex="-1"])',
 ].join(',');
 
