@@ -39,8 +39,8 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
 
       <p className={styles.intro}>
         Publication materials designed as Head Layout Artist and Multimedia &amp; Publications Head
-        for the Information Systems Synergy Society. Each card is one event — open it to page
-        through everything produced for it.
+        for the Information Systems Synergy Society, plus freelance commissions. Each card is one
+        piece or one event — open a stacked card to page through everything produced for it.
       </p>
 
       <div className={styles.filters} role="group" aria-label="Filter pubmats by type">

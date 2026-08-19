@@ -4,14 +4,24 @@ import merch03 from '../assets/pubmats/merch-pubmat-03.jpg';
 import merch04 from '../assets/pubmats/merch-pubmat-04.jpg';
 import membershipDrive from '../assets/pubmats/membership-drive.jpg';
 import bsisBrochure from '../assets/pubmats/bsis-brochure.jpg';
-import freshiesSalubong from '../assets/pubmats/freshies-salubong.jpg';
+import aeroBrochure01 from '../assets/pubmats/aero-brochure-01.jpg';
+import aeroBrochure02 from '../assets/pubmats/aero-brochure-02.jpg';
 import salubongBooth from '../assets/pubmats/salubong-booth.jpg';
 import birthdayGreeting from '../assets/pubmats/birthday-greeting.jpg';
+import isnergyMrMs from '../assets/pubmats/isnergy-mr-ms.jpg';
+import isnergyYell from '../assets/pubmats/isnergy-yell.jpg';
+import isnergyTypingBattle from '../assets/pubmats/isnergy-typing-battle.jpg';
+import isnergyPhotography from '../assets/pubmats/isnergy-photography.jpg';
+import isnergyPoster from '../assets/pubmats/isnergy-poster.jpg';
+import application1a from '../assets/pubmats/application1-01.jpg';
+import application1b from '../assets/pubmats/application1-02.jpg';
 import applicationFront from '../assets/pubmats/application-front.jpg';
 import applicationCreatives from '../assets/pubmats/application-creatives.jpg';
 import applicationExec from '../assets/pubmats/application-exec.jpg';
 import applicationLegal from '../assets/pubmats/application-legal.jpg';
 import applicationMpd from '../assets/pubmats/application-mpd.jpg';
+import goldGear01 from '../assets/pubmats/gold-gear-01.jpg';
+import goldGear02 from '../assets/pubmats/gold-gear-02.jpg';
 import smartstockPoster from '../assets/pubmats/smartstock-poster.jpg';
 import smartstockHero from '../assets/pubmats/smartstock-hero.jpg';
 import smartstockAiForecasts from '../assets/pubmats/smartstock-ai-forecasts.jpg';
@@ -59,35 +69,6 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     ],
   },
   {
-    title: 'Captivate',
-    event: 'Booth collateral',
-    kind: 'Pubmats',
-    year: '2024',
-    pieces: [{ label: 'Captivate Booth', img: null }],
-  },
-  {
-    title: "Valentine's Campaign",
-    event: 'Seasonal campaign',
-    kind: 'Pubmats',
-    year: '2024',
-    pieces: [{ label: "Valentine's Campaign", img: null }],
-  },
-  {
-    // Piece list per the résumé's "events covered (2024)".
-    title: 'ISystems Convergence',
-    event: 'Pageant · tournaments · quiz bee',
-    kind: 'Pubmats',
-    year: '2024',
-    pieces: [
-      { label: 'Mr. & Ms. IS', img: null },
-      { label: 'Yell Competition', img: null },
-      { label: 'Flag Competition', img: null },
-      { label: 'ML Tournament', img: null },
-      { label: 'Quiz Bee', img: null },
-      { label: 'Digital Poster', img: null },
-    ],
-  },
-  {
     title: 'Membership Drive',
     event: 'IS³ membership',
     kind: 'Pubmats',
@@ -102,21 +83,6 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     pieces: [{ label: 'BSIS Brochure', img: bsisBrochure }],
   },
   {
-    title: 'ExeCom Turnover',
-    event: 'Executive Committee turnover',
-    kind: 'Pubmats',
-    year: '2025',
-    pieces: [{ label: 'ExeCom Turnover', img: null }],
-  },
-  {
-    title: 'Freshies Salubong',
-    event: 'Salubong welcome',
-    kind: 'Pubmats',
-    year: '2026',
-    pieces: [{ label: 'Salubong welcome', img: freshiesSalubong }],
-  },
-  {
-    // Stands on its own rather than sitting inside the Salubong folder.
     title: 'Salubong Booth Poster',
     event: 'Booth collateral',
     kind: 'Pubmats',
@@ -130,22 +96,55 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     year: '2026',
     pieces: [{ label: 'Birthday Greeting', img: birthdayGreeting }],
   },
+  // The ISnergy competition pubmats stand as individual cards rather than
+  // nesting inside one event folder.
   {
-    // Piece list per the résumé's "events covered (2026)".
-    title: 'ISnergy',
-    event: 'Pageant · competitions · contests',
+    title: 'Mr. & Ms. IS',
+    event: 'ISnergy · pageant',
+    kind: 'Pubmats',
+    year: '2026',
+    pieces: [{ label: 'Mr. & Ms. IS', img: isnergyMrMs }],
+  },
+  {
+    title: 'Yell Competition',
+    event: 'ISnergy · competition',
+    kind: 'Pubmats',
+    year: '2026',
+    pieces: [{ label: 'Yell Competition', img: isnergyYell }],
+  },
+  {
+    title: 'Typing Battle',
+    event: 'ISnergy · competition',
+    kind: 'Pubmats',
+    year: '2026',
+    pieces: [{ label: 'Typing Battle', img: isnergyTypingBattle }],
+  },
+  {
+    title: 'Photography Competition',
+    event: 'ISnergy · contest',
+    kind: 'Pubmats',
+    year: '2026',
+    pieces: [{ label: 'Photography Competition', img: isnergyPhotography }],
+  },
+  {
+    title: 'Poster Competition',
+    event: 'ISnergy · contest',
+    kind: 'Pubmats',
+    year: '2026',
+    pieces: [{ label: 'Poster Competition', img: isnergyPoster }],
+  },
+  {
+    title: 'Application 1',
+    event: 'IS³ recruitment · 2026–2027',
     kind: 'Pubmats',
     year: '2026',
     pieces: [
-      { label: 'Mr. & Ms. IS', img: null },
-      { label: 'Yell Competition', img: null },
-      { label: 'Typing Battle', img: null },
-      { label: 'Photography Contest', img: null },
-      { label: 'Digital Poster Contest', img: null },
+      { label: 'Open for Applications', img: application1a },
+      { label: 'Available Positions', img: application1b },
     ],
   },
   {
-    title: 'Application Poster',
+    title: 'Application 2',
     event: 'IS³ recruitment · July 9–14',
     kind: 'Pubmats',
     year: '2026',
@@ -159,10 +158,13 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
   },
   {
     title: 'Gold Gear Awards',
-    event: 'Awards night',
+    event: 'Awards night · Valencia Hall',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Gold Gear Awards', img: null }],
+    pieces: [
+      { label: 'Gold Gear Awards', img: goldGear01 },
+      { label: 'Gold Gear Awardees', img: goldGear02 },
+    ],
   },
   {
     // SmartStock — the Technopreneurship capstone brand for Gerlyn Variety Store.
@@ -185,6 +187,17 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     pieces: [
       { label: 'SmartStock logo mark', img: smartstockLogoMark },
       { label: 'Gerlyn Variety Store SmartStock wordmark', img: smartstockWordmark },
+    ],
+  },
+  {
+    // The one piece here that came in as paid outside work.
+    title: 'Aeronautical Communications',
+    event: 'Freelance commission · brochure',
+    kind: 'Brochures',
+    year: '2026',
+    pieces: [
+      { label: 'Spread 01', img: aeroBrochure01 },
+      { label: 'Spread 02', img: aeroBrochure02 },
     ],
   },
 ];
