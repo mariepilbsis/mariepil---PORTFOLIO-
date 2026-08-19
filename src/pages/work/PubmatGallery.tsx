@@ -22,10 +22,11 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
     return map;
   }, []);
 
-  // Keep the original index so the lightbox opens the right event.
-  const shown = PUBMAT_EVENTS.map((event, index) => ({ event, index })).filter(
-    ({ event }) => kind === 'All' || event.kind === kind,
-  );
+  // Keep the original index so the lightbox opens the right event. Folders lead
+  // and single pieces follow; sort is stable, so each group keeps data order.
+  const shown = PUBMAT_EVENTS.map((event, index) => ({ event, index }))
+    .filter(({ event }) => kind === 'All' || event.kind === kind)
+    .sort((a, b) => Number(a.event.pieces.length === 1) - Number(b.event.pieces.length === 1));
 
   return (
     <section id="pubmats" className={`container ${styles.section}`}>

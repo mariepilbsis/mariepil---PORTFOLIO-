@@ -67,8 +67,9 @@
 .panel {
   position: relative;
   flex: none;
-  width: 430px;
-  padding: 44px 40px 0;
+  /* Never wider than the viewport, so a whole panel is always readable. */
+  width: min(430px, calc(100vw - 48px));
+  padding: 44px clamp(22px, 6vw, 40px) 0;
   border-right: 1px solid rgba(var(--linec), 0.09);
   display: flex;
   flex-direction: column;
@@ -163,8 +164,8 @@
 .endPanel {
   position: relative;
   flex: none;
-  width: 380px;
-  padding: 44px 40px;
+  width: min(380px, calc(100vw - 48px));
+  padding: 44px clamp(22px, 6vw, 40px);
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -71,8 +71,8 @@
 .name {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: 44px;
-  line-height: 1;
+  font-size: clamp(30px, 7vw, 44px);
+  line-height: 1.05;
   letter-spacing: -0.015em;
   color: var(--hd);
 }

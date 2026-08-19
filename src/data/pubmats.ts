@@ -28,6 +28,8 @@ import smartstockAiForecasts from '../assets/pubmats/smartstock-ai-forecasts.jpg
 import smartstockBanner from '../assets/pubmats/smartstock-banner.jpg';
 import smartstockLogoMark from '../assets/pubmats/smartstock-logo-mark.jpg';
 import smartstockWordmark from '../assets/pubmats/smartstock-wordmark.jpg';
+import isBrandingCover from '../assets/pubmats/is-branding-cover.jpg';
+import isBrandingPfp from '../assets/pubmats/is-branding-pfp.jpg';
 
 /** Filter categories. The gallery is grouped by type of piece, not by year. */
 export const PUBMAT_KINDS = ['All', 'Logos', 'Pubmats', 'Brochures'] as const;
@@ -134,7 +136,7 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     pieces: [{ label: 'Poster Competition', img: isnergyPoster }],
   },
   {
-    title: 'Application 1',
+    title: 'Application for Executive Committee',
     event: 'IS³ recruitment · 2026–2027',
     kind: 'Pubmats',
     year: '2026',
@@ -144,7 +146,7 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     ],
   },
   {
-    title: 'Application 2',
+    title: 'Application for Committee and Departments Staff',
     event: 'IS³ recruitment · July 9–14',
     kind: 'Pubmats',
     year: '2026',
@@ -187,6 +189,16 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     pieces: [
       { label: 'SmartStock logo mark', img: smartstockLogoMark },
       { label: 'Gerlyn Variety Store SmartStock wordmark', img: smartstockWordmark },
+    ],
+  },
+  {
+    title: 'IS³ Branding',
+    event: 'Facebook cover · profile photo',
+    kind: 'Logos',
+    year: '2026',
+    pieces: [
+      { label: 'Facebook cover photo', img: isBrandingCover },
+      { label: 'Facebook profile photo', img: isBrandingPfp },
     ],
   },
   {

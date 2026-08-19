@@ -36,9 +36,11 @@
   margin-bottom: 34px;
 }
 
+/* min() keeps the track from demanding 268px on a viewport narrower than that,
+   which is what pushed the grid past the screen edge on small phones. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(268px, 100%), 1fr));
   gap: 20px;
 }
 
@@ -90,9 +92,12 @@
     8px -8px 0 0 var(--acc);
 }
 
+/* Square, so the pubmats — which are overwhelmingly 1:1 — fill the frame
+   edge to edge, and the odd poster or banner letterboxes instead of losing
+   its edges to a crop. */
 .frame {
   position: relative;
-  height: 330px;
+  aspect-ratio: 1 / 1;
   background: var(--photo);
   overflow: hidden;
 }
@@ -115,11 +120,14 @@
 .zoom {
   display: block;
   width: 100%;
-  height: 330px;
+  height: 100%;
   padding: 0;
   border: 0;
   cursor: zoom-in;
-  background-size: cover;
+  /* contain, not cover — the card is meant to show the whole piece without
+     asking anyone to open it first. */
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
 }
 
@@ -149,4 +157,21 @@
   font-family: var(--font-mono);
   font-size: 10.5px;
   color: var(--acc2);
+}
+
+@media (max-width: 560px) {
+  .section {
+    padding-top: 44px;
+    padding-bottom: 68px;
+  }
+
+  .grid {
+    gap: 14px;
+  }
+
+  /* The year would otherwise squeeze the title onto too many lines. */
+  .caption {
+    align-items: flex-start;
+    padding: 12px 13px;
+  }
 }
