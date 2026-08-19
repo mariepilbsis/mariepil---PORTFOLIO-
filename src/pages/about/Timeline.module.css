@@ -45,7 +45,7 @@
 .row {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: 28px;
   padding: 16px 18px 46px;
   margin-left: -18px;

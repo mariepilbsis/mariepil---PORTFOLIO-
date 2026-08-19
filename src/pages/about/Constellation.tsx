@@ -14,6 +14,10 @@ export function Constellation() {
   // written from JS ignores it entirely, so the drift is opted out here.
   const stillness = useMediaQuery('(prefers-reduced-motion: reduce)');
 
+  // Below this the positioned field cannot hold its labels apart — see the note
+  // on .grid in the stylesheet.
+  const isNarrow = useMediaQuery('(max-width: 640px)');
+
   useEffect(() => () => cancelAnimationFrame(frameRef.current), []);
 
   const counts = useMemo(() => {
@@ -41,7 +45,7 @@ export function Constellation() {
    * arrive far faster than frames, so the write is deferred to the next one.
    */
   const onTilt = (event: MouseEvent<HTMLDivElement>) => {
-    if (stillness || frameRef.current) return;
+    if (stillness || isNarrow || frameRef.current) return;
 
     const rect = event.currentTarget.getBoundingClientRect();
     const dx = (event.clientX - rect.left) / rect.width - 0.5;
@@ -63,7 +67,7 @@ export function Constellation() {
         <div className={styles.eyebrow}>
           <span>02 — Constellation</span>
           <span className="eyebrow-muted">{catLabel}</span>
-          {!stillness && (
+          {!stillness && !isNarrow && (
             <span className={styles.hint}>
               <span className={styles.hintDot} aria-hidden="true" />
               Move cursor to tilt
@@ -94,43 +98,60 @@ export function Constellation() {
         </div>
       </div>
 
-      <div className={styles.field}>
-        <div ref={layerRef} className={styles.layer}>
-          <svg
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            className={styles.links}
-            aria-hidden="true"
-          >
-            <path
-              d={path}
-              fill="none"
-              stroke="#E23048"
-              strokeWidth="1"
-              vectorEffect="non-scaling-stroke"
-              opacity="0.85"
-              className={styles.linkPath}
-            />
-          </svg>
-
+      {isNarrow ? (
+        <ul className={styles.grid}>
           {SKILL_NODES.map((node) => {
             const on = cat === 'All' || node.cat === cat;
             return (
-              <div
+              <li
                 key={node.label}
-                className={`${styles.node} ${on ? '' : styles.nodeOff}`}
-                style={{ left: `${node.x}%`, top: `${node.y}%` }}
+                className={`${ui.chip} ${styles.gridChip} ${on ? '' : styles.gridChipOff}`}
               >
-                <span
-                  className={`${styles.nodeDot} ${on && cat !== 'All' ? styles.nodeDotLit : ''}`}
-                  aria-hidden="true"
-                />
-                <span className={styles.nodeLabel}>{node.label}</span>
-              </div>
+                <span className={ui.chipDot} aria-hidden="true" />
+                {node.label}
+              </li>
             );
           })}
+        </ul>
+      ) : (
+        <div className={styles.field}>
+          <div ref={layerRef} className={styles.layer}>
+            <svg
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              className={styles.links}
+              aria-hidden="true"
+            >
+              <path
+                d={path}
+                fill="none"
+                stroke="#E23048"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+                opacity="0.85"
+                className={styles.linkPath}
+              />
+            </svg>
+
+            {SKILL_NODES.map((node) => {
+              const on = cat === 'All' || node.cat === cat;
+              return (
+                <div
+                  key={node.label}
+                  className={`${styles.node} ${on ? '' : styles.nodeOff}`}
+                  style={{ left: `${node.x}%`, top: `${node.y}%` }}
+                >
+                  <span
+                    className={`${styles.nodeDot} ${on && cat !== 'All' ? styles.nodeDotLit : ''}`}
+                    aria-hidden="true"
+                  />
+                  <span className={styles.nodeLabel}>{node.label}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

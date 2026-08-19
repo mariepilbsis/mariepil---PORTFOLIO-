@@ -31,7 +31,7 @@
   max-width: var(--maxw);
   width: 100%;
   margin: 0 auto;
-  padding: 44px 24px 26px;
+  padding: 44px var(--gutter) 26px;
 }
 
 .title {
@@ -248,9 +248,9 @@
 .stackList {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 24px 20px;
+  padding: 0 var(--gutter) 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 20px;
 }
 

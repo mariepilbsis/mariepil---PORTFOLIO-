@@ -150,3 +150,22 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+
+/* The sheet is capped at 620px but takes the full width below that, which
+   leaves the backdrop no width to tap — so on a phone this 36px button is the
+   only way out of the dialog and has to carry the full touch target. The rails
+   come in to match the page gutter at the same time. */
+@media (max-width: 640px) {
+  .close {
+    width: 44px;
+    height: 44px;
+  }
+
+  .header {
+    padding: 16px var(--gutter);
+  }
+
+  .body {
+    padding: 26px var(--gutter) 60px;
+  }
+}

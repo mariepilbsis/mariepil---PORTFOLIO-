@@ -238,3 +238,15 @@
   color: var(--acc2);
   background: rgba(var(--accc), 0.1);
 }
+
+/* ---- touch sizing ---- */
+
+/* The square filter chips sit at 40px, just under the 44px minimum every other
+   control here keeps. On a pointer that is a non-issue; on a thumb it is the
+   difference between selecting a category and missing it, and the constellation
+   and pubmat filters are both driven entirely by these. */
+@media (max-width: 900px) {
+  .filterChip {
+    min-height: 44px;
+  }
+}

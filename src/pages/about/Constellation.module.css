@@ -33,7 +33,7 @@
   position: relative;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 58px 24px 0;
+  padding: 58px var(--gutter) 0;
 }
 
 .eyebrow {
@@ -89,7 +89,7 @@
   height: 520px;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--gutter);
 }
 
 .layer {
@@ -169,4 +169,43 @@
   .hint {
     display: none;
   }
+}
+
+/* -------------------------------------------- narrow-screen wrapped fallback */
+
+/* The field places 27 nowrap labels by percentage, which needs width to keep
+   them apart. In a ~340px layer they collided outright — "Time management" sat
+   on top of "User flows", "Prototyping" on "JavaScript" — and the ones anchored
+   near 14% or 88% hung off both edges, since each label is centred on its point
+   and several run past 130px.
+   
+   No amount of repositioning fixes that at this width, so below the breakpoint
+   the same set reads as a wrapped list. The scatter is the presentation, not
+   the content: the skills, their grouping and the category filter all survive,
+   and the filter still dims what it does not match. */
+.grid {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  /* The field got its separation from .layer's 44px inset; the list has to ask
+     for it, or the first skill sits flush against the category filters. */
+  padding: 28px var(--gutter) 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.gridChip {
+  transition:
+    opacity 0.3s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+/* Matches .nodeOff's role in the field — filtered out, not removed, so the
+   count in the eyebrow still lines up with what is on screen. */
+.gridChipOff {
+  opacity: 0.32;
 }

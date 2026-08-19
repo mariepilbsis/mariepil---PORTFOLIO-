@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   z-index: 60;
-  padding: 18px 24px 0;
+  padding: 18px var(--gutter) 0;
 }
 
 .pill {
@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   gap: 11px;
+  min-height: 44px;
   padding: 2px 4px;
   background: transparent;
   border: 0;
@@ -126,11 +127,37 @@
     width: 100%;
     justify-content: center;
   }
+
+  /* A stadium radius only reads as one on a single-row pill. Once the links take
+     their own row the pill is ~170px tall, 999px resolves to an 85px corner, and
+     the sides curve so far inward that the avatar and the CTA — both on the top
+     row, 8px from the edge — end up drawn outside the outline. A fixed radius
+     holds the shape at any row count. */
+  .pill {
+    border-radius: 26px;
+    gap: 10px;
+  }
+
+  /* Padding alone left these 31px tall on a phone — the four nav links are the
+     most-tapped controls on the site and were the one place that missed the
+     44px minimum the rest of the UI keeps. They own their row here, so the
+     taller box costs no width, and --nav-h is measured rather than assumed so
+     the spacer follows on its own. */
+  .link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Re-seated under the centred text now that the box is taller than it. */
+  .underline {
+    bottom: 8px;
+  }
 }
 
 @media (max-width: 620px) {
-  .pill {
-    gap: 10px;
+  .wrap {
+    padding-top: 12px;
   }
 
   .brandName {

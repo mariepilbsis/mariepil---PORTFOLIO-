@@ -3,7 +3,7 @@
   z-index: 1;
   max-width: 900px;
   margin: 0 auto;
-  padding: 100px 24px 90px;
+  padding: 100px var(--gutter) 90px;
   text-align: center;
 }
 
@@ -111,4 +111,19 @@
 
 .metaAccent {
   color: var(--acc2);
+}
+
+/* The pill carries the whole address in mono and .btn keeps it on one line, so
+   at 320px it measured 290px inside a 272px column and pushed out through the
+   right gutter. Trimming the rail and dropping a step of type keeps it on the
+   single line it is designed as, rather than wrapping a 999px-radius pill.
+   The class is doubled to beat .btn's nowrap/size on specificity instead of
+   relying on which module Vite happens to emit last. */
+@media (max-width: 380px) {
+  .copyBtn.copyBtn {
+    max-width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 11px;
+  }
 }
