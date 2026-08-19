@@ -25,12 +25,19 @@ function ScrollToTop() {
 export default function App() {
   return (
     <div className={styles.shell}>
+      {/* Four nav links, a theme toggle and a CTA repeat ahead of the content
+          on every route. Keyboard and screen-reader users get one stop to
+          skip the lot. */}
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+
       <BackgroundGrid />
       <ScrollToTop />
       <Nav />
       <div className={styles.navSpacer} />
 
-      <main>
+      <main id="main" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

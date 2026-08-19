@@ -28,9 +28,24 @@
   --glowB: 0.15;
   color-scheme: dark;
 
-  /* Fixed accent — identical in both themes. */
+  /* Muted text, in three steps. These carry different alphas per theme on
+     purpose: the light ground is far less forgiving, so the alphas that read
+     as a gentle grey on the dark ground land under 4.5:1 on the light one.
+     Every step below clears WCAG AA for normal text in both themes. */
+  --tx-muted: rgba(var(--txc), 0.66); /* 7.97:1 */
+  --tx-dim: rgba(var(--txc), 0.56); /* 5.96:1 */
+  --tx-faint: rgba(var(--txc), 0.5); /* 4.93:1 — the floor, small labels only */
+
+  /* Fixed accent — identical in both themes. Safe as a large-text or
+     decorative colour; on the light ground it only reaches 3.87:1, so small
+     accent text uses --acc2 instead. */
   --acc: #e23048;
   --accc: 226, 48, 72;
+
+  /* The accent as a filled button. --onacc on a flat --acc lands at 4.44:1,
+     a hair under AA, so each theme nudges the fill a couple of RGB units in
+     the direction that clears it — imperceptible next to --acc, but legible. */
+  --acc-solid: #e53149; /* #12090a on this: 4.55:1 */
 
   /* Type families. */
   --font-sans: 'Instrument Sans', system-ui, sans-serif;
@@ -65,6 +80,12 @@ html[data-theme='light'] {
   --glowA: 0.11;
   --glowB: 0.08;
   color-scheme: light;
+
+  --acc-solid: #df2f47; /* white on this: 4.53:1 */
+
+  --tx-muted: rgba(var(--txc), 0.82); /* 9.49:1 */
+  --tx-dim: rgba(var(--txc), 0.72); /* 6.75:1 */
+  --tx-faint: rgba(var(--txc), 0.62); /* 4.83:1 */
 }
 
 /* ------------------------------------------------------------------ base */
@@ -215,7 +236,34 @@ h3 {
 }
 
 .eyebrow-muted {
-  color: rgba(var(--txc), 0.35);
+  color: var(--tx-faint);
+}
+
+/* Off-screen until focused, then a pill in the top-left above the fixed nav. */
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--acc-solid);
+  color: var(--onacc);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  transform: translateY(calc(-100% - 20px));
+  transition: transform 0.18s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  color: var(--onacc);
+}
+
+/* The skip target should not draw a ring simply because it was jumped to. */
+main:focus {
+  outline: none;
 }
 
 .sr-only {

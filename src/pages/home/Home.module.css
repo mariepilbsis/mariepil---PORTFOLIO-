@@ -99,7 +99,7 @@
 }
 
 .quoteTail {
-  color: rgba(var(--txc), 0.5);
+  color: var(--tx-dim);
 }
 
 /* The card is capped at 400px, so keep it hard against the right edge. */
@@ -127,7 +127,7 @@
   font-family: var(--font-mono);
   font-size: 11px;
   line-height: 1.5;
-  color: rgba(var(--txc), 0.6);
+  color: var(--tx-muted);
 }
 
 .ledgerCell {
@@ -149,7 +149,7 @@
   font-size: 9.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(var(--txc), 0.32);
+  color: var(--tx-faint);
 }
 
 .ledgerValue {
@@ -186,7 +186,7 @@
   max-width: 620px;
   font-size: 15px;
   line-height: 1.72;
-  color: rgba(var(--txc), 0.66);
+  color: var(--tx-muted);
   text-wrap: pretty;
 }
 
@@ -232,7 +232,7 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.6;
-  color: rgba(var(--txc), 0.55);
+  color: var(--tx-dim);
 }
 
 /* ------------------------------------------------------------ entry cards */
@@ -282,14 +282,14 @@
   margin: 0;
   font-size: 13.5px;
   line-height: 1.65;
-  color: rgba(var(--txc), 0.58);
+  color: var(--tx-dim);
 }
 
 .cardCta {
   margin-top: 18px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--acc);
+  color: var(--acc2);
 }
 
 /* The hero H1 is nowrap by design, but must wrap on small screens. */

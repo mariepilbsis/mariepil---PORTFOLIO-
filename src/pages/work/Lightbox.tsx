@@ -20,19 +20,26 @@ interface LightboxProps {
 export function Lightbox({ event, onClose }: LightboxProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const [at, setAt] = useState(0);
 
-  useDismissable(event !== null, onClose);
+  useDismissable(event !== null, onClose, overlayRef);
 
   // Only pieces with artwork are pageable — a pending slot has nothing to show
   // at full size.
   const shot = event?.pieces.filter((piece) => piece.img !== null) ?? [];
   const total = shot.length;
 
-  /** Back to the first piece whenever a different folder opens. */
+  /**
+   * Work keys this component by the open folder, so a different folder arrives
+   * as a fresh mount with `at` already back at 0 — no reset-on-prop-change
+   * effect, and no render pass showing the previous folder's slide number.
+   */
   useEffect(() => {
-    setAt(0);
-    trackRef.current?.scrollTo({ top: 0 });
+    // Focus moves into the overlay so the arrow keys and Escape act on the
+    // folder rather than on the gallery still sitting behind it.
+    if (event) closeRef.current?.focus();
     // A lone piece never scrolls, so its rail is filled rather than empty.
     if (barRef.current) barRef.current.style.width = total < 2 ? '100%' : '0%';
   }, [event, total]);
@@ -89,21 +96,41 @@ export function Lightbox({ event, onClose }: LightboxProps) {
   // stacking context the overlay's z-index could not escape — the fixed nav
   // would paint on top of it.
   return createPortal(
-    <div className={styles.overlay}>
-      <button type="button" className={styles.close} onClick={onClose} aria-label="Close">
+    <div
+      ref={overlayRef}
+      className={styles.overlay}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${event.title} — ${total} ${total === 1 ? 'piece' : 'pieces'}`}
+    >
+      <button
+        ref={closeRef}
+        type="button"
+        className={styles.close}
+        onClick={onClose}
+        aria-label="Close"
+      >
         <CloseIcon />
       </button>
 
-      <div
-        ref={trackRef}
-        className={`hide-sb ${styles.track}`}
-        onScroll={onScroll}
-        role="group"
-        aria-label={`${event.title} — ${total} pieces`}
-      >
-        {shot.map((slide) => (
-          <div key={slide.label} className={styles.slide} onClick={onSlideClick}>
-            <img className={styles.image} src={slide.img ?? ''} alt={slide.label} />
+      <div ref={trackRef} className={`hide-sb ${styles.track}`} onScroll={onScroll}>
+        {shot.map((slide, index) => (
+          <div
+            key={slide.label}
+            className={styles.slide}
+            onClick={onSlideClick}
+            role="presentation"
+          >
+            {/* A folder can hold five full-size pieces. Only the one the folder
+                opens on is worth fetching up front; the rest arrive as they
+                scroll into the track. */}
+            <img
+              className={styles.image}
+              src={slide.img ?? ''}
+              alt={slide.label}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
           </div>
         ))}
       </div>
@@ -141,15 +168,17 @@ export function Lightbox({ event, onClose }: LightboxProps) {
           )}
         </div>
 
+        {/* Plain buttons, not a tablist: there are no tabpanels here, and a
+            tablist role would have a screen reader announce an interface that
+            does not exist. */}
         {total > 1 && (
-          <div className={styles.dots} role="tablist" aria-label="Pieces">
+          <div className={styles.dots} role="group" aria-label="Jump to piece">
             {shot.map((slide, index) => (
               <button
                 key={slide.label}
                 type="button"
-                role="tab"
-                aria-selected={index === at}
-                aria-label={slide.label}
+                aria-current={index === at ? 'true' : undefined}
+                aria-label={`${slide.label} (${index + 1} of ${total})`}
                 className={`${styles.dot} ${index === at ? styles.dotOn : ''}`}
                 onClick={() => goTo(index)}
               />

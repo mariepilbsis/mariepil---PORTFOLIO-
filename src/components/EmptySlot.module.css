@@ -20,7 +20,7 @@
     linear-gradient(rgba(var(--linec), 0.035), rgba(var(--linec), 0.035)),
     var(--bg);
   border: 1px dashed rgba(var(--linec), 0.14);
-  color: rgba(var(--txc), 0.38);
+  color: var(--tx-faint);
   text-align: center;
 }
 
@@ -29,7 +29,7 @@
   font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.4;
-  color: rgba(var(--txc), 0.5);
+  color: var(--tx-dim);
 }
 
 .note {

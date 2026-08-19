@@ -118,7 +118,7 @@
   margin-top: 5px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: rgba(var(--txc), 0.45);
+  color: var(--tx-dim);
 }
 
 .tools {
@@ -136,7 +136,7 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.65;
-  color: rgba(var(--txc), 0.55);
+  color: var(--tx-dim);
 }
 
 .caseBtn {
@@ -222,11 +222,11 @@
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(var(--txc), 0.35);
+  color: var(--tx-faint);
 }
 
 .scrollArrow {
-  color: var(--acc);
+  color: var(--acc2);
 }
 
 /* ------------------------------------------- narrow-screen vertical stack */

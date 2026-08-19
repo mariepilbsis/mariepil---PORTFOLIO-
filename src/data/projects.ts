@@ -13,6 +13,12 @@ export interface Project {
    * so the card and the modal both fall back to an empty slot.
    */
   cover?: string;
+  /**
+   * Walkthrough video, served straight from public/ rather than bundled — it is
+   * far too big to run through the asset pipeline, and swapping the file should
+   * not invalidate the JS chunk. Takes the shot slot when it is set.
+   */
+  video?: string;
 }
 
 export const PROJECTS: readonly Project[] = [
@@ -31,6 +37,7 @@ export const PROJECTS: readonly Project[] = [
       'Tested the forecast screens for plain-language clarity',
     ],
     toolList: ['Figma', 'Prototyping', 'User flows', 'Wireframing', 'Usability design'],
+    video: '/SmartStock-AI-InventoryPrototype-Video.mp4',
   },
   {
     num: '02',

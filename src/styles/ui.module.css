@@ -20,7 +20,7 @@
 /* ---- variants ---- */
 
 .primary {
-  background: var(--acc);
+  background: var(--acc-solid);
   color: var(--onacc);
   border: 0;
   font-weight: 700;
@@ -164,7 +164,10 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--tx);
-  opacity: 0.55;
+  /* Element opacity dims the label as well as the border, so this doubles as
+     the text contrast: 0.55 read as 3.9:1 on the light ground. 0.72 keeps the
+     chip visibly secondary while clearing AA in both themes. */
+  opacity: 0.72;
   transition:
     opacity 0.25s,
     border-color 0.22s;
@@ -183,7 +186,7 @@
 .filterChipFill {
   position: absolute;
   inset: 0;
-  background: var(--acc);
+  background: var(--acc-solid);
   opacity: 0;
   transition: opacity 0.25s;
 }
@@ -197,8 +200,11 @@
   color: var(--tx);
 }
 
+/* --onacc, not --surf: the two resolve to the same colour in both themes, but
+   this one is defined as "the text that sits on the accent" and is contrast
+   checked against --acc-solid. */
 .filterChipActive .filterChipLabel {
-  color: var(--surf);
+  color: var(--onacc);
 }
 
 .filterChipLg {

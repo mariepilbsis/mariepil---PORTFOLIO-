@@ -9,7 +9,7 @@ export function SplitPie() {
   return (
     <div className={styles.split}>
       <div className={styles.side}>
-        <h3 className={`${styles.heading} ${styles.headingRight}`}>Design &amp; User Experience</h3>
+        <h2 className={`${styles.heading} ${styles.headingRight}`}>Design &amp; User Experience</h2>
         <ul className={`${styles.list} ${styles.listRight}`}>
           {HALF_DESIGN.map((item) => (
             <li key={item} className={styles.item}>
@@ -77,7 +77,7 @@ export function SplitPie() {
       </div>
 
       <div className={styles.side}>
-        <h3 className={styles.heading}>Engineering &amp; Implementation</h3>
+        <h2 className={styles.heading}>Engineering &amp; Implementation</h2>
         <ul className={styles.list}>
           {HALF_CODE.map((item) => (
             <li key={item} className={styles.item}>

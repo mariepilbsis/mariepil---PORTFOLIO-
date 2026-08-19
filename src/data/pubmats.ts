@@ -1,38 +1,54 @@
-import merchTeaser from '../assets/pubmats/merch-teaser.jpg';
-import merch01 from '../assets/pubmats/merch-pubmat-01.jpg';
-import merch02 from '../assets/pubmats/merch-pubmat-02.jpg';
-import merch03 from '../assets/pubmats/merch-pubmat-03.jpg';
-import merch04 from '../assets/pubmats/merch-pubmat-04.jpg';
-import membershipDrive from '../assets/pubmats/membership-drive.jpg';
-import bsisBrochure from '../assets/pubmats/bsis-brochure.jpg';
-import bsisBrochureOutside from '../assets/pubmats/bsis-brochure-outside.jpg';
-import bsisBrochureMockup from '../assets/pubmats/bsis-brochure-mockup.jpg';
-import aeroBrochureCaap from '../assets/pubmats/aero-brochure-caap.jpg';
-import bpmBdo from '../assets/pubmats/bpm-bdo.jpg';
-import salubongBooth from '../assets/pubmats/salubong-booth.jpg';
-import birthdayGreeting from '../assets/pubmats/birthday-greeting.jpg';
-import isnergyMrMs from '../assets/pubmats/isnergy-mr-ms.jpg';
-import isnergyYell from '../assets/pubmats/isnergy-yell.jpg';
-import isnergyTypingBattle from '../assets/pubmats/isnergy-typing-battle.jpg';
-import isnergyPhotography from '../assets/pubmats/isnergy-photography.jpg';
-import isnergyPoster from '../assets/pubmats/isnergy-poster.jpg';
-import application1a from '../assets/pubmats/application1-01.jpg';
-import application1b from '../assets/pubmats/application1-02.jpg';
-import applicationFront from '../assets/pubmats/application-front.jpg';
-import applicationCreatives from '../assets/pubmats/application-creatives.jpg';
-import applicationExec from '../assets/pubmats/application-exec.jpg';
-import applicationLegal from '../assets/pubmats/application-legal.jpg';
-import applicationMpd from '../assets/pubmats/application-mpd.jpg';
-import goldGear01 from '../assets/pubmats/gold-gear-01.jpg';
-import goldGear02 from '../assets/pubmats/gold-gear-02.jpg';
-import smartstockPoster from '../assets/pubmats/smartstock-poster.jpg';
-import smartstockHero from '../assets/pubmats/smartstock-hero.jpg';
-import smartstockAiForecasts from '../assets/pubmats/smartstock-ai-forecasts.jpg';
-import smartstockBanner from '../assets/pubmats/smartstock-banner.jpg';
-import smartstockLogoMark from '../assets/pubmats/smartstock-logo-mark.jpg';
-import smartstockWordmark from '../assets/pubmats/smartstock-wordmark.jpg';
-import isBrandingCover from '../assets/pubmats/is-branding-cover.jpg';
-import isBrandingPfp from '../assets/pubmats/is-branding-pfp.jpg';
+/**
+ * Artwork is resolved by filename stem rather than named imports: every piece
+ * needs a full-size original for the lightbox *and* a thumbnail for the card,
+ * and pairing those by hand across 35 pieces was 70 import lines waiting to
+ * drift apart. Vite still hashes and tree-shakes these the same way.
+ *
+ * Thumbnails come from scripts/make-thumbnails.py — re-run it after adding art.
+ */
+const FULL = import.meta.glob('../assets/pubmats/*.jpg', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+const THUMB_WEBP = import.meta.glob('../assets/pubmats/thumbs/*.webp', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+const THUMB_JPG = import.meta.glob('../assets/pubmats/thumbs/*.jpg', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+/**
+ * Resolves one piece's three files from its stem.
+ *
+ * This runs at module scope, so a hard throw in production would white-screen
+ * the whole site over one missing file. Instead it shouts in dev — where a
+ * typo or a forgotten thumbnail run should stop you — and in production falls
+ * back to whatever it does have, costing bytes rather than the page.
+ */
+function art(stem: string): Pick<PubmatPiece, 'img' | 'thumb' | 'thumbJpg'> {
+  const img = FULL[`../assets/pubmats/${stem}.jpg`] ?? null;
+  const thumb = THUMB_WEBP[`../assets/pubmats/thumbs/${stem}.webp`];
+  const thumbJpg = THUMB_JPG[`../assets/pubmats/thumbs/${stem}.jpg`];
+
+  if (import.meta.env.DEV) {
+    if (!img) throw new Error(`No artwork at src/assets/pubmats/${stem}.jpg`);
+    if (!thumb || !thumbJpg) {
+      throw new Error(`No thumbnail for ${stem} — run: python scripts/make-thumbnails.py`);
+    }
+  }
+
+  // Falling back to the full-size original keeps the card filled; it is heavy,
+  // but a heavy card beats an empty one.
+  return {
+    img,
+    thumb: thumb ?? img ?? undefined,
+    thumbJpg: thumbJpg ?? img ?? undefined,
+  };
+}
 
 /** Filter categories. The gallery is grouped by type of piece, not by year. */
 export const PUBMAT_KINDS = ['All', 'Pubmats', 'Brochures', 'Logos'] as const;
@@ -41,8 +57,12 @@ export type PubmatKind = (typeof PUBMAT_KINDS)[number];
 
 export interface PubmatPiece {
   label: string;
-  /** null while the artwork is still outstanding. */
+  /** Full-size original, shown in the lightbox. null while artwork is outstanding. */
   img: string | null;
+  /** 560px WebP shown on the gallery card — see scripts/make-thumbnails.py. */
+  thumb?: string;
+  /** Same thumbnail as JPEG, for browsers without WebP. */
+  thumbJpg?: string;
 }
 
 /**
@@ -67,11 +87,11 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Pubmats',
     year: '2024',
     pieces: [
-      { label: 'Coming soon teaser', img: merchTeaser },
-      { label: 'Merch Pubmat 01', img: merch01 },
-      { label: 'Merch Pubmat 02', img: merch02 },
-      { label: 'Merch Pubmat 03', img: merch03 },
-      { label: 'Merch Pubmat 04 · officers edition', img: merch04 },
+      { label: 'Coming soon teaser', ...art('merch-teaser') },
+      { label: 'Merch Pubmat 01', ...art('merch-pubmat-01') },
+      { label: 'Merch Pubmat 02', ...art('merch-pubmat-02') },
+      { label: 'Merch Pubmat 03', ...art('merch-pubmat-03') },
+      { label: 'Merch Pubmat 04 · officers edition', ...art('merch-pubmat-04') },
     ],
   },
   {
@@ -79,7 +99,7 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     event: 'IS³ membership',
     kind: 'Pubmats',
     year: '2025',
-    pieces: [{ label: 'Membership Drive', img: membershipDrive }],
+    pieces: [{ label: 'Membership Drive', ...art('membership-drive') }],
   },
   {
     title: 'BSIS Brochure',
@@ -87,9 +107,9 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Brochures',
     year: '2025',
     pieces: [
-      { label: 'Outside spread', img: bsisBrochureOutside },
-      { label: 'Inside spread', img: bsisBrochure },
-      { label: 'Trifold mockup', img: bsisBrochureMockup },
+      { label: 'Outside spread', ...art('bsis-brochure-outside') },
+      { label: 'Inside spread', ...art('bsis-brochure') },
+      { label: 'Trifold mockup', ...art('bsis-brochure-mockup') },
     ],
   },
   {
@@ -97,21 +117,21 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     event: 'BDO Unibank · account registration and activation',
     kind: 'Brochures',
     year: '2025',
-    pieces: [{ label: 'BPM lifecycle e-brochure', img: bpmBdo }],
+    pieces: [{ label: 'BPM lifecycle e-brochure', ...art('bpm-bdo') }],
   },
   {
     title: 'Salubong Booth Poster',
     event: 'Booth collateral',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Salubong Booth Poster', img: salubongBooth }],
+    pieces: [{ label: 'Salubong Booth Poster', ...art('salubong-booth') }],
   },
   {
     title: 'Birthday Greeting',
     event: 'Officer greetings',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Birthday Greeting', img: birthdayGreeting }],
+    pieces: [{ label: 'Birthday Greeting', ...art('birthday-greeting') }],
   },
   // The ISnergy competition pubmats stand as individual cards rather than
   // nesting inside one event folder.
@@ -120,35 +140,35 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     event: 'ISnergy · pageant',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Mr. & Ms. IS', img: isnergyMrMs }],
+    pieces: [{ label: 'Mr. & Ms. IS', ...art('isnergy-mr-ms') }],
   },
   {
     title: 'Yell Competition',
     event: 'ISnergy · competition',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Yell Competition', img: isnergyYell }],
+    pieces: [{ label: 'Yell Competition', ...art('isnergy-yell') }],
   },
   {
     title: 'Typing Battle',
     event: 'ISnergy · competition',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Typing Battle', img: isnergyTypingBattle }],
+    pieces: [{ label: 'Typing Battle', ...art('isnergy-typing-battle') }],
   },
   {
     title: 'Photography Competition',
     event: 'ISnergy · contest',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Photography Competition', img: isnergyPhotography }],
+    pieces: [{ label: 'Photography Competition', ...art('isnergy-photography') }],
   },
   {
     title: 'Poster Competition',
     event: 'ISnergy · contest',
     kind: 'Pubmats',
     year: '2026',
-    pieces: [{ label: 'Poster Competition', img: isnergyPoster }],
+    pieces: [{ label: 'Poster Competition', ...art('isnergy-poster') }],
   },
   {
     title: 'Application for Executive Committee',
@@ -156,8 +176,8 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Pubmats',
     year: '2026',
     pieces: [
-      { label: 'Open for Applications', img: application1a },
-      { label: 'Available Positions', img: application1b },
+      { label: 'Open for Applications', ...art('application1-01') },
+      { label: 'Available Positions', ...art('application1-02') },
     ],
   },
   {
@@ -166,11 +186,11 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Pubmats',
     year: '2026',
     pieces: [
-      { label: 'Shape the Future of IS · front page', img: applicationFront },
-      { label: 'Executive Department', img: applicationExec },
-      { label: 'Creatives Department', img: applicationCreatives },
-      { label: 'Legal Department', img: applicationLegal },
-      { label: 'Membership & Publicity Department', img: applicationMpd },
+      { label: 'Shape the Future of IS · front page', ...art('application-front') },
+      { label: 'Executive Department', ...art('application-exec') },
+      { label: 'Creatives Department', ...art('application-creatives') },
+      { label: 'Legal Department', ...art('application-legal') },
+      { label: 'Membership & Publicity Department', ...art('application-mpd') },
     ],
   },
   {
@@ -179,8 +199,8 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Pubmats',
     year: '2026',
     pieces: [
-      { label: 'Gold Gear Awards', img: goldGear01 },
-      { label: 'Gold Gear Awardees', img: goldGear02 },
+      { label: 'Gold Gear Awards', ...art('gold-gear-01') },
+      { label: 'Gold Gear Awardees', ...art('gold-gear-02') },
     ],
   },
   {
@@ -190,10 +210,10 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Pubmats',
     year: '2026',
     pieces: [
-      { label: 'The Future of Retail Inventory · poster', img: smartstockPoster },
-      { label: 'Smarter inventory starts here', img: smartstockHero },
-      { label: 'AI Demand Forecasts', img: smartstockAiForecasts },
-      { label: 'The Future of Retail Inventory · banner', img: smartstockBanner },
+      { label: 'The Future of Retail Inventory · poster', ...art('smartstock-poster') },
+      { label: 'Smarter inventory starts here', ...art('smartstock-hero') },
+      { label: 'AI Demand Forecasts', ...art('smartstock-ai-forecasts') },
+      { label: 'The Future of Retail Inventory · banner', ...art('smartstock-banner') },
     ],
   },
   {
@@ -202,8 +222,8 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Logos',
     year: '2026',
     pieces: [
-      { label: 'SmartStock logo mark', img: smartstockLogoMark },
-      { label: 'Gerlyn Variety Store SmartStock wordmark', img: smartstockWordmark },
+      { label: 'SmartStock logo mark', ...art('smartstock-logo-mark') },
+      { label: 'Gerlyn Variety Store SmartStock wordmark', ...art('smartstock-wordmark') },
     ],
   },
   {
@@ -212,8 +232,8 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     kind: 'Logos',
     year: '2026',
     pieces: [
-      { label: 'Facebook cover photo', img: isBrandingCover },
-      { label: 'Facebook profile photo', img: isBrandingPfp },
+      { label: 'Facebook cover photo', ...art('is-branding-cover') },
+      { label: 'Facebook profile photo', ...art('is-branding-pfp') },
     ],
   },
   {
@@ -222,7 +242,7 @@ export const PUBMAT_EVENTS: readonly PubmatEvent[] = [
     event: 'Civil Aviation Authority of the Philippines · mandates and functions',
     kind: 'Brochures',
     year: '2026',
-    pieces: [{ label: 'CAAP E-Brochure', img: aeroBrochureCaap }],
+    pieces: [{ label: 'CAAP E-Brochure', ...art('aero-brochure-caap') }],
   },
 ];
 

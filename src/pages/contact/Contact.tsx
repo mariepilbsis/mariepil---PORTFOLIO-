@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { SITE } from '../../data/site';
+import { usePageMeta } from '../../hooks/usePageMeta';
 import ui from '../../styles/ui.module.css';
 import styles from './Contact.module.css';
 
 export function Contact() {
+  usePageMeta({
+    title: 'Contact',
+    description:
+      'Get in touch with Gay Marie R. Pil — open to paid roles, freelance projects and internships in UI/UX, front-end, data analytics and digital marketing.',
+  });
+
   const [copied, setCopied] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -31,11 +38,11 @@ export function Contact() {
           Get in touch
         </div>
 
-        <h2 className={styles.h2}>
+        <h1 className={styles.h1}>
           Ready to build
           <br />
-          <span className={styles.h2Accent}>something together?</span>
-        </h2>
+          <span className={styles.h1Accent}>something together?</span>
+        </h1>
 
         <p className={styles.copy}>
           Open to paid roles, freelance projects and internships in UI/UX, front-end, data

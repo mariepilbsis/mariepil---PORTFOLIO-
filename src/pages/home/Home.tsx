@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 
 import { IdentityCard } from '../../components/IdentityCard';
+import { usePageMeta } from '../../hooks/usePageMeta';
 import { BIO, PRINCIPLES } from '../../data/about';
 import { ENTRY_CARDS, HERO, STAT_LEDGER } from '../../data/home';
 import { Ticker } from './Ticker';
@@ -9,6 +10,12 @@ import styles from './Home.module.css';
 
 export function Home() {
   const navigate = useNavigate();
+
+  usePageMeta({
+    title: 'UI/UX designer, layout artist and design lead',
+    description:
+      'Portfolio of Gay Marie R. Pil — UI/UX designer, layout artist and design lead. Information Systems student at Bulacan State University, and Multimedia & Publications Head for IS³.',
+  });
 
   return (
     <div className="pg">

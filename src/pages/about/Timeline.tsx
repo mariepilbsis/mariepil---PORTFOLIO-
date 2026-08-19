@@ -12,9 +12,16 @@ export function Timeline() {
   /**
    * Scroll-driven rail. The dot and the crimson fill are written straight to
    * the DOM rather than through state so the listener stays cheap.
+   *
+   * Coalesced into a frame: reading getBoundingClientRect forces layout, and
+   * scroll can fire many times between paints, so measuring per event meant
+   * paying for layouts nobody ever saw.
    */
   useEffect(() => {
-    const update = () => {
+    let frame = 0;
+
+    const measure = () => {
+      frame = 0;
       const rail = railRef.current;
       const dot = dotRef.current;
       const fill = fillRef.current;
@@ -31,11 +38,17 @@ export function Timeline() {
       fill.style.height = `${p * travel}px`;
     };
 
+    const update = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(measure);
+    };
+
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
-    update();
+    measure();
 
     return () => {
+      if (frame) cancelAnimationFrame(frame);
       window.removeEventListener('scroll', update);
       window.removeEventListener('resize', update);
     };

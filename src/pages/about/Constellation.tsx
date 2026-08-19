@@ -1,12 +1,20 @@
-import { useMemo, useRef, useState, type MouseEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
 
 import { SKILL_CATEGORIES, SKILL_NODES, type SkillCategory } from '../../data/skills';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import ui from '../../styles/ui.module.css';
 import styles from './Constellation.module.css';
 
 export function Constellation() {
   const [cat, setCat] = useState<SkillCategory>('All');
   const layerRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef(0);
+
+  // The global reduced-motion rule only shortens CSS animations; a transform
+  // written from JS ignores it entirely, so the drift is opted out here.
+  const stillness = useMediaQuery('(prefers-reduced-motion: reduce)');
+
+  useEffect(() => () => cancelAnimationFrame(frameRef.current), []);
 
   const counts = useMemo(() => {
     const map = new Map<SkillCategory, number>([['All', SKILL_NODES.length]]);
@@ -28,14 +36,22 @@ export function Constellation() {
   const catLabel =
     cat === 'All' ? `all ${SKILL_NODES.length} skills` : `${cat.toLowerCase()} — ${activeCount} nodes`;
 
-  /** Parallax: the whole node layer drifts against the pointer. */
+  /**
+   * Parallax: the whole node layer drifts against the pointer. Pointer moves
+   * arrive far faster than frames, so the write is deferred to the next one.
+   */
   const onTilt = (event: MouseEvent<HTMLDivElement>) => {
-    const layer = layerRef.current;
-    if (!layer) return;
+    if (stillness || frameRef.current) return;
+
     const rect = event.currentTarget.getBoundingClientRect();
     const dx = (event.clientX - rect.left) / rect.width - 0.5;
     const dy = (event.clientY - rect.top) / rect.height - 0.5;
-    layer.style.transform = `translate3d(${-dx * 26}px, ${-dy * 18}px, 0)`;
+
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = 0;
+      const layer = layerRef.current;
+      if (layer) layer.style.transform = `translate3d(${-dx * 26}px, ${-dy * 18}px, 0)`;
+    });
   };
 
   return (
@@ -47,10 +63,12 @@ export function Constellation() {
         <div className={styles.eyebrow}>
           <span>02 — Constellation</span>
           <span className="eyebrow-muted">{catLabel}</span>
-          <span className={styles.hint}>
-            <span className={styles.hintDot} aria-hidden="true" />
-            Move cursor to tilt
-          </span>
+          {!stillness && (
+            <span className={styles.hint}>
+              <span className={styles.hintDot} aria-hidden="true" />
+              Move cursor to tilt
+            </span>
+          )}
         </div>
 
         <h2 className={styles.title}>The full constellation.</h2>

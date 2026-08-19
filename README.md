@@ -305,3 +305,58 @@ block, markup follows, and the data arrays (`PAGES`, `PUBMATS`, `TIMELINE`, skil
 at the top of the `class Component` block near the end of the file. `sc-for` is a repeat loop,
 `sc-if` a conditional, and `{{ x }}` a value from `renderVals()` — translate them to `.map()`,
 conditional rendering, and props.
+
+---
+
+## Maintaining the built site
+
+Everything above describes the design as handed off. This section covers the running app.
+
+```bash
+npm run dev        # local dev server
+npm run build      # typecheck + production build into dist/
+npm run typecheck  # types only
+npm run lint       # ESLint, including jsx-a11y accessibility rules
+```
+
+### Adding a pubmat
+
+1. Drop the web-sized original into `src/assets/pubmats/` as `<stem>.jpg`.
+2. Run `python scripts/make-thumbnails.py` (needs `python -m pip install Pillow`).
+   It writes a 560px WebP and JPEG into `src/assets/pubmats/thumbs/`.
+3. Add the piece to `src/data/pubmats.ts` with `{ label: '…', ...art('<stem>') }`.
+
+`art()` resolves all three files from the stem, and throws in dev if a thumbnail is
+missing — so if the app stops with *"No thumbnail for …"*, step 2 was skipped.
+
+The gallery cards show the thumbnails and the lightbox shows the originals. That split
+is what keeps `/work` at ~520 KB of covers instead of the 5.1 MB it cost when the cards
+pointed at full-size artwork.
+
+### The social card
+
+`public/og-image.jpg` is what Facebook, LinkedIn, Slack and X show when the site is
+linked. Regenerate it with `python scripts/make-og-image.py` after changing the portrait
+or the tagline. Social crawlers do not run JavaScript, so this card and the `og:`/
+`twitter:` tags in `index.html` describe the site as a whole; `usePageMeta` handles the
+per-route title, description and canonical for browsers and search engines.
+
+### Two things worth knowing
+
+- **Muted text runs through tokens.** `--tx-muted`, `--tx-dim` and `--tx-faint` in
+  `global.css` carry *different alphas per theme*, because the light ground is far less
+  forgiving than the dark one. Reach for those rather than a fresh
+  `rgba(var(--txc), …)`, or the light theme quietly drops under 4.5:1.
+- **`--acc-solid`, not `--acc`, for filled buttons and chips.** It is the same crimson
+  nudged a couple of RGB units per theme so the label on top clears AA.
+
+### Still outstanding
+
+- **Captions for the SmartStock walkthrough.** The clip in the case modal has narration
+  and no captions, which locks out deaf and hard-of-hearing visitors and anyone watching
+  muted. Needs a WebVTT transcript wired up as a `<track>` — see the TODO in
+  `CaseModal.tsx`. `jsx-a11y/media-has-caption` is at `warn` until it lands, then it goes
+  back to `error`.
+- **An absolute production domain.** `public/sitemap.xml` uses relative `<loc>` values and
+  `index.html` has no `og:url`, because the final domain was not settled. Both want the
+  real origin once it is.

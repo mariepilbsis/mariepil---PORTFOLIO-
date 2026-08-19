@@ -38,9 +38,10 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
         01 — Pubmats · {PUBMAT_EVENTS.length} events · {PUBMAT_PIECE_COUNT} pieces
       </div>
 
-      <h2 className={styles.title}>
+      {/* The page-level heading for /work — the systems reel below opens at h2. */}
+      <h1 className={styles.title}>
         Selected Work <span className={styles.titleAccent}>&amp; Publications</span>
-      </h2>
+      </h1>
 
       <p className={styles.intro}>
         Visual systems and digital media designed as Multimedia and Publications Head for the
@@ -83,13 +84,27 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
             <div key={event.title} className={`${styles.card} ${multi ? styles.cardStacked : ''}`}>
               <div className={styles.frame}>
                 {cover?.img ? (
+                  // A real <img>, not a background: only a background could not
+                  // be lazy-loaded, and the covers were pulling 5 MB of
+                  // full-size artwork on first paint. The frame already
+                  // reserves a square, so there is nothing to shift.
                   <button
                     type="button"
                     className={styles.zoom}
-                    style={{ backgroundImage: `url(${cover.img})` }}
                     aria-label={`Open ${event.title} — ${event.pieces.length} pieces`}
                     onClick={() => onOpen(index)}
-                  />
+                  >
+                    <picture>
+                      <source srcSet={cover.thumb} type="image/webp" />
+                      <img
+                        className={styles.zoomImg}
+                        src={cover.thumbJpg}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
+                  </button>
                 ) : (
                   <EmptySlot label={event.title} />
                 )}

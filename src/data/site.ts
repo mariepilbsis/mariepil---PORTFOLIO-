@@ -7,6 +7,7 @@ export interface Site {
   linkedin: string;
   /** Served from public/ — an empty string leaves the Résumé button inert. */
   resume: string;
+  /** Everything after the © and the year, which the footer stamps at render. */
   footerLine: string;
 }
 
@@ -18,5 +19,5 @@ export const SITE: Site = {
   base: 'Bulacan, PH',
   linkedin: 'https://www.linkedin.com/in/gay-marie-pil-a932a02ab/',
   resume: '/MariePil-Resume.pdf',
-  footerLine: '© 2026 · Gay Marie R. Pil · designed and built in Bulacan',
+  footerLine: 'Gay Marie R. Pil · designed and built in Bulacan',
 };

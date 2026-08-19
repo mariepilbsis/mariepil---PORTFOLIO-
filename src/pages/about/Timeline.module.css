@@ -80,7 +80,7 @@
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 10.5px;
-  color: rgba(var(--txc), 0.6);
+  color: var(--tx-muted);
 }
 
 .tagNow {
@@ -97,7 +97,7 @@
   margin-top: 7px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: rgba(var(--txc), 0.45);
+  color: var(--tx-dim);
 }
 
 /* ----------------------------------------------------------- right column */
@@ -136,7 +136,7 @@
   max-width: 660px;
   font-size: 14.5px;
   line-height: 1.7;
-  color: rgba(var(--txc), 0.66);
+  color: var(--tx-muted);
   text-wrap: pretty;
 }
 

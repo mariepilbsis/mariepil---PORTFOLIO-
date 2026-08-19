@@ -4,13 +4,19 @@ import ui from '../styles/ui.module.css';
 import styles from './Footer.module.css';
 
 export function Footer() {
+  // Stamped at render rather than hardcoded, so the footer cannot quietly go
+  // stale on New Year's Day.
+  const year = new Date().getFullYear();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <span className={styles.avatar} aria-hidden="true">
           {SITE.initials}
         </span>
-        <span className={styles.line}>{SITE.footerLine}</span>
+        <span className={styles.line}>
+          © {year} · {SITE.footerLine}
+        </span>
 
         <div className={styles.actions}>
           <a
