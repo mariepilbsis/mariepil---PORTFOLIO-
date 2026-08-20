@@ -59,7 +59,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   background: var(--surf);
-  border-left: 1px solid rgba(var(--linec), 0.1);
+  border-left: 1px solid var(--line-1);
 }
 
 .meta {
@@ -156,7 +156,7 @@
 
   .aside {
     border-left: 0;
-    border-top: 1px solid rgba(var(--linec), 0.1);
+    border-top: 1px solid var(--line-1);
   }
 }
 
@@ -174,7 +174,7 @@
   }
 
   .aside {
-    border-left: 1px solid rgba(var(--linec), 0.1);
+    border-left: 1px solid var(--line-1);
     border-top: 0;
   }
 }

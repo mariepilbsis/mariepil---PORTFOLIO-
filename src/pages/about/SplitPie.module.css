@@ -76,11 +76,6 @@
   flood-opacity: 0.65;
 }
 
-.glowSoft {
-  flood-color: rgb(var(--accc));
-  flood-opacity: 0.45;
-}
-
 .sliceDesigner {
   fill: var(--acc);
   cursor: pointer;
@@ -92,19 +87,29 @@
   filter: url(#pie-glow-designer);
 }
 
+/* The wedge is a warm mid-tone on a warm light ground, so the rim needs a line
+   to sit against; the red half needs none, its own colour is the edge. The
+   stroke rides the fill directly — an earlier pass gave both halves a
+   page-coloured separator stroke as well, which pushed this outline a pixel and
+   a half off its own fill and hung a pale halo around the wedge. The ±9/4px
+   offsets already open the split on their own. */
 .sliceCoder {
   fill: var(--slice);
-  stroke: rgba(var(--linec), 0.16);
+  stroke: var(--line-3);
   cursor: pointer;
-  transition:
-    fill 0.28s,
-    stroke 0.28s;
+  transition: fill 0.28s;
 }
 
+/*
+ * Hover deepens the fill and stops there. It used to swap the stroke to the
+ * accent and light an accent-coloured drop shadow with it, which put a hard
+ * red outline and a red halo around a warm grey wedge — two temperatures
+ * fighting on one shape, and the loudest thing on the page for the half meant
+ * to be the quiet one. Red belongs to the designer half; this half answers in
+ * its own colour.
+ */
 .sliceCoder:hover {
   fill: var(--slice2);
-  stroke: var(--acc);
-  filter: url(#pie-glow-coder);
 }
 
 /* Set through CSS rather than the fill attribute so the labels follow the theme. */

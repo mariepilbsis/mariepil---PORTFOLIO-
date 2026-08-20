@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,6 +53,30 @@
       rel="stylesheet"
     />
 
+    <!-- Set the theme before first paint so there is no flash of the wrong
+         theme. Runs after the theme-color meta above so it can repaint the
+         mobile browser chrome to match. -->
+    <script>
+      (function () {
+        var theme = 'dark';
+        try {
+          var stored = localStorage.getItem('gm-theme');
+          theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
+        } catch (e) {
+          /* Blocked storage or no matchMedia — dark is the default. */
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'light') {
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', '#f4efec');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

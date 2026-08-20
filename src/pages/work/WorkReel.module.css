@@ -52,7 +52,7 @@
 .stage {
   position: relative;
   flex: 1;
-  border-top: 1px solid rgba(var(--linec), 0.09);
+  border-top: 1px solid var(--line-1);
   overflow: hidden;
 }
 
@@ -72,7 +72,7 @@
   /* Never wider than the viewport, so a whole panel is always readable. */
   width: min(430px, calc(100vw - 48px));
   padding: 44px clamp(22px, 6vw, 40px) 0;
-  border-right: 1px solid rgba(var(--linec), 0.09);
+  border-right: 1px solid var(--line-1);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -150,7 +150,7 @@
   height: 230px;
   flex: none;
   background: var(--photo);
-  border: 1px solid rgba(var(--linec), 0.08);
+  border: 1px solid var(--line-1);
   overflow: hidden;
 }
 
@@ -209,7 +209,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: rgba(var(--linec), 0.08);
+  background: var(--line-1);
 }
 
 .progressBar {
@@ -259,9 +259,9 @@
   flex-direction: column;
   gap: 26px;
   padding: 26px 24px;
-  border: 1px solid rgba(var(--linec), 0.11);
+  border: 1px solid var(--line-2);
   border-radius: 16px;
-  background: rgba(var(--linec), 0.03);
+  background: var(--fill-1);
 }
 
 .stackEnd {

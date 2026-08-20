@@ -36,8 +36,8 @@
 }
 
 .ghost {
-  background: rgba(var(--linec), 0.06);
-  border: 1px solid rgba(var(--linec), 0.15);
+  background: var(--fill-2);
+  border: 1px solid var(--line-2);
   color: var(--tx);
   font-weight: 600;
 }
@@ -49,7 +49,7 @@
 
 .outline {
   background: transparent;
-  border: 1px solid rgba(var(--linec), 0.2);
+  border: 1px solid var(--line-3);
   color: var(--tx);
   font-weight: 600;
 }
@@ -61,7 +61,7 @@
 
 .dashed {
   background: transparent;
-  border: 1px dashed rgba(var(--linec), 0.25);
+  border: 1px dashed var(--line-3);
   color: rgba(var(--txc), 0.7);
   font-weight: 600;
 }
@@ -72,8 +72,8 @@
 }
 
 .mono {
-  background: rgba(var(--linec), 0.04);
-  border: 1px solid rgba(var(--linec), 0.12);
+  background: var(--fill-1);
+  border: 1px solid var(--line-2);
   color: rgba(var(--txc), 0.8);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -118,7 +118,7 @@
   align-items: center;
   gap: 8px;
   padding: 7px 13px;
-  border: 1px solid rgba(var(--linec), 0.14);
+  border: 1px solid var(--line-2);
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 10.5px;
@@ -156,7 +156,7 @@
   justify-content: center;
   min-height: 40px;
   padding: 10px 15px;
-  border: 1px solid rgba(var(--linec), 0.18);
+  border: 1px solid var(--line-3);
   background: transparent;
   cursor: pointer;
   font-family: var(--font-mono);
@@ -223,7 +223,7 @@
   height: 44px;
   flex: none;
   border-radius: 50%;
-  border: 1px solid rgba(var(--linec), 0.14);
+  border: 1px solid var(--line-2);
   background: transparent;
   color: var(--tx);
   cursor: pointer;

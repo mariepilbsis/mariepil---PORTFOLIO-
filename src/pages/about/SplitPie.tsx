@@ -3,7 +3,7 @@ import styles from './SplitPie.module.css';
 
 /**
  * 60/40 donut split between the designer and coder halves. The two slices are
- * offset by ±6/3px so the split reads as an exploded pie.
+ * offset by ±9/4px so the split reads as an exploded pie.
  */
 export function SplitPie() {
   return (
@@ -35,25 +35,22 @@ export function SplitPie() {
             <filter id="pie-glow-designer" x="-35%" y="-35%" width="170%" height="170%">
               <feDropShadow dx="0" dy="0" stdDeviation="10" className={styles.glowStrong} />
             </filter>
-            <filter id="pie-glow-coder" x="-35%" y="-35%" width="170%" height="170%">
-              <feDropShadow dx="0" dy="0" stdDeviation="8" className={styles.glowSoft} />
-            </filter>
           </defs>
 
           <path
             d="M120 120 L120 8 A112 112 0 1 0 185.8 210.6 Z"
-            transform="translate(-6,3)"
+            transform="translate(-9,4)"
             className={styles.sliceDesigner}
           />
           <path
             d="M120 120 L185.8 210.6 A112 112 0 0 0 120 8 Z"
-            transform="translate(6,-3)"
+            transform="translate(9,-4)"
             strokeWidth="1"
             className={styles.sliceCoder}
           />
           <text
-            x="52"
-            y="152"
+            x="49"
+            y="153"
             textAnchor="middle"
             fontFamily="'Instrument Sans', sans-serif"
             fontSize="18"
@@ -63,8 +60,8 @@ export function SplitPie() {
             Designer
           </text>
           <text
-            x="180"
-            y="104"
+            x="183"
+            y="103"
             textAnchor="middle"
             fontFamily="'Instrument Sans', sans-serif"
             fontSize="16"

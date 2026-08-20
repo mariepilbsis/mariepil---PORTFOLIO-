@@ -85,7 +85,7 @@
 }
 
 .pending:hover {
-  border-color: rgba(var(--linec), 0.25);
+  border-color: var(--line-3);
   color: rgba(var(--txc), 0.7);
 }
 

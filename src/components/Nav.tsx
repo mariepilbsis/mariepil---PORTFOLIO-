@@ -3,6 +3,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { NAV_ITEMS } from '../data/navigation';
 import { SITE } from '../data/site';
+import { useTheme } from '../theme/theme-context';
+import { MoonIcon, SunIcon } from './Icons';
 import ui from '../styles/ui.module.css';
 import styles from './Nav.module.css';
 
@@ -11,6 +13,7 @@ const NAV_GAP = 14;
 
 export function Nav() {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
   const wrapRef = useRef<HTMLElement>(null);
 
   /**
@@ -32,6 +35,14 @@ export function Nav() {
 
     return () => observer.disconnect();
   }, []);
+
+  /*
+   * Names the destination, not the control: an icon-only button whose name
+   * never changes leaves a screen reader with no way to tell which theme is
+   * on. Same string in the tooltip, so pointer and assistive users read the
+   * same promise.
+   */
+  const nextTheme = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
 
   return (
     <header ref={wrapRef} className={styles.wrap}>
@@ -58,6 +69,29 @@ export function Nav() {
         </nav>
 
         <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.themeToggle}
+            onClick={toggleTheme}
+            aria-label={nextTheme}
+            title={nextTheme}
+          >
+            <span
+              className={styles.themeIcon}
+              style={{ opacity: theme === 'light' ? 0 : 1 }}
+              aria-hidden="true"
+            >
+              <SunIcon />
+            </span>
+            <span
+              className={styles.themeIcon}
+              style={{ opacity: theme === 'light' ? 1 : 0 }}
+              aria-hidden="true"
+            >
+              <MoonIcon />
+            </span>
+          </button>
+
           <button
             type="button"
             className={`${ui.btn} ${ui.primary} ${ui.md}`}

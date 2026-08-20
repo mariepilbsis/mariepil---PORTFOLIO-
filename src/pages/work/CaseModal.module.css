@@ -18,7 +18,7 @@
 .sheet {
   width: min(620px, 100%);
   background: var(--surf);
-  border-left: 1px solid rgba(var(--linec), 0.12);
+  border-left: 1px solid var(--line-2);
   overflow-y: auto;
   animation: fadeUp 0.3s ease both;
 }
@@ -32,7 +32,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 20px 28px;
-  border-bottom: 1px solid rgba(var(--linec), 0.09);
+  border-bottom: 1px solid var(--line-1);
   background: var(--surf);
 }
 
@@ -49,7 +49,7 @@
   height: 36px;
   flex: none;
   border-radius: 50%;
-  border: 1px solid rgba(var(--linec), 0.16);
+  border: 1px solid var(--line-2);
   background: transparent;
   color: var(--tx);
   font-size: 16px;
@@ -89,7 +89,7 @@
   height: 260px;
   margin: 26px 0;
   background: var(--photo);
-  border: 1px solid rgba(var(--linec), 0.1);
+  border: 1px solid var(--line-1);
   overflow: hidden;
 }
 

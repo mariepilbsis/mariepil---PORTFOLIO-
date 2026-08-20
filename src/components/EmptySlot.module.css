@@ -17,9 +17,9 @@
   /* Opaque base so the parent frame's cream --photo backing is fully covered,
      with a faint lift on top of it. */
   background:
-    linear-gradient(rgba(var(--linec), 0.035), rgba(var(--linec), 0.035)),
+    linear-gradient(var(--fill-1), var(--fill-1)),
     var(--bg);
-  border: 1px dashed rgba(var(--linec), 0.14);
+  border: 1px dashed var(--line-2);
   color: var(--tx-faint);
   text-align: center;
 }

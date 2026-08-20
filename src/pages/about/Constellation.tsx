@@ -125,7 +125,7 @@ export function Constellation() {
               <path
                 d={path}
                 fill="none"
-                stroke="#E23048"
+                stroke="var(--acc)"
                 strokeWidth="1"
                 vectorEffect="non-scaling-stroke"
                 opacity="0.85"

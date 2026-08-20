@@ -1,13 +1,11 @@
 /* ---------------------------------------------------------------------------
    Design tokens.
 
-   The site is dark only. index.html hardcodes data-theme="dark" on <html>, so
-   the light block below never matches — it is kept, intact and contrast
-   checked, so light mode is a small change to switch back on rather than a
-   rewrite. See the note above it.
-
-   The channel-triplet variables (--txc, --linec, …) exist so translucent
-   values can be written as rgba(var(--txc), .6).
+   Both themes are driven from one set of custom properties on <html>; the light
+   theme overrides them under html[data-theme="light"]. The channel-triplet
+   variables (--txc, --accc, …) exist so translucent values can be written as
+   rgba(var(--txc), .6). Lines and fills no longer work that way — see the
+   tier tokens below.
    --------------------------------------------------------------------------- */
 
 :root {
@@ -17,7 +15,6 @@
   --surfc: 18, 9, 10;
   --tx: #f7f3f1;
   --txc: 247, 243, 241;
-  --linec: 255, 255, 255;
   --hd: #ffffff;
   --onacc: #12090a;
   --acc2: #ff5c72;
@@ -29,6 +26,23 @@
   --gridA: 0.055;
   --glowA: 0.2;
   --glowB: 0.15;
+
+  /* Lines and fills, in tiers.
+
+     These used to be written inline against a raw line channel, at alphas from
+     .03 to .3 — 64 of them across 17 files, each one picked by eye against the
+     dark ground. Light mode inverted that channel to a near-black, which
+     quietly inverted their meaning too: a fill meant to lift a card off the
+     page sank it instead, and hairlines tuned to glow against black turned
+     invisible against cream. The tiers let each theme say what a line or a
+     fill IS, rather than every component guessing an alpha and hoping it
+     survives the other theme. */
+  --fill-1: rgba(255, 255, 255, 0.035); /* card and panel ground */
+  --fill-2: rgba(255, 255, 255, 0.07); /* the same, one step up */
+  --line-1: rgba(255, 255, 255, 0.09); /* dividers, rules, tracks */
+  --line-2: rgba(255, 255, 255, 0.13); /* the standard border */
+  --line-3: rgba(255, 255, 255, 0.22); /* emphasis and dashed edges */
+  --ghost: rgba(255, 255, 255, 0.07); /* oversized numerals behind content */
   color-scheme: dark;
 
   /* Muted text, in three steps. These carry different alphas per theme on
@@ -63,19 +77,6 @@
   --nav-h: 92px;
 }
 
-/* DORMANT — light mode is switched off.
- *
- * Nothing sets data-theme="light" any more, so none of this applies. To bring
- * light mode back:
- *   1. Give <html> in index.html a theme chosen at runtime again rather than
- *      the fixed data-theme="dark", setting it before first paint so there is
- *      no flash of the wrong theme.
- *   2. Restore the theme context and provider, and the toggle button in Nav.
- *      Both were removed in the same commit as this note — `git log -- src/theme`
- *      has them.
- *
- * The values are AA-checked against the light ground and still good; the
- * ratios in the comments are current. */
 html[data-theme='light'] {
   --bg: #f4efec;
   --bgc: 244, 239, 236;
@@ -83,18 +84,35 @@ html[data-theme='light'] {
   --surfc: 255, 255, 255;
   --tx: #1c1416;
   --txc: 28, 20, 22;
-  --linec: 20, 12, 14;
   --hd: #140c0e;
   --onacc: #ffffff;
   --acc2: #b81230;
   --acc3: #7e0a1d;
-  --slice: #e6ddd9;
-  --slice2: #d9ccc7;
+  --slice: #cfbfb3;
+  --slice2: #bda898;
   --slot: #b4a8a3;
   --photo: #e8e0dc;
-  --gridA: 0.05;
-  --glowA: 0.11;
-  --glowB: 0.08;
+  /* The accent washes read as a warm tint on black. On cream at the same
+     strength they turned into a pink stain across the hero and the footer, so
+     light runs them at roughly half. */
+  --gridA: 0.04;
+  --glowA: 0.05;
+  --glowB: 0.04;
+
+  /* Fills lift here rather than sink: on a cream page a card is a white one,
+     so these are white at high alpha, the opposite direction from dark.
+
+     The line channel is a warm brown-black, not the cold near-black of --txc.
+     Against a warm ground a neutral hairline reads blue and detaches; matching
+     the ground's temperature is what makes the borders sit in the page instead
+     of on top of it. Alphas run higher than dark because a dark line on light
+     has to work harder than a light line on dark to carry the same weight. */
+  --fill-1: rgba(255, 255, 255, 0.75);
+  --fill-2: rgba(255, 255, 255, 0.92);
+  --line-1: rgba(58, 38, 34, 0.14);
+  --line-2: rgba(58, 38, 34, 0.22);
+  --line-3: rgba(58, 38, 34, 0.38);
+  --ghost: rgba(58, 38, 34, 0.16);
   color-scheme: light;
 
   --acc-solid: #df2f47; /* white on this: 4.53:1 */
