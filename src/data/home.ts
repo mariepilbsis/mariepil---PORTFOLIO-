@@ -5,10 +5,12 @@ export const HERO = {
   eyebrowMuted: '· Bulacan State University',
   headingLead: "Hi, I'm Marie ",
   headingAccent: 'Pil',
-  lead: 'I design user-centered systems and ',
-  leadStrong: 'lead the creative teams that ship them.',
-  primaryCta: 'View my work →',
-  secondaryCta: 'Get in touch',
+  // Split so the bold half lands on the deliverables. Swapping the two
+  // clauses is what it takes to bold the role instead.
+  lead: 'Creative Virtual Assistant & Multimedia Lead ',
+  leadStrong: 'crafting high-impact visual content, digital assets, and streamlined workflows.',
+  primaryCta: 'View Creative Work →',
+  secondaryCta: 'Hire Me / Get in Touch',
 } as const;
 
 export interface StatEntry {
@@ -19,7 +21,7 @@ export interface StatEntry {
 // "Leading" lived here too, but the identity card's role row now says it.
 export const STAT_LEDGER: readonly StatEntry[] = [
   { label: 'Currently', value: 'Multimedia & Publications Head · IS³' },
-  { label: 'Shipped', value: 'SmartStock · built and deployed' },
+  { label: 'Shipped', value: 'Creative Operations & Content Systems' },
 ];
 
 export const TICKER_ITEMS: readonly string[] = [

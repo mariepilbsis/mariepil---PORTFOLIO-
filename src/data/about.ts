@@ -9,7 +9,7 @@ export interface IdentityRow {
 
 export const IDENTITY_ROWS: readonly IdentityRow[] = [
   { key: 'uid', value: 'gaymariepil' },
-  { key: 'role', value: 'design lead · ui/ux designer · layout artist' },
+  { key: 'role', value: 'creative va · multimedia lead · digital content operator' },
   { key: 'school', value: 'bulacan state university' },
   { key: 'program', value: 'bs information systems' },
   { key: 'base', value: 'bulacan, ph · gmt+8' },
@@ -33,9 +33,11 @@ export const PROFILE_MEDIA: { video: string } = {
 export const BIO = {
   headingLine1: 'Great design is structured,',
   headingLine2: 'functional, and scalable.',
-  pullQuoteLead: 'Leading multimedia and publication teams taught me what matters most: ',
+  // Rendered only in the home hero, not on this page — the emphasis carries the
+  // credential, the muted tail carries what the client gets.
+  pullQuoteLead: 'With a strong foundation in multimedia leadership and digital systems, ',
   pullQuoteTail:
-    'a design only creates value when it ships accurately, hits every deadline, and elevates the user experience.',
+    'I help business owners, agencies, and founders elevate their visual identity, streamline content operations, and ship marketing assets on time—every time.',
   // Trimmed once the home hero and identity card started carrying the
   // student / school / role details this used to restate.
   body: 'I bridge the gap between UI/UX design, front-end development, and operations—crafting interactive prototypes, web interfaces, and production-ready systems grounded in clear user data.',
