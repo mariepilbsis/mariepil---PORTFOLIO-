@@ -10,7 +10,7 @@ export const HERO = {
   lead: 'Creative Virtual Assistant & Multimedia Lead ',
   leadStrong: 'crafting high-impact visual content, digital assets, and streamlined workflows.',
   primaryCta: 'View Creative Work →',
-  secondaryCta: 'Hire Me / Get in Touch',
+  secondaryCta: 'Hire me',
 } as const;
 
 export interface StatEntry {
