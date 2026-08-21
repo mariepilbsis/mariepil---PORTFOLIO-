@@ -75,7 +75,7 @@ export function Constellation() {
           )}
         </div>
 
-        <h2 className={styles.title}>The full constellation.</h2>
+        <h2 className={styles.title}>Skill Constellation</h2>
 
         <div className={styles.chips} role="group" aria-label="Filter skills by category">
           {SKILL_CATEGORIES.map((name) => {

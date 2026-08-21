@@ -48,27 +48,32 @@ export function SplitPie() {
             strokeWidth="1"
             className={styles.sliceCoder}
           />
-          <text
-            x="49"
-            y="153"
-            textAnchor="middle"
-            fontFamily="'Instrument Sans', sans-serif"
-            fontSize="18"
-            fontWeight="700"
-            className={styles.labelDesigner}
-          >
+          {/* Each label sits on its own slice's bisector — 252° for the designer
+              wedge, 72° for the developer one — at a radius where the widest
+              line still clears the arc. The developer label used to sit off its
+              bisector at a radius its own width could not fit in, so the tail
+              of the word hung past the arc and onto the page behind it. */}
+          <text x="58" y="137" textAnchor="middle" className={`${styles.label} ${styles.labelDesigner}`}>
             Designer
           </text>
           <text
-            x="183"
-            y="103"
+            x="58"
+            y="157"
             textAnchor="middle"
-            fontFamily="'Instrument Sans', sans-serif"
-            fontSize="16"
-            fontWeight="700"
-            className={styles.labelCoder}
+            className={`${styles.label} ${styles.labelDesigner} ${styles.pct}`}
           >
+            60%
+          </text>
+          <text x="184" y="94" textAnchor="middle" className={`${styles.label} ${styles.labelCoder}`}>
             Developer
+          </text>
+          <text
+            x="184"
+            y="114"
+            textAnchor="middle"
+            className={`${styles.label} ${styles.labelCoder} ${styles.pct}`}
+          >
+            40%
           </text>
         </svg>
       </div>

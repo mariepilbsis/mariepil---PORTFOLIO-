@@ -45,8 +45,9 @@ export function Contact() {
         </h1>
 
         <p className={styles.copy}>
-          Open to paid roles, freelance projects and internships in UI/UX, front-end, data
-          analytics, or digital marketing. One message and I&rsquo;ll send the full deck of work.
+          Open to freelance, contract, and internship work in Design &amp; Operations Virtual
+          Assistance, e-commerce support, business analytics, UI/UX, front-end, or digital
+          marketing.
         </p>
 
         <div className={styles.actions}>

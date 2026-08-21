@@ -21,11 +21,23 @@
 }
 
 .intro {
-  margin: 0 0 30px;
+  margin: 0 0 10px;
   max-width: 620px;
   font-size: 15px;
   line-height: 1.7;
   color: var(--tx-muted);
+  text-wrap: pretty;
+}
+
+/* A how-to-use aside rather than part of the section's copy, so it sits a step
+   down from the intro in size and weight and carries the eyebrow's tracking. */
+.introNote {
+  margin: 0 0 30px;
+  max-width: 620px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: rgba(var(--txc), 0.52);
   text-wrap: pretty;
 }
 

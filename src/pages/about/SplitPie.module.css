@@ -112,15 +112,33 @@
   fill: var(--slice2);
 }
 
-/* Set through CSS rather than the fill attribute so the labels follow the theme. */
+/* Set through CSS rather than presentation attributes so the labels follow the
+   theme and both halves share one size. They used to be written inline at 18px
+   and 16px, which read as a hierarchy the two halves don't have. */
+.label {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  pointer-events: none;
+}
+
+/* The share each wedge stands for. The numbers used to live only in the SVG's
+   aria-label — announced to a screen reader, and nowhere for anyone reading
+   the chart. Size and weight carry the step down from the name; an opacity
+   here does not, because white at 74% over --acc lands at 3.0:1, under AA for
+   text this small. */
+.pct {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
 .labelDesigner {
   fill: var(--surf);
-  pointer-events: none;
 }
 
 .labelCoder {
   fill: var(--tx);
-  pointer-events: none;
 }
 
 @media (max-width: 860px) {

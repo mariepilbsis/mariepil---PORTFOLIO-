@@ -45,9 +45,10 @@ export function PubmatGallery({ onOpen }: { onOpen: (index: number) => void }) {
 
       <p className={styles.intro}>
         Visual systems and digital media designed as Multimedia and Publications Head for the
-        Information Systems Synergy Society, alongside client projects. Click into any collection to
-        explore the full output.
+        Information Systems Synergy Society, alongside client projects.
       </p>
+
+      <p className={styles.introNote}>Click into any collection to explore the full output.</p>
 
       <div className={styles.filters} role="group" aria-label="Filter pubmats by type">
         {PUBMAT_KINDS.map((value) => {

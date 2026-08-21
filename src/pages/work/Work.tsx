@@ -16,7 +16,7 @@ export function Work() {
   const { hash } = useLocation();
 
   usePageMeta({
-    title: 'Work & Pubmats',
+    title: 'Systems & Designs',
     description:
       'Publication materials, brochures and brand marks designed for IS³ and client work, plus SmartStock — an AI inventory platform designed end to end, then built and deployed.',
   });

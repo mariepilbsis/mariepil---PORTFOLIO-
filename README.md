@@ -7,7 +7,7 @@ positioning, her publication-material (pubmat) body of work, her product/case wo
 timeline and credentials, and a contact page. It ships with a dark and a light theme, switched by a
 toggle in the nav and remembered across visits.
 
-Pages: **Home · About & Experience · Work & Pubmats · Contact** (client-side switching, no routing
+Pages: **Home · About & Experience · Systems & Designs · Contact** (client-side switching, no routing
 library required — but real URL routes are recommended in the rebuild, see *Interactions*).
 
 ## About the Design Files
@@ -104,7 +104,7 @@ Pill: `background:rgba(var(--surfc),.82)`, `backdrop-filter:blur(14px)`,
 `display:flex; gap:18px; flex-wrap:wrap`.
 - **Brand button** — 38px crimson circle, JetBrains Mono 700 13px `GP` in `--onacc`, then
   "Gay Marie R. Pil" 14.5px/600. Navigates home.
-- **Nav links** — Home · About & Experience · Work & Pubmats · Contact. 13.5px/500,
+- **Nav links** — Home · About & Experience · Systems & Designs · Contact. 13.5px/500,
   `opacity:.62`, active `1`, hover `1`. Active link carries a crimson underline.
 - **Theme toggle** — 44px circle, `1px solid rgba(var(--linec),.16)`, transparent fill; sun icon in
   dark mode, moon icon in light mode (crossfade via opacity, both icons stacked). Hover: crimson
@@ -187,7 +187,7 @@ Pill: `background:rgba(var(--surfc),.82)`, `backdrop-filter:blur(14px)`,
 - **Credentials / recognition cards** follow the timeline (issuer, name, kind: Certification /
   Internship / Award, incl. Dean's Lister — semester details still to be supplied by the client).
 
-### 4. Work & Pubmats
+### 4. Systems & Designs
 - **Horizontal reel** — a tall scroll container whose inner `position:sticky` stage is
   `calc(100vh - 76px)` (min 620px). Vertical scroll progress `p` inside the container drives
   `translate3d(-p * (trackScrollWidth - stageWidth), 0, 0)` on the track, so the case cards slide
@@ -206,8 +206,8 @@ Pill: `background:rgba(var(--surfc),.82)`, `backdrop-filter:blur(14px)`,
 ### 5. Contact
 Centered column, max 900px, `padding:100px 24px 90px`, radial glow behind.
 Eyebrow, H2 "Ready to build **something**" (`clamp(42px,6.4vw,78px)`), 17px paragraph:
-"Open to paid roles, freelance projects and internships in UI/UX, front-end, data analytics, or
-digital marketing. One message and I'll send the full deck of work."
+"Open to freelance, contract, and internship work in Design & Operations Virtual Assistance,
+e-commerce support, business analytics, UI/UX, front-end, or digital marketing."
 Buttons: crimson `mailto:`, LinkedIn (ghost), Resume (dashed border — **link still to be supplied**).
 Below: a "copy email" button that writes to the clipboard and swaps its label to
 "copied to clipboard ✓" for 1.8s. Meta row (mono 11.5px at `.45`):
@@ -215,7 +215,7 @@ Below: a "copy email" button that writes to the clipboard and swaps its label to
 
 ### 6. Footer (all pages)
 `--surf` band, `1px solid rgba(var(--linec),.09)` top border, 30px crimson `GP` avatar,
-`© 2026 · Gay Marie R. Pil · designed and built in Bulacan`, and three 44px round icon buttons
+`© 2026 · Gay Marie R. Pil`, and three 44px round icon buttons
 (email, LinkedIn, back-to-top) with crimson hover.
 
 ---

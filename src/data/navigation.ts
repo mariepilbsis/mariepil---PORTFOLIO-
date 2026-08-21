@@ -6,6 +6,6 @@ export interface NavItem {
 export const NAV_ITEMS: readonly NavItem[] = [
   { path: '/', label: 'Home' },
   { path: '/about', label: 'About & Experience' },
-  { path: '/work', label: 'Work & Pubmats' },
+  { path: '/work', label: 'Systems & Designs' },
   { path: '/contact', label: 'Contact' },
 ];

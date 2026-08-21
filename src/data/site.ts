@@ -19,5 +19,5 @@ export const SITE: Site = {
   base: 'Bulacan, PH',
   linkedin: 'https://www.linkedin.com/in/gay-marie-pil-a932a02ab/',
   resume: '/MariePil-Resume.pdf',
-  footerLine: 'Gay Marie R. Pil · designed and built in Bulacan',
+  footerLine: 'Gay Marie R. Pil',
 };
