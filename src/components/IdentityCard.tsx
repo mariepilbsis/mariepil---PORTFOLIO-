@@ -72,11 +72,29 @@ export function IdentityCard() {
           <div key={row.key} className={styles.row}>
             <dt className={styles.rowKey}>{row.key}</dt>
             <dd className={`${styles.rowValue} ${row.accent ? styles.rowAccent : ''}`}>
-              {row.value}
+              {breakOnSeparators(row.value)}
             </dd>
           </div>
         ))}
       </dl>
     </div>
   );
+}
+
+/**
+ * Lets a middot-separated value break only between one part and the next.
+ *
+ * The card right-aligns these in a narrow column, so a long value wraps. Left
+ * alone it broke at whatever space happened to fall near the edge and stranded
+ * a bare word on its own line. Every space inside a part becomes non-breaking,
+ * as does the one before each separator, which leaves exactly one break
+ * opportunity per separator and keeps the middot on the line it follows.
+ *
+ * A value with no separator comes back unchanged.
+ */
+function breakOnSeparators(value: string): string {
+  return value
+    .split(' · ')
+    .map((part) => part.replace(/ /g, ' '))
+    .join(' · ');
 }

@@ -13,7 +13,7 @@ export const IDENTITY_ROWS: readonly IdentityRow[] = [
   { key: 'school', value: 'bulacan state university' },
   { key: 'program', value: 'bs information systems' },
   { key: 'base', value: 'bulacan, ph · gmt+8' },
-  { key: 'exp', value: 'design lead · since 2023' },
+  { key: 'exp', value: 'creative lead · since 2023' },
   // The status dot is drawn in CSS, not typed here — as text a screen reader
   // announces it as "black circle" before the words that matter.
   { key: 'status', value: 'open to opportunities', accent: true },
@@ -40,7 +40,7 @@ export const BIO = {
     'I help business owners, agencies, and founders elevate their visual identity, streamline content operations, and ship marketing assets on time—every time.',
   // Trimmed once the home hero and identity card started carrying the
   // student / school / role details this used to restate.
-  body: 'I bridge the gap between UI/UX design, front-end development, and operations—crafting interactive prototypes, web interfaces, and production-ready systems grounded in clear user data.',
+  body: 'I bridge the gap between creative production and digital operations—building brand systems, marketing assets and content workflows that stay consistent, stay on brand, and ship on schedule.',
 } as const;
 
 export interface Principle {

@@ -9,7 +9,7 @@ export function Contact() {
   usePageMeta({
     title: 'Contact',
     description:
-      'Get in touch with Gay Marie R. Pil — open to paid roles, freelance projects and internships in UI/UX, front-end, data analytics and digital marketing.',
+      'Get in touch with Gay Marie R. Pil — Creative Virtual Assistant and Multimedia Lead, available for visual content, digital asset and content operations work.',
   });
 
   const [copied, setCopied] = useState(false);

@@ -1,7 +1,7 @@
 /** Content for the Home page: hero, stat ledger, ticker, entry cards. */
 
 export const HERO = {
-  eyebrow: 'Design · Development · Creative leadership',
+  eyebrow: 'Creative VA · Multimedia · Content operations',
   eyebrowMuted: '· Bulacan State University',
   headingLead: "Hi, I'm Marie ",
   headingAccent: 'Pil',

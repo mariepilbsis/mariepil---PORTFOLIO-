@@ -12,9 +12,9 @@ export function Home() {
   const navigate = useNavigate();
 
   usePageMeta({
-    title: 'UI/UX designer, layout artist and design lead',
+    title: 'Creative Virtual Assistant & Multimedia Lead',
     description:
-      'Portfolio of Gay Marie R. Pil — UI/UX designer, layout artist and design lead. Information Systems student at Bulacan State University, and Multimedia & Publications Head for IS³.',
+      'Portfolio of Gay Marie R. Pil — Creative Virtual Assistant and Multimedia Lead. Visual content, digital assets and content operations for business owners, agencies and founders.',
   });
 
   return (
