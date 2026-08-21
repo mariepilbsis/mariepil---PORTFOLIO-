@@ -19,8 +19,11 @@
   --onacc: #12090a;
   --acc2: #ff5c72;
   --acc3: #ffd8de;
-  --slice: #241618;
-  --slice2: #33201f;
+  /* The developer wedge, which has to hold its own shape against the page with
+     no outline around it. #241618 was near enough to --surf that the wedge all
+     but vanished on the About page, which is why it used to carry a stroke. */
+  --slice: #33201f;
+  --slice2: #422b2d;
   --slot: #3a2e30;
   --photo: #efe9e7;
   --gridA: 0.055;
