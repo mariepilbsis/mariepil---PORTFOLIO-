@@ -3,25 +3,25 @@
 export interface IdentityRow {
   key: string;
   value: string;
-  /** Crimson for the status row, body text everywhere else. */
-  accent?: boolean;
 }
 
+// Credentials and availability used to sit here too. A recruiter scanning the
+// card wants the offer, not the CV, so the rows carry the title and the work
+// it covers and nothing else.
 export const IDENTITY_ROWS: readonly IdentityRow[] = [
   { key: 'uid', value: 'gaymariepil' },
-  { key: 'role', value: 'creative va · multimedia lead · digital content operator' },
-  { key: 'school', value: 'bulacan state university' },
-  { key: 'program', value: 'bs information systems' },
+  { key: 'role', value: 'design & operations va' },
+  {
+    key: 'scope',
+    value: 'e-commerce support · business analytics · ui/ux · front-end · digital marketing',
+  },
   { key: 'base', value: 'bulacan, ph · gmt+8' },
-  { key: 'exp', value: 'creative lead · since 2023' },
-  // The status dot is drawn in CSS, not typed here — as text a screen reader
-  // announces it as "black circle" before the words that matter.
-  { key: 'status', value: 'open to opportunities', accent: true },
 ];
 
 /**
  * The identity card's media slot. The portrait is always there; when this is a
- * real file the card grows a play control and the video runs over the photo.
+ * real file the video runs over the photo on hover, and the card grows a play
+ * control for touch, where there is no hover to run it.
  *
  * To switch it on: drop the file in src/assets/, `import reel from
  * '../assets/<file>.mp4'` above, and set `video: reel`. Nothing else changes.
@@ -33,11 +33,14 @@ export const PROFILE_MEDIA: { video: string } = {
 export const BIO = {
   headingLine1: 'Great design is structured,',
   headingLine2: 'functional, and scalable.',
-  // Rendered only in the home hero, not on this page — the emphasis carries the
-  // credential, the muted tail carries what the client gets.
-  pullQuoteLead: 'With a strong foundation in multimedia leadership and digital systems, ',
+  // Rendered only in the home hero, not on this page. The emphasis carries the
+  // promise and the muted tail carries how it is kept — the other way round
+  // from the credential-first version this replaced, which leaned on the same
+  // "digital systems" and "streamlined workflows" the headline above it
+  // already says.
+  pullQuoteLead: 'I help organizations scale their marketing and stay on schedule — ',
   pullQuoteTail:
-    'I help business owners, agencies, and founders elevate their visual identity, streamline content operations, and ship marketing assets on time—every time.',
+    'combining creative leadership with digital operations to ship consistent, publication-ready assets on time, every time.',
   // Trimmed once the home hero and identity card started carrying the
   // student / school / role details this used to restate.
   body: 'I bridge the gap between creative production and digital operations—building brand systems, marketing assets and content workflows that stay consistent, stay on brand, and ship on schedule.',
@@ -67,7 +70,7 @@ export const PRINCIPLES: readonly Principle[] = [
   },
 ];
 
-export const HALF_DESIGN: readonly string[] = [
+export const PART_DESIGN: readonly string[] = [
   'UI/UX Design & Prototyping',
   'Wireframing & User Flows',
   'Publication & Layout Design',
@@ -75,10 +78,19 @@ export const HALF_DESIGN: readonly string[] = [
   'Accessibility & Usability Design',
 ];
 
-export const HALF_CODE: readonly string[] = [
+export const PART_CODE: readonly string[] = [
   'Front-End Development',
   'HTML / CSS / JavaScript',
   'Django & MySQL Integration',
   'System Architecture & Databases',
   'Production Deployment & Testing',
+];
+
+/** The third part, alongside the design and engineering ones above. */
+export const PART_BUSINESS: readonly string[] = [
+  'Requirements Gathering & Documentation',
+  'Business Process Improvement',
+  'Data & Inventory Analysis',
+  'Dashboards & Reporting',
+  'Stakeholder Collaboration',
 ];

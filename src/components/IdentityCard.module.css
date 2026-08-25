@@ -48,26 +48,30 @@
 
 /* ---------------------------------------------------------------- portrait */
 
+/* Tall enough for the 3:4 source to show head and shoulders without cropping
+   in. The rows below shed three entries, so the card lands near the height it
+   had when it was a short frame over a long list. */
 .portraitFrame {
   position: relative;
-  height: 352px;
+  height: 460px;
   background: var(--photo);
   overflow: hidden;
 }
 
-/* Scaled and nudged off-centre to frame the face, matching the prototype crop. */
+/* The source is cropped to the frame's 400x460 at twice that, so the face is
+   framed in the file rather than steered from here — no scale, no offset. */
 .portrait {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50.4% 61.9%;
-  transform: scale(1.35);
   display: block;
 }
 
 /* --------------------------------------------------------- video overlay */
 
-/* Its own crop — the portrait's scale/offset frames a still face, not footage. */
+/* Cover-cropped like the portrait. The still is framed in the file now, so the
+   two line up only as far as the footage is shot to match — see the note in
+   PROFILE_MEDIA. */
 .video {
   position: absolute;
   inset: 0;
@@ -146,21 +150,4 @@
   margin: 0;
   text-align: right;
   color: var(--tx);
-}
-
-.rowAccent {
-  color: var(--acc2);
-}
-
-/* The status dot. Decorative, so it is drawn rather than typed — see the note
-   on IDENTITY_ROWS in data/about.ts. */
-.rowAccent::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-right: 7px;
-  border-radius: 50%;
-  background: currentColor;
-  vertical-align: middle;
 }

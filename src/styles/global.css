@@ -19,11 +19,18 @@
   --onacc: #12090a;
   --acc2: #ff5c72;
   --acc3: #ffd8de;
-  /* The developer wedge, which has to hold its own shape against the page with
-     no outline around it. #241618 was near enough to --surf that the wedge all
-     but vanished on the About page, which is why it used to carry a stroke. */
-  --slice: #33201f;
-  --slice2: #422b2d;
+  /* The developer and analyst wedges, as two rungs of one warm ramp under the
+     red. Each has to hold its shape against the page with no outline around
+     it: #241618 was near enough to --surf that the wedge all but vanished,
+     which is why it used to carry a stroke, and #33201f only cleared the page
+     by 1.25:1 — enough for two wedges, but as the darkest of three it read as
+     a hole rather than a share. These sit a step up, so the three separate by
+     lightness as well as hue and a reader who cannot tell the red from the
+     brown still sees three. --slice2 and --slice3-hover are the hovers. */
+  --slice: #57393c;
+  --slice2: #6a4747;
+  --slice3: #8f4b52;
+  --slice3-hover: #a35a61;
   --slot: #3a2e30;
   --photo: #efe9e7;
   --gridA: 0.055;
@@ -93,6 +100,8 @@ html[data-theme='light'] {
   --acc3: #7e0a1d;
   --slice: #cfbfb3;
   --slice2: #bda898;
+  --slice3: #a5837b;
+  --slice3-hover: #94706a;
   --slot: #b4a8a3;
   --photo: #e8e0dc;
   /* The accent washes read as a warm tint on black. On cream at the same

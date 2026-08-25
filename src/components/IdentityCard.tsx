@@ -10,24 +10,60 @@ import styles from './IdentityCard.module.css';
 export function IdentityCard() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  /** Set by the button, which outranks hover — see `leave`. */
+  const pinned = useRef(false);
 
   const hasVideo = PROFILE_MEDIA.video !== '';
 
-  const toggle = () => {
+  const start = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    if (video.paused) {
-      void video.play();
-      setPlaying(true);
+    // play() rejects when a pause lands mid-promise, which a quick hover in and
+    // out does routinely. Nothing to recover from, so the state stays put.
+    video
+      .play()
+      .then(() => setPlaying(true))
+      .catch(() => {});
+  };
+
+  const stop = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.pause();
+    video.currentTime = 0;
+    setPlaying(false);
+  };
+
+  const enter = () => {
+    if (!hasVideo || pinned.current) return;
+    // Playback nobody asked for is exactly what reduced motion rules out. The
+    // button still works there, since that is a request.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    start();
+  };
+
+  const leave = () => {
+    if (!hasVideo || pinned.current) return;
+
+    stop();
+  };
+
+  /** Touch has no hover, so the button carries the whole interaction there. */
+  const toggle = () => {
+    if (playing) {
+      pinned.current = false;
+      stop();
     } else {
-      video.pause();
-      setPlaying(false);
+      pinned.current = true;
+      start();
     }
   };
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onMouseEnter={enter} onMouseLeave={leave}>
       <div className={styles.header}>
         <span>identity.card</span>
         <span className={styles.verified}>
@@ -37,10 +73,12 @@ export function IdentityCard() {
       </div>
 
       <div className={styles.portraitFrame}>
-        <img className={styles.portrait} src={portrait} alt={SITE.name} width="400" height="352" />
+        <img className={styles.portrait} src={portrait} alt={SITE.name} width="400" height="460" />
 
         {/* Sits over the portrait and fades in on play, so the photo is what
-            the card rests on and the video is what it does. */}
+            the card rests on and the video is what it does. Hovering the card
+            runs it; it rewinds on the way out so the next hover starts on the
+            first frame rather than mid-wave. */}
         {hasVideo && (
           <>
             <video
@@ -71,9 +109,7 @@ export function IdentityCard() {
         {IDENTITY_ROWS.map((row) => (
           <div key={row.key} className={styles.row}>
             <dt className={styles.rowKey}>{row.key}</dt>
-            <dd className={`${styles.rowValue} ${row.accent ? styles.rowAccent : ''}`}>
-              {breakOnSeparators(row.value)}
-            </dd>
+            <dd className={styles.rowValue}>{breakOnSeparators(row.value)}</dd>
           </div>
         ))}
       </dl>

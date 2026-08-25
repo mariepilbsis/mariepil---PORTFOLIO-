@@ -9,7 +9,7 @@ export function About() {
   usePageMeta({
     title: 'About & Experience',
     description:
-      'The two halves — design and engineering — plus the full skill constellation, roles shipped, certifications and awards behind the portfolio.',
+      'The three parts — design, engineering and business analysis — plus the full skill constellation, roles shipped, certifications and awards behind the portfolio.',
   });
 
   return (
@@ -20,8 +20,8 @@ export function About() {
       <h1 className="sr-only">About &amp; Experience</h1>
       {/* The old "01 — About" intro now opens the home page, alongside the
           identity card it used to sit next to here. */}
-      <section className={`container ${styles.halves}`}>
-        <div className={`eyebrow ${styles.halvesEyebrow}`}>01 — Two halves</div>
+      <section className={`container ${styles.parts}`}>
+        <div className={`eyebrow ${styles.partsEyebrow}`}>01 — Design, Code, Strategy</div>
         <SplitPie />
       </section>
 

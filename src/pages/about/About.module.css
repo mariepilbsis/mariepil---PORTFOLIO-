@@ -2,13 +2,13 @@
 
 /* First section on the page now that the intro moved home, so it carries
    the clearance the old intro used to. */
-.halves {
+.parts {
   z-index: 1;
   padding-top: 64px;
   padding-bottom: 40px;
 }
 
-.halvesEyebrow {
+.partsEyebrow {
   margin-bottom: 44px;
 }
 

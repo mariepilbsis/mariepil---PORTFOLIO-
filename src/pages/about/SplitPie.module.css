@@ -1,9 +1,18 @@
+/* Three parts cannot flank a chart from two sides, so the pie sits on top and
+   the columns run beneath it. */
 .split {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 64px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-items: stretch;
+  gap: 60px;
+}
+
+.columns {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px;
+  align-items: start;
 }
 
 .side {
@@ -15,16 +24,14 @@
   font-family: var(--font-serif);
   font-weight: 400;
   /* The headings run to two lines at this length, so they shrink a little and
-     get room to breathe between them rather than sitting flush. */
+     get room to breathe between them rather than sitting flush. Three columns
+     leave each one narrower than the old flanking pair, so they wrap sooner —
+     the minimum end of the clamp is what carries them. */
   font-size: clamp(24px, 2.4vw, 30px);
   line-height: 1.12;
   letter-spacing: -0.01em;
   text-wrap: balance;
   color: var(--hd);
-}
-
-.headingRight {
-  text-align: right;
 }
 
 .list {
@@ -36,10 +43,6 @@
   gap: 13px;
 }
 
-.listRight {
-  align-items: flex-end;
-}
-
 .item {
   display: flex;
   align-items: center;
@@ -47,10 +50,6 @@
   font-size: 14.5px;
   line-height: 1.4;
   color: rgba(var(--txc), 0.78);
-}
-
-.listRight .item {
-  text-align: right;
 }
 
 .diamond {
@@ -84,12 +83,12 @@
   fill: var(--acc2);
 }
 
-/* No outline, for the same reason the red half has none: its own colour is the
+/* No outline, for the same reason the red wedge has none: its own colour is the
    edge. A stroke here traced the whole wedge — both straight cuts and the arc,
-   down to a hard dark spike at the vertex — so one half read as a flat shape
+   down to a hard dark spike at the vertex — so one part read as a flat shape
    and the other as a drawn-around cut-out, two languages in one graphic. What
    the line was really propping up was a dark-mode fill too close to the page to
-   hold its shape; --slice carries that now. The ±9/4px offsets open the split
+   hold its shape; --slice carries that now. The solved offsets open the splits
    on their own. */
 .sliceCoder {
   fill: var(--slice);
@@ -109,12 +108,29 @@
   fill: var(--slice2);
 }
 
+/* The third wedge answers hover in its own colour, the way the other two do. */
+.sliceAnalyst {
+  fill: var(--slice3);
+  cursor: pointer;
+  transition: fill 0.28s;
+}
+
+.sliceAnalyst:hover {
+  fill: var(--slice3-hover);
+}
+
 /* Set through CSS rather than presentation attributes so the labels follow the
-   theme and both halves share one size. They used to be written inline at 18px
-   and 16px, which read as a hierarchy the two halves don't have. */
+   theme and all three parts share one size. They used to be written inline at
+   18px and 16px, which read as a hierarchy the parts don't have.
+
+   Sized in user units, so the viewBox scales them: at a 300px render these
+   land near 17px. Dropping them from 15 to 13.5 as the pie grew is what buys
+   the wedges room — the names now clear their arcs by 18 units instead of
+   riding the edge, and the graphic reads as a chart with labels on it rather
+   than type with a pie behind it. */
 .label {
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: -0.005em;
   pointer-events: none;
@@ -122,12 +138,16 @@
 
 /* The share each wedge stands for. The numbers used to live only in the SVG's
    aria-label — announced to a screen reader, and nowhere for anyone reading
-   the chart. Size and weight carry the step down from the name; an opacity
-   here does not, because white at 74% over --acc lands at 3.0:1, under AA for
-   text this small. */
+   the chart. Size, weight and now family carry the step down from the name; an
+   opacity does not, because white at 74% over --acc lands at 3.0:1, under AA
+   for text this small. The mono face is the one the eyebrows and the identity
+   card rows already use for figures, so the percentages read as data rather
+   than as a smaller line of the label. */
 .pct {
-  font-size: 12.5px;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
 }
 
 .labelDesigner {
@@ -138,23 +158,35 @@
   fill: var(--tx);
 }
 
-@media (max-width: 860px) {
+/* Both non-red wedges are mid-toned in either theme, so body text clears AA on
+   them: 5.7:1 and 9.2:1 on the dark pair, 5.3:1 and 10.3:1 on the light. */
+.labelAnalyst {
+  fill: var(--tx);
+}
+
+/* Two-up before one-up: at tablet widths three columns squeeze every heading
+   onto three lines, but there is still room for a pair. */
+@media (max-width: 1000px) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+  }
+}
+
+@media (max-width: 620px) {
   .split {
-    grid-template-columns: 1fr;
     gap: 36px;
-    justify-items: center;
   }
 
-  .heading,
-  .headingRight {
+  .columns {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  /* Stacked, each column is its own centred block, but the bullets stay left
+     aligned against their diamonds — centring the rows would leave the
+     diamonds in a ragged line down the middle. */
+  .heading {
     text-align: center;
-  }
-
-  .listRight {
-    align-items: center;
-  }
-
-  .list {
-    align-items: center;
   }
 }
