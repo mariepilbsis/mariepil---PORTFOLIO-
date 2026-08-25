@@ -1,10 +1,9 @@
 /** Content for the Home page: hero, stat ledger, ticker, entry cards. */
 
 export const HERO = {
-  eyebrow: 'Creative VA · Multimedia · Content operations',
-  eyebrowMuted: '· Bulacan State University',
-  headingLead: "Hi, I'm Marie ",
-  headingAccent: 'Pil',
+  eyebrow: 'Creative Virtual Assistant · Content Operations · Visual Assets',
+  headingLead: "Hi, I'm ",
+  headingAccent: 'Marie Pil',
   // Split so the bold half lands on the deliverables. Swapping the two
   // clauses is what it takes to bold the role instead.
   lead: 'Creative Virtual Assistant & Multimedia Lead ',

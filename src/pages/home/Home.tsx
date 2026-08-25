@@ -2,9 +2,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { IdentityCard } from '../../components/IdentityCard';
 import { usePageMeta } from '../../hooks/usePageMeta';
-import { BIO, PRINCIPLES } from '../../data/about';
+import { BIO } from '../../data/about';
 import { ENTRY_CARDS, HERO, STAT_LEDGER } from '../../data/home';
 import { Ticker } from './Ticker';
+import { Workflow } from './Workflow';
 import ui from '../../styles/ui.module.css';
 import styles from './Home.module.css';
 
@@ -27,7 +28,6 @@ export function Home() {
             <div className={styles.heroEyebrow}>
               <span className={styles.heroRule} aria-hidden="true" />
               {HERO.eyebrow}
-              <span className="eyebrow-muted">{HERO.eyebrowMuted}</span>
             </div>
 
             <h1 className={styles.h1}>
@@ -78,26 +78,7 @@ export function Home() {
           </div>
         </div>
 
-        <section className={styles.creed}>
-          <div className={styles.creedHead}>
-            <h2 className={styles.creedTitle}>
-              {BIO.headingLine1}
-              <br />
-              {BIO.headingLine2}
-            </h2>
-            <p className={styles.creedBody}>{BIO.body}</p>
-          </div>
-
-          <div className={styles.principles}>
-            {PRINCIPLES.map((principle) => (
-              <div key={principle.num} className={styles.principle}>
-                <div className={styles.principleNum}>{principle.num}</div>
-                <div className={styles.principleTitle}>{principle.title}</div>
-                <p className={styles.principleBody}>{principle.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <Workflow />
       </div>
 
       <Ticker />

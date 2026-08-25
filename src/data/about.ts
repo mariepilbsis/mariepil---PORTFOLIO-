@@ -1,4 +1,4 @@
-/** Content for the About page: identity card, bio, principles and the split pie. */
+/** Content for the About page: identity card, bio, workflow steps and the split pie. */
 
 export interface IdentityRow {
   key: string;
@@ -31,8 +31,6 @@ export const PROFILE_MEDIA: { video: string } = {
 };
 
 export const BIO = {
-  headingLine1: 'Great design is structured,',
-  headingLine2: 'functional, and scalable.',
   // Rendered only in the home hero, not on this page. The emphasis carries the
   // promise and the muted tail carries how it is kept — the other way round
   // from the credential-first version this replaced, which leaned on the same
@@ -41,32 +39,37 @@ export const BIO = {
   pullQuoteLead: 'I help organizations scale their marketing and stay on schedule — ',
   pullQuoteTail:
     'combining creative leadership with digital operations to ship consistent, publication-ready assets on time, every time.',
-  // Trimmed once the home hero and identity card started carrying the
-  // student / school / role details this used to restate.
-  body: 'I bridge the gap between creative production and digital operations—building brand systems, marketing assets and content workflows that stay consistent, stay on brand, and ship on schedule.',
 } as const;
 
-export interface Principle {
+// The heading and the line under it that open the workflow steps. The lead used
+// to run as its own two-column banner under the hero buttons, with the bio
+// beside it; it says more as the promise the three steps below then keep.
+export const WORKFLOW = {
+  title: 'My Workflow',
+  lead: 'Great design is structured, functional, and scalable.',
+} as const;
+
+export interface WorkflowStep {
   num: string;
   title: string;
   body: string;
 }
 
-export const PRINCIPLES: readonly Principle[] = [
+export const WORKFLOW_STEPS: readonly WorkflowStep[] = [
   {
     num: '01',
-    title: 'Design the system',
-    body: 'User flows, wireframes, and interactive Figma prototypes first—ensuring every visual decision serves a functional purpose.',
+    title: 'Understand the objective',
+    body: 'Analyzing your business goals, target audience, and brand guidelines first—ensuring every visual asset serves a clear strategic purpose before design work begins.',
   },
   {
     num: '02',
-    title: 'Build it for real',
-    body: 'HTML, CSS, JavaScript, and Django backend integration—I deliver functional, deployed code alongside high-fidelity mockups.',
+    title: 'Build & execute',
+    body: 'Creating high-impact marketing collateral, publication layouts, and digital media using Canva, Adobe Photoshop, and Figma—delivering polished, production-ready assets.',
   },
   {
     num: '03',
-    title: 'Ship with a team',
-    body: 'Directing multimedia initiatives across design, web, and layout—ensuring consistent branding and zero missed event deadlines.',
+    title: 'Ship & organize',
+    body: 'Directing content schedules, batching deliverables, and maintaining media assets—ensuring strict brand consistency and zero missed posting deadlines.',
   },
 ];
 

@@ -193,14 +193,18 @@ h3 {
 
 /* -------------------------------------------------------------- keyframes */
 
-@keyframes blink {
+/* The hero caret. It fades and shortens on a slow ease rather than snapping
+   off, and rests fully lit at 0%/100% so it stays visible when reduced motion
+   collapses the animation to a single frame. */
+@keyframes flicker {
   0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
   100% {
-    opacity: 0;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.28;
+    transform: scaleY(0.9);
   }
 }
 

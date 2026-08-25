@@ -1,0 +1,228 @@
+.workflow {
+  position: relative;
+  z-index: 1;
+  padding: 8px 0 24px;
+}
+
+/* The title and its lead stack, so the three steps below read as the answer
+   to the promise rather than as a second column beside it. */
+.head {
+  max-width: 720px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--hd);
+}
+
+.lead {
+  margin: 14px 0 0;
+  max-width: 620px;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--tx-muted);
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------------ rail */
+
+/* --node-mid is the distance from the top of a step to the middle of its
+   node, which is where the rail runs. isolation makes this element the
+   stacking context, so each step's hover ground can sit at z-index -1 —
+   under the track, so the rail draws straight through it, but still above
+   the page.  */
+.rail {
+  --node: 44px;
+  --pad-t: 16px;
+  --node-mid: calc(var(--pad-t) + var(--node) / 2);
+
+  position: relative;
+  isolation: isolate;
+  margin-top: 46px;
+}
+
+/* The three rail pieces: static track, scroll-driven fill, travelling head. */
+.track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--node-mid);
+  height: 1px;
+  background: var(--line-2);
+}
+
+.fill {
+  position: absolute;
+  left: 0;
+  top: var(--node-mid);
+  width: 0;
+  height: 1px;
+  background: var(--acc);
+  box-shadow: 0 0 10px rgba(var(--accc), 0.75);
+}
+
+.dot {
+  position: absolute;
+  left: 0;
+  top: calc(var(--node-mid) - 6px);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--acc);
+  box-shadow: 0 0 18px rgba(var(--accc), 0.9);
+  will-change: transform;
+}
+
+/* ----------------------------------------------------------------- steps */
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+  padding: var(--pad-t) 18px 22px 0;
+}
+
+/* The hover ground, insetting past the step's own box so the copy is not
+   pinned to its edge. Under the track by design — see .rail. */
+.step::before {
+  content: '';
+  position: absolute;
+  inset: 4px -14px 8px -14px;
+  z-index: -1;
+  border-radius: 16px;
+  background: var(--fill-1);
+  opacity: 0;
+  transition: opacity 0.28s;
+}
+
+.step:hover::before,
+.step:focus-within::before {
+  opacity: 1;
+}
+
+/* Sits on the rail, with --bg behind the number so the track does not run
+   through it. */
+.node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--node);
+  height: var(--node);
+  margin-bottom: 20px;
+  border: 2px solid var(--line-3);
+  border-radius: 50%;
+  background: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tx-muted);
+  transition:
+    border-color 0.28s,
+    color 0.28s,
+    box-shadow 0.28s;
+}
+
+.step:hover .node,
+.step:focus-within .node {
+  border-color: var(--acc);
+  color: var(--acc2);
+  box-shadow: 0 0 20px rgba(var(--accc), 0.4);
+}
+
+/* STEP 01 — the word stays quiet so the number carries the accent. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid var(--line-3);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tagWord {
+  color: var(--tx-faint);
+}
+
+.tagNum {
+  color: var(--acc2);
+}
+
+.stepTitle {
+  margin: 14px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--hd);
+  text-wrap: balance;
+}
+
+.stepBody {
+  margin: 9px 0 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--tx-dim);
+  text-wrap: pretty;
+}
+
+/* The rail stands on its end: nodes down the left, copy beside them. The JS
+   axis switch in Workflow.tsx keys off this same width. */
+@media (max-width: 760px) {
+  .list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .track,
+  .fill {
+    left: calc(var(--node) / 2);
+    top: 0;
+    right: auto;
+    bottom: 0;
+    width: 1px;
+  }
+
+  .track {
+    height: auto;
+  }
+
+  .fill {
+    height: 0;
+  }
+
+  .dot {
+    left: calc(var(--node) / 2 - 6px);
+    top: 0;
+  }
+
+  .step {
+    padding: 0 0 34px calc(var(--node) + 22px);
+  }
+
+  .step::before {
+    inset: -10px -14px 20px calc(var(--node) + 8px);
+  }
+
+  .node {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-bottom: 0;
+  }
+}
