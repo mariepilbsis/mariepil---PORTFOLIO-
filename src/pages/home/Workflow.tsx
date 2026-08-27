@@ -86,14 +86,10 @@ export function Workflow() {
         <ol className={styles.list}>
           {WORKFLOW_STEPS.map((step) => (
             <li key={step.num} className={styles.step}>
-              {/* The tag below already says "Step 01", so the node is decoration. */}
+              {/* The ordered list already carries the order, so the numeral is
+                  decoration — it rides the rail rather than being read out. */}
               <span className={styles.node} aria-hidden="true">
                 {step.num}
-              </span>
-
-              <span className={styles.tag}>
-                <span className={styles.tagWord}>Step</span>
-                <span className={styles.tagNum}>{step.num}</span>
               </span>
 
               <h3 className={styles.stepTitle}>{step.title}</h3>
