@@ -142,14 +142,18 @@
   box-shadow: 0 0 20px rgba(var(--accc), 0.4);
 }
 
-/* STEP 01 — the word stays quiet so the number carries the accent. */
+/* STEP 01 — the word stays quiet so the number carries the accent. Rides the
+   rail beside the node, so it takes the same --bg ground: without it the
+   track, the fill and the dot all draw straight through the wording. */
 .tag {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 7px;
   padding: 6px 12px;
   border: 1px solid var(--line-3);
   border-radius: 999px;
+  background: var(--bg);
   font-family: var(--font-mono);
   font-size: 10.5px;
   letter-spacing: 0.14em;
