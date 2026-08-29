@@ -5,29 +5,26 @@ export interface IdentityRow {
   value: string;
 }
 
-// Credentials and availability used to sit here too. A recruiter scanning the
-// card wants the offer, not the CV, so the rows carry the title and the work
-// it covers and nothing else.
+// Credentials and availability used to sit here too, and after them the role
+// and the scope of work. The card carries a vertical intro video now, and a
+// 9:16 frame is tall — these two rows are what fits beside it, and the video
+// says the rest better than a list of nouns could.
 export const IDENTITY_ROWS: readonly IdentityRow[] = [
   { key: 'uid', value: 'gaymariepil' },
-  { key: 'role', value: 'design & operations va' },
-  {
-    key: 'scope',
-    value: 'e-commerce support · business analytics · ui/ux · front-end · digital marketing',
-  },
   { key: 'base', value: 'bulacan, ph · gmt+8' },
 ];
 
 /**
  * The identity card's media slot. The portrait is always there; when this is a
- * real file the video runs over the photo on hover, and the card grows a play
- * control for touch, where there is no hover to run it.
+ * real file the card grows a play button, and pressing it runs the intro over
+ * the photo. Nothing plays on hover — the clip is narrated.
  *
- * To switch it on: drop the file in src/assets/, `import reel from
- * '../assets/<file>.mp4'` above, and set `video: reel`. Nothing else changes.
+ * Served straight from public/ rather than bundled, like the walkthrough in
+ * projects.ts: it is tens of megabytes and only ever fetched on that press, so
+ * there is nothing for the bundler to do but copy it.
  */
 export const PROFILE_MEDIA: { video: string } = {
-  video: '',
+  video: '/MariePil-Intro.mp4',
 };
 
 export const BIO = {

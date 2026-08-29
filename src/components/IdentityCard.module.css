@@ -49,8 +49,9 @@
 /* ---------------------------------------------------------------- portrait */
 
 /* Tall enough for the 3:4 source to show head and shoulders without cropping
-   in. The rows below shed three entries, so the card lands near the height it
-   had when it was a short frame over a long list. */
+   in. The card stays this size while the intro plays: pressing play hands the
+   clip to the whole screen rather than growing the card around it, so nothing
+   here has to make room for a 9:16 frame. */
 .portraitFrame {
   position: relative;
   height: 460px;
@@ -69,15 +70,17 @@
 
 /* --------------------------------------------------------- video overlay */
 
-/* Cover-cropped like the portrait. The still is framed in the file now, so the
-   two line up only as far as the footage is shot to match — see the note in
-   PROFILE_MEDIA. */
+/* Only ever seen if the fullscreen request is turned down — otherwise the clip
+   is on the screen, not in here. The offset is for that fallback: the clip is
+   9:16 against a 400x460 frame, so cover drops a third of the height, and
+   centring the crop would take the burnt-in titles off the top edge with it. */
 .video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 8%;
   display: block;
   opacity: 0;
   pointer-events: none;
@@ -86,36 +89,111 @@
 
 .videoOn {
   opacity: 1;
+  pointer-events: auto;
 }
 
-/* 44px square, matching the minimum touch target the shared controls keep. */
-.mediaToggle {
+/* Where the intro actually plays. Fullscreen hands the element the whole
+   screen — landscape on most of them — and the `cover` above would answer that
+   by enlarging a 9:16 clip until only a centre strip survived. Contain gives
+   the whole picture back, on black.
+
+   Written out twice because a selector the browser does not recognise voids
+   the entire rule it heads, so these two cannot share one list. */
+.video:fullscreen {
+  object-fit: contain;
+  background: #000000;
+}
+
+.video:-webkit-full-screen {
+  object-fit: contain;
+  background: #000000;
+}
+
+/* -------------------------------------------------------- video controls */
+
+/* A white disc with a black glyph, held to one palette in both themes. The
+   photo behind it is a light studio backdrop in some crops and dark hair in
+   others, so a tinted or translucent button would go quiet over half of it —
+   this one stays legible over any of it. */
+.playVideo {
   position: absolute;
-  right: 12px;
-  bottom: 12px;
-  width: 44px;
-  height: 44px;
+  right: 14px;
+  bottom: 14px;
+  width: 56px;
+  height: 56px;
   display: grid;
   place-items: center;
   padding: 0;
-  border: 1px solid var(--line-3);
+  border: none;
   border-radius: 50%;
-  background: rgba(var(--surfc), 0.62);
+  background: #ffffff;
+  color: #000000;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s cubic-bezier(0.2, 0.8, 0.3, 1),
+    box-shadow 0.2s;
+}
+
+/* The triangle's mass sits left of its bounding box, so centring the box reads
+   as off-centre. One pixel right puts it back. */
+.playVideo svg {
+  transform: translateX(1px);
+}
+
+.playVideo:hover,
+.playVideo:focus-visible {
+  transform: scale(1.08);
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.4),
+    0 0 0 3px rgba(var(--accc), 0.55);
+}
+
+/* Top-right, because the browser's own control bar owns the bottom edge once
+   the clip is running. */
+.closeVideo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(6px);
-  color: var(--hd);
+  color: #ffffff;
   line-height: 1;
   cursor: pointer;
   transition:
     background 0.2s,
-    border-color 0.2s,
     transform 0.2s;
 }
 
-.mediaToggle:hover {
-  background: var(--acc);
-  border-color: var(--acc);
-  color: var(--onacc);
-  transform: scale(1.06);
+.closeVideo:hover,
+.closeVideo:focus-visible {
+  background: rgba(0, 0, 0, 0.78);
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video,
+  .playVideo,
+  .closeVideo {
+    transition: none;
+  }
+
+  .playVideo:hover,
+  .playVideo:focus-visible,
+  .closeVideo:hover,
+  .closeVideo:focus-visible {
+    transform: none;
+  }
 }
 
 /* ------------------------------------------------------------- data rows */

@@ -1,69 +1,68 @@
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import portrait from '../assets/portrait.webp';
 import { IDENTITY_ROWS, PROFILE_MEDIA } from '../data/about';
 import { SITE } from '../data/site';
-import { PauseIcon, PlayIcon } from './Icons';
+import { CloseIcon, PlayIcon } from './Icons';
 import styles from './IdentityCard.module.css';
 
 /** Portrait + data rows. Anchors the home hero and reappears nowhere else. */
 export function IdentityCard() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
-  /** Set by the button, which outranks hover — see `leave`. */
-  const pinned = useRef(false);
+  /** The intro is up — on the screen, or in the frame if fullscreen was refused. */
+  const [active, setActive] = useState(false);
 
   const hasVideo = PROFILE_MEDIA.video !== '';
 
-  const start = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // play() rejects when a pause lands mid-promise, which a quick hover in and
-    // out does routinely. Nothing to recover from, so the state stays put.
-    video
-      .play()
-      .then(() => setPlaying(true))
-      .catch(() => {});
-  };
-
-  const stop = () => {
+  /** Back to the photo — and back to the top of the clip, not where it stopped. */
+  const stop = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
 
     video.pause();
     video.currentTime = 0;
-    setPlaying(false);
+    setActive(false);
+  }, []);
+
+  const play = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    setActive(true);
+    // Both of these ride the click that asked for them: sound because the click
+    // is the gesture that grants it, the screen for the same reason. A browser
+    // that turns either down leaves the clip running in the card, which is why
+    // the frame below it still has a crop worth looking at.
+    video.play().catch(() => {});
+    enterFullscreen(video);
   };
 
-  const enter = () => {
-    if (!hasVideo || pinned.current) return;
-    // Playback nobody asked for is exactly what reduced motion rules out. The
-    // button still works there, since that is a request.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* Leaving fullscreen — Escape, the player's own button, the phone's Done — is
+     how the intro gets closed, so the card follows the screen back to the
+     photo rather than keeping its own idea of what is playing. */
+  useEffect(() => {
+    if (!active) return;
 
-    start();
-  };
+    const video = videoRef.current;
+    if (!video) return;
 
-  const leave = () => {
-    if (!hasVideo || pinned.current) return;
+    const onExit = () => {
+      if (!document.fullscreenElement) stop();
+    };
 
-    stop();
-  };
+    document.addEventListener('fullscreenchange', onExit);
+    // iPhone Safari runs its own fullscreen player and reports the way out on
+    // the element rather than through the document.
+    video.addEventListener('webkitendfullscreen', stop);
 
-  /** Touch has no hover, so the button carries the whole interaction there. */
-  const toggle = () => {
-    if (playing) {
-      pinned.current = false;
-      stop();
-    } else {
-      pinned.current = true;
-      start();
-    }
-  };
+    return () => {
+      document.removeEventListener('fullscreenchange', onExit);
+      video.removeEventListener('webkitendfullscreen', stop);
+    };
+  }, [active, stop]);
 
   return (
-    <div className={styles.card} onMouseEnter={enter} onMouseLeave={leave}>
+    <div className={styles.card}>
       <div className={styles.header}>
         <span>identity.card</span>
         <span className={styles.verified}>
@@ -75,32 +74,52 @@ export function IdentityCard() {
       <div className={styles.portraitFrame}>
         <img className={styles.portrait} src={portrait} alt={SITE.name} width="400" height="460" />
 
-        {/* Sits over the portrait and fades in on play, so the photo is what
-            the card rests on and the video is what it does. Hovering the card
-            runs it; it rewinds on the way out so the next hover starts on the
-            first frame rather than mid-wave. */}
+        {/* The photo is what the card rests on and the intro is what it does.
+            Nothing runs on hover: this is a spoken minute and three quarters,
+            and sound nobody asked for is the one thing a hero must not do. */}
         {hasVideo && (
           <>
+            {/* TODO(a11y): the intro is narrated and has no captions, which
+                locks out deaf and hard-of-hearing visitors and anyone watching
+                muted. Needs a WebVTT transcript added as
+                <track kind="captions" srcLang="en" src="/intro.vtt" default />,
+                after which jsx-a11y/media-has-caption goes back to error. The
+                warning is left standing rather than suppressed. */}
             <video
               ref={videoRef}
-              className={`${styles.video} ${playing ? styles.videoOn : ''}`}
+              className={`${styles.video} ${active ? styles.videoOn : ''}`}
               src={PROFILE_MEDIA.video}
               poster={portrait}
-              muted
-              loop
+              controls={active}
+              controlsList="nodownload"
               playsInline
               preload="metadata"
-              onEnded={() => setPlaying(false)}
+              onEnded={stop}
             />
 
-            <button
-              type="button"
-              className={styles.mediaToggle}
-              aria-label={playing ? 'Pause the intro video' : 'Play the intro video'}
-              onClick={toggle}
-            >
-              {playing ? <PauseIcon /> : <PlayIcon />}
-            </button>
+            {active ? (
+              /* Only ever reachable on the fallback path: when fullscreen is
+                 granted the screen covers this, and coming back out of it has
+                 already put the photo up. Top-right, clear of the control bar
+                 along the bottom edge. */
+              <button
+                type="button"
+                className={styles.closeVideo}
+                aria-label="Close the intro and show the photo"
+                onClick={stop}
+              >
+                <CloseIcon size={17} />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className={styles.playVideo}
+                aria-label={`Play ${SITE.name}'s intro video full screen`}
+                onClick={play}
+              >
+                <PlayIcon size={22} />
+              </button>
+            )}
           </>
         )}
       </div>
@@ -118,6 +137,25 @@ export function IdentityCard() {
 }
 
 /**
+ * Asks for the whole screen, and settles for the card if it is turned down.
+ *
+ * iPhone Safari will not put an arbitrary element in fullscreen, but it will
+ * put a <video> there through a method of its own. That is the second try
+ * rather than the first, since everything else implements the standard one and
+ * reports back through the document.
+ */
+function enterFullscreen(video: HTMLVideoElement) {
+  if (video.requestFullscreen) {
+    void video.requestFullscreen().catch(() => {});
+    return;
+  }
+
+  const iosFullscreen = (video as HTMLVideoElement & { webkitEnterFullscreen?: () => void })
+    .webkitEnterFullscreen;
+  iosFullscreen?.call(video);
+}
+
+/**
  * Lets a middot-separated value break only between one part and the next.
  *
  * The card right-aligns these in a narrow column, so a long value wraps. Left
@@ -131,6 +169,6 @@ export function IdentityCard() {
 function breakOnSeparators(value: string): string {
   return value
     .split(' · ')
-    .map((part) => part.replace(/ /g, ' '))
-    .join(' · ');
+    .map((part) => part.replace(/ /g, '\u00a0'))
+    .join('\u00a0· ');
 }
